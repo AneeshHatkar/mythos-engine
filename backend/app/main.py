@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from backend.app.api.routes_foundation import router as foundation_router
 from backend.app.api.routes_world import router as world_router
+from backend.app.api.routes_world_engines import router as world_engines_router
 from backend.app.core.config import settings
 from backend.app.schemas.foundation import HealthResponse, RootResponse
 
@@ -16,6 +17,7 @@ app = FastAPI(
 
 app.include_router(foundation_router)
 app.include_router(world_router)
+app.include_router(world_engines_router)
 
 
 @app.get("/", response_model=RootResponse)
@@ -36,6 +38,7 @@ def root() -> RootResponse:
             "canon",
             "branches",
             "world",
+            "world_engines",
             "worlds",
             "world_bibles",
             "world_identity",
