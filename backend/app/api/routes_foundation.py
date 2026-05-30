@@ -293,3 +293,30 @@ def get_branch(branch_id: str) -> BranchRead:
         raise HTTPException(status_code=404, detail="Branch not found")
 
     return branch
+
+
+@router.post(
+    "/registry/seed/foundation",
+    response_model=List[RegistryTypeRead],
+    status_code=201,
+)
+def seed_foundation_registry() -> List[RegistryTypeRead]:
+    """Load the official Chunk 1 foundation registry seed pack.
+
+    The endpoint is idempotent: existing type_id values are returned instead of duplicated.
+    """
+    from backend.app.registry_seed.foundation_seed import FOUNDATION_REGISTRY_SEED
+
+    seeded_types: List[RegistryTypeRead] = []
+
+    for seed_item in FOUNDATION_REGISTRY_SEED:
+        existing = store.get_registry_type(seed_item["type_id"])
+        if existing is not None:
+            seeded_types.append(existing)
+            continue
+
+        created = store.create_registry_type(RegistryTypeCreate(**seed_item))
+        if created is not None:
+            seeded_types.append(created)
+
+    return seeded_types
