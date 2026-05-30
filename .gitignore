@@ -29,3 +29,11 @@ experiments/runs/
 *.db
 *.sqlite
 *.sqlite3
+
+# macOS custom folder icon files
+Icon?
+image-removebg-preview.png
+
+# macOS custom folder icon files
+Icon?
+image-removebg-preview.png
