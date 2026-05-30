@@ -23,6 +23,7 @@ from backend.app.schemas.foundation import (
     CanonLockRead,
 )
 from backend.app.services.foundation_store import store
+from backend.app.services.export_service import export_service
 
 
 router = APIRouter(tags=["Foundation"])
@@ -208,12 +209,52 @@ def list_feedback(
 
 @router.post("/exports/json", response_model=ExportRecordRead, status_code=201)
 def create_json_export_record(payload: ExportRecordCreate) -> ExportRecordRead:
-    export_record = store.create_export_record(payload)
+    export_record = export_service.export_json(payload.project_id)
 
     if export_record is None:
         raise HTTPException(
             status_code=404,
-            detail="Project or universe not found for export record",
+            detail="Project not found for JSON export",
+        )
+
+    return export_record
+
+
+
+@router.post("/exports/csv", response_model=ExportRecordRead, status_code=201)
+def create_csv_export_record(payload: ExportRecordCreate) -> ExportRecordRead:
+    export_record = export_service.export_csv(payload.project_id)
+
+    if export_record is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project not found for CSV export",
+        )
+
+    return export_record
+
+
+@router.post("/exports/markdown", response_model=ExportRecordRead, status_code=201)
+def create_markdown_export_record(payload: ExportRecordCreate) -> ExportRecordRead:
+    export_record = export_service.export_markdown(payload.project_id)
+
+    if export_record is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project not found for Markdown export",
+        )
+
+    return export_record
+
+
+@router.post("/exports/db-snapshot", response_model=ExportRecordRead, status_code=201)
+def create_db_snapshot_export_record(payload: ExportRecordCreate) -> ExportRecordRead:
+    export_record = export_service.export_db_snapshot_metadata(payload.project_id)
+
+    if export_record is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project not found for DB snapshot metadata export",
         )
 
     return export_record
