@@ -7,6 +7,7 @@ from fastapi import APIRouter
 from backend.app.engines.world.world_orchestrator_engine import WorldOrchestratorEngine
 from backend.app.engines.world.world_quality_engine import WorldQualityEngine
 from backend.app.engines.world.world_template_engine import WorldTemplateEngine
+from backend.app.services.world_run_store import world_run_store
 
 
 router = APIRouter(prefix="/world/engines", tags=["World Engines"])
@@ -185,6 +186,23 @@ def orchestrate_world(payload: Dict[str, Any]) -> Dict[str, Any]:
     response_data = dict(result.data)
     response_data["audit_integration"] = audit_integration
 
+    persisted_run = world_run_store.save_orchestration_run(
+        payload=payload,
+        result_data=response_data,
+        audit_metadata=audit_integration,
+        status="success" if result.success else "failed",
+    )
+
+    persistence = {
+        "persisted": True,
+        "run_id": persisted_run["run_id"],
+        "created_at": persisted_run["created_at"],
+        "snapshot_id": persisted_run.get("snapshot_id"),
+        "export_id": persisted_run.get("export_id"),
+    }
+
+    response_data["persistence"] = persistence
+
     return {
         "success": result.success,
         "engine_name": result.engine_name,
@@ -193,4 +211,42 @@ def orchestrate_world(payload: Dict[str, Any]) -> Dict[str, Any]:
         "errors": result.errors,
         "generated_object_ids": result.generated_object_ids,
         "audit_integration": audit_integration,
+        "persistence": persistence,
+    }
+
+
+@router.get("/runs")
+def list_world_generation_runs(
+    project_id: str | None = None,
+    universe_id: str | None = None,
+    template_id: str | None = None,
+    limit: int = 20,
+) -> Dict[str, Any]:
+    runs = world_run_store.list_runs(
+        project_id=project_id,
+        universe_id=universe_id,
+        template_id=template_id,
+        limit=limit,
+    )
+
+    return {
+        "success": True,
+        "count": len(runs),
+        "runs": runs,
+    }
+
+
+@router.get("/runs/{run_id}")
+def get_world_generation_run(run_id: str) -> Dict[str, Any]:
+    run = world_run_store.get_run(run_id)
+
+    if run is None:
+        return {
+            "success": False,
+            "error": f"World generation run not found: {run_id}",
+        }
+
+    return {
+        "success": True,
+        "run": run,
     }
