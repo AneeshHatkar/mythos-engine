@@ -3,6 +3,10 @@ from typing import Dict, List, Optional
 from backend.app.schemas.foundation import (
     AuditRecordCreate,
     AuditRecordRead,
+    BranchCreate,
+    BranchRead,
+    CanonLockCreate,
+    CanonLockRead,
     ExportRecordCreate,
     ExportRecordRead,
     FeedbackRecordCreate,
@@ -30,6 +34,8 @@ class FoundationStore:
         self.universes: Dict[str, UniverseRead] = {}
         self.registry_types: Dict[str, RegistryTypeRead] = {}
         self.versions: Dict[str, VersionRecordRead] = {}
+        self.canon_locks: Dict[str, CanonLockRead] = {}
+        self.branches: Dict[str, BranchRead] = {}
         self.audit_records: Dict[str, AuditRecordRead] = {}
         self.feedback_records: Dict[str, FeedbackRecordRead] = {}
         self.exports: Dict[str, ExportRecordRead] = {}
@@ -324,5 +330,103 @@ class FoundationStore:
 
         return results
 
+    # -------------------------------------------------------------------------
+    # Canon Locks
+    # -------------------------------------------------------------------------
+
+    def create_canon_lock(
+        self, payload: CanonLockCreate
+    ) -> Optional[CanonLockRead]:
+        if payload.project_id not in self.projects:
+            return None
+
+        if payload.universe_id and payload.universe_id not in self.universes:
+            return None
+
+        canon_lock = CanonLockRead(
+            canon_lock_id=new_id("lock"),
+            project_id=payload.project_id,
+            universe_id=payload.universe_id,
+            object_type=payload.object_type,
+            object_id=payload.object_id,
+            field_path=payload.field_path,
+            locked_value=payload.locked_value,
+            reason=payload.reason,
+            locked_by=payload.locked_by,
+        )
+        self.canon_locks[canon_lock.canon_lock_id] = canon_lock
+        return canon_lock
+
+    def list_canon_locks(
+        self,
+        project_id: Optional[str] = None,
+        universe_id: Optional[str] = None,
+        object_type: Optional[str] = None,
+        object_id: Optional[str] = None,
+    ) -> List[CanonLockRead]:
+        results = list(self.canon_locks.values())
+
+        if project_id:
+            results = [item for item in results if item.project_id == project_id]
+
+        if universe_id:
+            results = [item for item in results if item.universe_id == universe_id]
+
+        if object_type:
+            results = [item for item in results if item.object_type == object_type]
+
+        if object_id:
+            results = [item for item in results if item.object_id == object_id]
+
+        return results
+
+    # -------------------------------------------------------------------------
+    # Branches
+    # -------------------------------------------------------------------------
+
+    def create_branch(self, payload: BranchCreate) -> Optional[BranchRead]:
+        if payload.project_id not in self.projects:
+            return None
+
+        if payload.universe_id not in self.universes:
+            return None
+
+        if payload.parent_branch_id and payload.parent_branch_id not in self.branches:
+            return None
+
+        branch = BranchRead(
+            branch_id=new_id("branch"),
+            project_id=payload.project_id,
+            universe_id=payload.universe_id,
+            branch_name=payload.branch_name,
+            branch_type=payload.branch_type,
+            parent_branch_id=payload.parent_branch_id,
+            reason=payload.reason,
+            canon_status=payload.canon_status,
+        )
+        self.branches[branch.branch_id] = branch
+        return branch
+
+    def list_branches(
+        self,
+        project_id: Optional[str] = None,
+        universe_id: Optional[str] = None,
+        branch_type: Optional[str] = None,
+    ) -> List[BranchRead]:
+        results = list(self.branches.values())
+
+        if project_id:
+            results = [item for item in results if item.project_id == project_id]
+
+        if universe_id:
+            results = [item for item in results if item.universe_id == universe_id]
+
+        if branch_type:
+            results = [item for item in results if item.branch_type == branch_type]
+
+        return results
+
+    def get_branch(self, branch_id: str) -> Optional[BranchRead]:
+        return self.branches.get(branch_id)
 
 store = FoundationStore()

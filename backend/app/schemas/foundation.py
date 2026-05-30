@@ -167,3 +167,39 @@ class ExportRecordCreate(BaseModel):
 class ExportRecordRead(ExportRecordCreate):
     export_id: str
     created_at: datetime = Field(default_factory=utc_now)
+
+class CanonLockCreate(BaseModel):
+    project_id: str
+    universe_id: Optional[str] = None
+    object_type: str
+    object_id: str
+    field_path: str = Field(
+        default="*",
+        description="Specific field to lock, or * to lock the whole object.",
+    )
+    locked_value: Dict[str, Any] = Field(default_factory=dict)
+    reason: str = ""
+    locked_by: str = "user"
+
+
+class CanonLockRead(CanonLockCreate):
+    canon_lock_id: str
+    status: str = "locked"
+    created_at: datetime = Field(default_factory=utc_now)
+
+
+class BranchCreate(BaseModel):
+    project_id: str
+    universe_id: str
+    branch_name: str = Field(min_length=1, max_length=180)
+    branch_type: str = Field(default="alternate_timeline")
+    parent_branch_id: Optional[str] = None
+    reason: str = ""
+    canon_status: str = "alternate_timeline"
+
+
+class BranchRead(BranchCreate):
+    branch_id: str
+    status: str = "active"
+    created_at: datetime = Field(default_factory=utc_now)
+    updated_at: datetime = Field(default_factory=utc_now)

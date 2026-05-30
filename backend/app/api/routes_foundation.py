@@ -17,6 +17,10 @@ from backend.app.schemas.foundation import (
     UniverseRead,
     VersionRecordCreate,
     VersionRecordRead,
+    BranchCreate,
+    BranchRead,
+    CanonLockCreate,
+    CanonLockRead,
 )
 from backend.app.services.foundation_store import store
 
@@ -226,3 +230,66 @@ def list_exports(
         universe_id=universe_id,
         export_type=export_type,
     )
+
+@router.post("/canon/locks", response_model=CanonLockRead, status_code=201)
+def create_canon_lock(payload: CanonLockCreate) -> CanonLockRead:
+    canon_lock = store.create_canon_lock(payload)
+
+    if canon_lock is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project or universe not found for canon lock",
+        )
+
+    return canon_lock
+
+
+@router.get("/canon/locks", response_model=List[CanonLockRead])
+def list_canon_locks(
+    project_id: Optional[str] = Query(default=None),
+    universe_id: Optional[str] = Query(default=None),
+    object_type: Optional[str] = Query(default=None),
+    object_id: Optional[str] = Query(default=None),
+) -> List[CanonLockRead]:
+    return store.list_canon_locks(
+        project_id=project_id,
+        universe_id=universe_id,
+        object_type=object_type,
+        object_id=object_id,
+    )
+
+
+@router.post("/branches", response_model=BranchRead, status_code=201)
+def create_branch(payload: BranchCreate) -> BranchRead:
+    branch = store.create_branch(payload)
+
+    if branch is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project, universe, or parent branch not found",
+        )
+
+    return branch
+
+
+@router.get("/branches", response_model=List[BranchRead])
+def list_branches(
+    project_id: Optional[str] = Query(default=None),
+    universe_id: Optional[str] = Query(default=None),
+    branch_type: Optional[str] = Query(default=None),
+) -> List[BranchRead]:
+    return store.list_branches(
+        project_id=project_id,
+        universe_id=universe_id,
+        branch_type=branch_type,
+    )
+
+
+@router.get("/branches/{branch_id}", response_model=BranchRead)
+def get_branch(branch_id: str) -> BranchRead:
+    branch = store.get_branch(branch_id)
+
+    if branch is None:
+        raise HTTPException(status_code=404, detail="Branch not found")
+
+    return branch
