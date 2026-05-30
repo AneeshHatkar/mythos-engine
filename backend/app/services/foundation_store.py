@@ -1,5 +1,10 @@
-from typing import Dict, List, Optional
+import json
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Type, TypeVar
 
+from pydantic import BaseModel
+
+from backend.app.db.database import create_connection, initialize_object_store
 from backend.app.schemas.foundation import (
     AuditRecordCreate,
     AuditRecordRead,
@@ -22,27 +27,131 @@ from backend.app.schemas.foundation import (
     new_id,
 )
 
+ModelT = TypeVar("ModelT", bound=BaseModel)
 
-class FoundationStore:
-    """In-memory foundation store for MythOS Engine v0.1.
 
-    This gives us working API behavior before we move to SQLite/SQLAlchemy.
+def now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
+class SQLiteFoundationStore:
+    """SQLite-backed foundation store for MythOS Engine.
+
+    This replaces the temporary in-memory store while keeping the same public
+    method names used by the API routes.
+
+    The design uses one generic persisted-object table for Chunk 1. Each object
+    is stored as validated Pydantic JSON. This keeps the foundation flexible and
+    lets us persist all early object types without writing a large migration
+    system too early.
+
+    Later chunks can add specialized SQL tables for high-volume systems such as
+    world events, character memories, relationship graphs, model evaluations,
+    and generated scenes.
     """
 
-    def __init__(self) -> None:
-        self.projects: Dict[str, ProjectRead] = {}
-        self.universes: Dict[str, UniverseRead] = {}
-        self.registry_types: Dict[str, RegistryTypeRead] = {}
-        self.versions: Dict[str, VersionRecordRead] = {}
-        self.canon_locks: Dict[str, CanonLockRead] = {}
-        self.branches: Dict[str, BranchRead] = {}
-        self.audit_records: Dict[str, AuditRecordRead] = {}
-        self.feedback_records: Dict[str, FeedbackRecordRead] = {}
-        self.exports: Dict[str, ExportRecordRead] = {}
+    def __init__(self, db_path: Optional[str] = None) -> None:
+        self.connection = create_connection(db_path)
+        initialize_object_store(self.connection)
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # Generic helpers
+    # ------------------------------------------------------------------
+
+    def _model_to_json(self, model: BaseModel) -> str:
+        return json.dumps(model.model_dump(mode="json"), ensure_ascii=False)
+
+    def _row_to_model(self, row: Any, model_cls: Type[ModelT]) -> ModelT:
+        payload = json.loads(row["payload_json"])
+        return model_cls.model_validate(payload)
+
+    def _insert_model(
+        self,
+        *,
+        collection: str,
+        object_id: str,
+        model: BaseModel,
+        type_key: Optional[str] = None,
+        project_id: Optional[str] = None,
+        universe_id: Optional[str] = None,
+        object_type: Optional[str] = None,
+    ) -> None:
+        timestamp = now_iso()
+        self.connection.execute(
+            """
+            INSERT INTO mythos_objects (
+                collection,
+                object_id,
+                type_key,
+                project_id,
+                universe_id,
+                object_type,
+                payload_json,
+                created_at,
+                updated_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                collection,
+                object_id,
+                type_key,
+                project_id,
+                universe_id,
+                object_type,
+                self._model_to_json(model),
+                timestamp,
+                timestamp,
+            ),
+        )
+        self.connection.commit()
+
+    def _get_model(
+        self,
+        *,
+        collection: str,
+        object_id: str,
+        model_cls: Type[ModelT],
+    ) -> Optional[ModelT]:
+        row = self.connection.execute(
+            """
+            SELECT payload_json
+            FROM mythos_objects
+            WHERE collection = ? AND object_id = ?
+            """,
+            (collection, object_id),
+        ).fetchone()
+
+        if row is None:
+            return None
+
+        return self._row_to_model(row, model_cls)
+
+    def _list_models(
+        self,
+        *,
+        collection: str,
+        model_cls: Type[ModelT],
+        filters: Optional[Dict[str, Any]] = None,
+    ) -> List[ModelT]:
+        query = "SELECT payload_json FROM mythos_objects WHERE collection = ?"
+        params: List[Any] = [collection]
+
+        filters = filters or {}
+
+        for column, value in filters.items():
+            if value is None:
+                continue
+
+            query += f" AND {column} = ?"
+            params.append(value)
+
+        rows = self.connection.execute(query, params).fetchall()
+        return [self._row_to_model(row, model_cls) for row in rows]
+
+    # ------------------------------------------------------------------
     # Projects
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_project(self, payload: ProjectCreate) -> ProjectRead:
         project = ProjectRead(
@@ -53,21 +162,32 @@ class FoundationStore:
             target_use=payload.target_use,
             default_content_profile=payload.default_content_profile,
         )
-        self.projects[project.project_id] = project
+
+        self._insert_model(
+            collection="projects",
+            object_id=project.project_id,
+            model=project,
+            project_id=project.project_id,
+            object_type="project",
+        )
         return project
 
     def list_projects(self) -> List[ProjectRead]:
-        return list(self.projects.values())
+        return self._list_models(collection="projects", model_cls=ProjectRead)
 
     def get_project(self, project_id: str) -> Optional[ProjectRead]:
-        return self.projects.get(project_id)
+        return self._get_model(
+            collection="projects",
+            object_id=project_id,
+            model_cls=ProjectRead,
+        )
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Universes
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_universe(self, payload: UniverseCreate) -> Optional[UniverseRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
         universe = UniverseRead(
@@ -80,27 +200,39 @@ class FoundationStore:
             scale_preference=payload.scale_preference,
             target_formats=payload.target_formats,
         )
-        self.universes[universe.universe_id] = universe
+
+        self._insert_model(
+            collection="universes",
+            object_id=universe.universe_id,
+            model=universe,
+            project_id=universe.project_id,
+            universe_id=universe.universe_id,
+            object_type="universe",
+        )
         return universe
 
     def list_universes_for_project(self, project_id: str) -> List[UniverseRead]:
-        return [
-            universe
-            for universe in self.universes.values()
-            if universe.project_id == project_id
-        ]
+        return self._list_models(
+            collection="universes",
+            model_cls=UniverseRead,
+            filters={"project_id": project_id},
+        )
 
     def get_universe(self, universe_id: str) -> Optional[UniverseRead]:
-        return self.universes.get(universe_id)
+        return self._get_model(
+            collection="universes",
+            object_id=universe_id,
+            model_cls=UniverseRead,
+        )
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Registry
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_registry_type(
         self, payload: RegistryTypeCreate
     ) -> Optional[RegistryTypeRead]:
-        if payload.type_id in self.registry_types:
+        if self.get_registry_type(payload.type_id) is not None:
             return None
 
         registry_type = RegistryTypeRead(
@@ -116,7 +248,14 @@ class FoundationStore:
             example_output=payload.example_output,
             created_by=payload.created_by,
         )
-        self.registry_types[payload.type_id] = registry_type
+
+        self._insert_model(
+            collection="registry_types",
+            object_id=registry_type.type_id,
+            model=registry_type,
+            type_key=registry_type.type_id,
+            object_type=registry_type.category,
+        )
         return registry_type
 
     def list_registry_types(
@@ -124,10 +263,11 @@ class FoundationStore:
         category: Optional[str] = None,
         tag: Optional[str] = None,
     ) -> List[RegistryTypeRead]:
-        results = list(self.registry_types.values())
-
-        if category:
-            results = [item for item in results if item.category == category]
+        results = self._list_models(
+            collection="registry_types",
+            model_cls=RegistryTypeRead,
+            filters={"object_type": category},
+        )
 
         if tag:
             results = [item for item in results if tag in item.tags]
@@ -135,17 +275,21 @@ class FoundationStore:
         return results
 
     def get_registry_type(self, type_id: str) -> Optional[RegistryTypeRead]:
-        return self.registry_types.get(type_id)
+        return self._get_model(
+            collection="registry_types",
+            object_id=type_id,
+            model_cls=RegistryTypeRead,
+        )
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Versions
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_version(self, payload: VersionRecordCreate) -> Optional[VersionRecordRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
-        if payload.universe_id and payload.universe_id not in self.universes:
+        if payload.universe_id and self.get_universe(payload.universe_id) is None:
             return None
 
         version = VersionRecordRead(
@@ -160,7 +304,15 @@ class FoundationStore:
             canon_status=payload.canon_status,
             snapshot=payload.snapshot,
         )
-        self.versions[version.version_id] = version
+
+        self._insert_model(
+            collection="versions",
+            object_id=version.version_id,
+            model=version,
+            project_id=version.project_id,
+            universe_id=version.universe_id,
+            object_type=version.object_type,
+        )
         return version
 
     def list_versions(
@@ -170,33 +322,32 @@ class FoundationStore:
         object_type: Optional[str] = None,
         object_id: Optional[str] = None,
     ) -> List[VersionRecordRead]:
-        results = list(self.versions.values())
-
-        if project_id:
-            results = [item for item in results if item.project_id == project_id]
-
-        if universe_id:
-            results = [item for item in results if item.universe_id == universe_id]
-
-        if object_type:
-            results = [item for item in results if item.object_type == object_type]
+        results = self._list_models(
+            collection="versions",
+            model_cls=VersionRecordRead,
+            filters={
+                "project_id": project_id,
+                "universe_id": universe_id,
+                "object_type": object_type,
+            },
+        )
 
         if object_id:
             results = [item for item in results if item.object_id == object_id]
 
         return results
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Audit
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_audit_record(
         self, payload: AuditRecordCreate
     ) -> Optional[AuditRecordRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
-        if payload.universe_id and payload.universe_id not in self.universes:
+        if payload.universe_id and self.get_universe(payload.universe_id) is None:
             return None
 
         audit_record = AuditRecordRead(
@@ -214,7 +365,15 @@ class FoundationStore:
             errors=payload.errors,
             quality_score=payload.quality_score,
         )
-        self.audit_records[audit_record.audit_id] = audit_record
+
+        self._insert_model(
+            collection="audit_records",
+            object_id=audit_record.audit_id,
+            model=audit_record,
+            project_id=audit_record.project_id,
+            universe_id=audit_record.universe_id,
+            object_type=audit_record.engine_name,
+        )
         return audit_record
 
     def list_audit_records(
@@ -223,30 +382,27 @@ class FoundationStore:
         universe_id: Optional[str] = None,
         engine_name: Optional[str] = None,
     ) -> List[AuditRecordRead]:
-        results = list(self.audit_records.values())
+        return self._list_models(
+            collection="audit_records",
+            model_cls=AuditRecordRead,
+            filters={
+                "project_id": project_id,
+                "universe_id": universe_id,
+                "object_type": engine_name,
+            },
+        )
 
-        if project_id:
-            results = [item for item in results if item.project_id == project_id]
-
-        if universe_id:
-            results = [item for item in results if item.universe_id == universe_id]
-
-        if engine_name:
-            results = [item for item in results if item.engine_name == engine_name]
-
-        return results
-
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Feedback
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_feedback(
         self, payload: FeedbackRecordCreate
     ) -> Optional[FeedbackRecordRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
-        if payload.universe_id and payload.universe_id not in self.universes:
+        if payload.universe_id and self.get_universe(payload.universe_id) is None:
             return None
 
         feedback = FeedbackRecordRead(
@@ -260,7 +416,15 @@ class FoundationStore:
             comment=payload.comment,
             future_use=payload.future_use,
         )
-        self.feedback_records[feedback.feedback_id] = feedback
+
+        self._insert_model(
+            collection="feedback_records",
+            object_id=feedback.feedback_id,
+            model=feedback,
+            project_id=feedback.project_id,
+            universe_id=feedback.universe_id,
+            object_type=feedback.object_type,
+        )
         return feedback
 
     def list_feedback(
@@ -270,33 +434,32 @@ class FoundationStore:
         object_type: Optional[str] = None,
         object_id: Optional[str] = None,
     ) -> List[FeedbackRecordRead]:
-        results = list(self.feedback_records.values())
-
-        if project_id:
-            results = [item for item in results if item.project_id == project_id]
-
-        if universe_id:
-            results = [item for item in results if item.universe_id == universe_id]
-
-        if object_type:
-            results = [item for item in results if item.object_type == object_type]
+        results = self._list_models(
+            collection="feedback_records",
+            model_cls=FeedbackRecordRead,
+            filters={
+                "project_id": project_id,
+                "universe_id": universe_id,
+                "object_type": object_type,
+            },
+        )
 
         if object_id:
             results = [item for item in results if item.object_id == object_id]
 
         return results
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Exports
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_export_record(
         self, payload: ExportRecordCreate
     ) -> Optional[ExportRecordRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
-        if payload.universe_id and payload.universe_id not in self.universes:
+        if payload.universe_id and self.get_universe(payload.universe_id) is None:
             return None
 
         export_record = ExportRecordRead(
@@ -308,7 +471,15 @@ class FoundationStore:
             file_path=payload.file_path,
             summary=payload.summary,
         )
-        self.exports[export_record.export_id] = export_record
+
+        self._insert_model(
+            collection="exports",
+            object_id=export_record.export_id,
+            model=export_record,
+            project_id=export_record.project_id,
+            universe_id=export_record.universe_id,
+            object_type=export_record.export_type,
+        )
         return export_record
 
     def list_exports(
@@ -317,30 +488,27 @@ class FoundationStore:
         universe_id: Optional[str] = None,
         export_type: Optional[str] = None,
     ) -> List[ExportRecordRead]:
-        results = list(self.exports.values())
+        return self._list_models(
+            collection="exports",
+            model_cls=ExportRecordRead,
+            filters={
+                "project_id": project_id,
+                "universe_id": universe_id,
+                "object_type": export_type,
+            },
+        )
 
-        if project_id:
-            results = [item for item in results if item.project_id == project_id]
-
-        if universe_id:
-            results = [item for item in results if item.universe_id == universe_id]
-
-        if export_type:
-            results = [item for item in results if item.export_type == export_type]
-
-        return results
-
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Canon Locks
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_canon_lock(
         self, payload: CanonLockCreate
     ) -> Optional[CanonLockRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
-        if payload.universe_id and payload.universe_id not in self.universes:
+        if payload.universe_id and self.get_universe(payload.universe_id) is None:
             return None
 
         canon_lock = CanonLockRead(
@@ -354,7 +522,15 @@ class FoundationStore:
             reason=payload.reason,
             locked_by=payload.locked_by,
         )
-        self.canon_locks[canon_lock.canon_lock_id] = canon_lock
+
+        self._insert_model(
+            collection="canon_locks",
+            object_id=canon_lock.canon_lock_id,
+            model=canon_lock,
+            project_id=canon_lock.project_id,
+            universe_id=canon_lock.universe_id,
+            object_type=canon_lock.object_type,
+        )
         return canon_lock
 
     def list_canon_locks(
@@ -364,34 +540,33 @@ class FoundationStore:
         object_type: Optional[str] = None,
         object_id: Optional[str] = None,
     ) -> List[CanonLockRead]:
-        results = list(self.canon_locks.values())
-
-        if project_id:
-            results = [item for item in results if item.project_id == project_id]
-
-        if universe_id:
-            results = [item for item in results if item.universe_id == universe_id]
-
-        if object_type:
-            results = [item for item in results if item.object_type == object_type]
+        results = self._list_models(
+            collection="canon_locks",
+            model_cls=CanonLockRead,
+            filters={
+                "project_id": project_id,
+                "universe_id": universe_id,
+                "object_type": object_type,
+            },
+        )
 
         if object_id:
             results = [item for item in results if item.object_id == object_id]
 
         return results
 
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # Branches
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
 
     def create_branch(self, payload: BranchCreate) -> Optional[BranchRead]:
-        if payload.project_id not in self.projects:
+        if self.get_project(payload.project_id) is None:
             return None
 
-        if payload.universe_id not in self.universes:
+        if self.get_universe(payload.universe_id) is None:
             return None
 
-        if payload.parent_branch_id and payload.parent_branch_id not in self.branches:
+        if payload.parent_branch_id and self.get_branch(payload.parent_branch_id) is None:
             return None
 
         branch = BranchRead(
@@ -404,7 +579,15 @@ class FoundationStore:
             reason=payload.reason,
             canon_status=payload.canon_status,
         )
-        self.branches[branch.branch_id] = branch
+
+        self._insert_model(
+            collection="branches",
+            object_id=branch.branch_id,
+            model=branch,
+            project_id=branch.project_id,
+            universe_id=branch.universe_id,
+            object_type=branch.branch_type,
+        )
         return branch
 
     def list_branches(
@@ -413,20 +596,23 @@ class FoundationStore:
         universe_id: Optional[str] = None,
         branch_type: Optional[str] = None,
     ) -> List[BranchRead]:
-        results = list(self.branches.values())
-
-        if project_id:
-            results = [item for item in results if item.project_id == project_id]
-
-        if universe_id:
-            results = [item for item in results if item.universe_id == universe_id]
-
-        if branch_type:
-            results = [item for item in results if item.branch_type == branch_type]
-
-        return results
+        return self._list_models(
+            collection="branches",
+            model_cls=BranchRead,
+            filters={
+                "project_id": project_id,
+                "universe_id": universe_id,
+                "object_type": branch_type,
+            },
+        )
 
     def get_branch(self, branch_id: str) -> Optional[BranchRead]:
-        return self.branches.get(branch_id)
+        return self._get_model(
+            collection="branches",
+            object_id=branch_id,
+            model_cls=BranchRead,
+        )
 
-store = FoundationStore()
+
+# The app imports this singleton.
+store = SQLiteFoundationStore()
