@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from fastapi import APIRouter
 
+from backend.app.engines.world.embedding_originality_engine import EmbeddingOriginalityEngine
 from backend.app.engines.world.world_orchestrator_engine import WorldOrchestratorEngine
 from backend.app.engines.world.world_quality_engine import WorldQualityEngine
 from backend.app.engines.world.world_template_engine import WorldTemplateEngine
@@ -15,6 +16,7 @@ router = APIRouter(prefix="/world/engines", tags=["World Engines"])
 template_engine = WorldTemplateEngine()
 quality_engine = WorldQualityEngine()
 orchestrator_engine = WorldOrchestratorEngine()
+embedding_originality_engine = EmbeddingOriginalityEngine()
 
 
 def _utc_now() -> str:
@@ -129,6 +131,7 @@ def world_engine_health() -> Dict[str, Any]:
             "GET /world/engines/templates",
             "POST /world/engines/orchestrate",
             "POST /world/engines/quality",
+            "POST /world/engines/originality",
         ],
     }
 
@@ -168,6 +171,31 @@ def score_world_quality(payload: Dict[str, Any]) -> Dict[str, Any]:
         "audit_integration": audit_integration,
     }
 
+
+
+
+@router.post("/originality")
+def score_world_originality(payload: Dict[str, Any]) -> Dict[str, Any]:
+    result = embedding_originality_engine.run(payload)
+
+    audit_integration = _build_audit_integration(
+        engine_name=result.engine_name,
+        event_type="world_embedding_originality_run",
+        payload=payload,
+        result_success=result.success,
+        result_data=result.data,
+        warning_count=len(result.warnings),
+        error_count=len(result.errors),
+    )
+
+    return {
+        "success": result.success,
+        "engine_name": result.engine_name,
+        "data": result.data,
+        "warnings": result.warnings,
+        "errors": result.errors,
+        "audit_integration": audit_integration,
+    }
 
 @router.post("/orchestrate")
 def orchestrate_world(payload: Dict[str, Any]) -> Dict[str, Any]:
