@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from backend.app.api.routes_foundation import router as foundation_router
 from backend.app.core.config import settings
 from backend.app.schemas.foundation import HealthResponse, RootResponse
 
@@ -12,6 +13,8 @@ app = FastAPI(
     ),
 )
 
+app.include_router(foundation_router)
+
 
 @app.get("/", response_model=RootResponse)
 def root() -> RootResponse:
@@ -19,7 +22,23 @@ def root() -> RootResponse:
         name=settings.app_name,
         version=settings.app_version,
         message="MythOS Engine backend is running.",
-        route_groups=["foundation", "projects", "universes", "registry", "versioning", "audit", "feedback", "exports", "world", "characters", "simulation", "narrative", "genre", "adaptation", "ml_research"],
+        route_groups=[
+            "foundation",
+            "projects",
+            "universes",
+            "registry",
+            "versioning",
+            "audit",
+            "feedback",
+            "exports",
+            "world",
+            "characters",
+            "simulation",
+            "narrative",
+            "genre",
+            "adaptation",
+            "ml_research",
+        ],
     )
 
 
