@@ -3,12 +3,20 @@ from typing import List, Optional
 from fastapi import APIRouter, HTTPException, Query
 
 from backend.app.schemas.foundation import (
+    AuditRecordCreate,
+    AuditRecordRead,
+    ExportRecordCreate,
+    ExportRecordRead,
+    FeedbackRecordCreate,
+    FeedbackRecordRead,
     ProjectCreate,
     ProjectRead,
     RegistryTypeCreate,
     RegistryTypeRead,
     UniverseCreate,
     UniverseRead,
+    VersionRecordCreate,
+    VersionRecordRead,
 )
 from backend.app.services.foundation_store import store
 
@@ -110,3 +118,111 @@ def get_registry_type(type_id: str) -> RegistryTypeRead:
         raise HTTPException(status_code=404, detail="Registry type not found")
 
     return registry_type
+
+
+@router.post("/versions", response_model=VersionRecordRead, status_code=201)
+def create_version(payload: VersionRecordCreate) -> VersionRecordRead:
+    version = store.create_version(payload)
+
+    if version is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project or universe not found for version record",
+        )
+
+    return version
+
+
+@router.get("/versions", response_model=List[VersionRecordRead])
+def list_versions(
+    project_id: Optional[str] = Query(default=None),
+    universe_id: Optional[str] = Query(default=None),
+    object_type: Optional[str] = Query(default=None),
+    object_id: Optional[str] = Query(default=None),
+) -> List[VersionRecordRead]:
+    return store.list_versions(
+        project_id=project_id,
+        universe_id=universe_id,
+        object_type=object_type,
+        object_id=object_id,
+    )
+
+
+@router.post("/audit/records", response_model=AuditRecordRead, status_code=201)
+def create_audit_record(payload: AuditRecordCreate) -> AuditRecordRead:
+    audit_record = store.create_audit_record(payload)
+
+    if audit_record is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project or universe not found for audit record",
+        )
+
+    return audit_record
+
+
+@router.get("/audit/records", response_model=List[AuditRecordRead])
+def list_audit_records(
+    project_id: Optional[str] = Query(default=None),
+    universe_id: Optional[str] = Query(default=None),
+    engine_name: Optional[str] = Query(default=None),
+) -> List[AuditRecordRead]:
+    return store.list_audit_records(
+        project_id=project_id,
+        universe_id=universe_id,
+        engine_name=engine_name,
+    )
+
+
+@router.post("/feedback", response_model=FeedbackRecordRead, status_code=201)
+def create_feedback(payload: FeedbackRecordCreate) -> FeedbackRecordRead:
+    feedback = store.create_feedback(payload)
+
+    if feedback is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project or universe not found for feedback record",
+        )
+
+    return feedback
+
+
+@router.get("/feedback", response_model=List[FeedbackRecordRead])
+def list_feedback(
+    project_id: Optional[str] = Query(default=None),
+    universe_id: Optional[str] = Query(default=None),
+    object_type: Optional[str] = Query(default=None),
+    object_id: Optional[str] = Query(default=None),
+) -> List[FeedbackRecordRead]:
+    return store.list_feedback(
+        project_id=project_id,
+        universe_id=universe_id,
+        object_type=object_type,
+        object_id=object_id,
+    )
+
+
+@router.post("/exports/json", response_model=ExportRecordRead, status_code=201)
+def create_json_export_record(payload: ExportRecordCreate) -> ExportRecordRead:
+    export_record = store.create_export_record(payload)
+
+    if export_record is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Project or universe not found for export record",
+        )
+
+    return export_record
+
+
+@router.get("/exports", response_model=List[ExportRecordRead])
+def list_exports(
+    project_id: Optional[str] = Query(default=None),
+    universe_id: Optional[str] = Query(default=None),
+    export_type: Optional[str] = Query(default=None),
+) -> List[ExportRecordRead]:
+    return store.list_exports(
+        project_id=project_id,
+        universe_id=universe_id,
+        export_type=export_type,
+    )
