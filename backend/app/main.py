@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from backend.app.api.routes_foundation import router as foundation_router
+from backend.app.api.routes_world import router as world_router
 from backend.app.core.config import settings
 from backend.app.schemas.foundation import HealthResponse, RootResponse
 
@@ -14,6 +15,7 @@ app = FastAPI(
 )
 
 app.include_router(foundation_router)
+app.include_router(world_router)
 
 
 @app.get("/", response_model=RootResponse)
@@ -31,7 +33,38 @@ def root() -> RootResponse:
             "audit",
             "feedback",
             "exports",
+            "canon",
+            "branches",
             "world",
+            "worlds",
+            "world_bibles",
+            "world_identity",
+            "world_rules",
+            "chronology",
+            "geography",
+            "environment",
+            "demographics",
+            "society",
+            "power_factions",
+            "economy",
+            "law",
+            "military_security",
+            "belief_religion",
+            "culture_language",
+            "knowledge_education",
+            "institutions",
+            "technology_magic_science",
+            "species_creatures",
+            "infrastructure",
+            "artifacts",
+            "aesthetic_texture",
+            "civilization_pressure",
+            "consistency",
+            "originality",
+            "story_potential",
+            "world_dna",
+            "causality_graph",
+            "training_readiness",
             "characters",
             "simulation",
             "narrative",
