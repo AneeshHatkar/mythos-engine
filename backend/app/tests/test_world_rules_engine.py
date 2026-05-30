@@ -28,6 +28,7 @@ def test_world_rules_engine_returns_engine_result():
     assert "rules" in result.data
     assert "boundary_constraints" in result.data
     assert "contradiction_intent" in result.data
+    assert "training_notes" in result.data
 
 
 def test_world_rules_engine_generates_deep_rule_set():
@@ -51,7 +52,8 @@ def test_world_rules_engine_generates_deep_rule_set():
     assert len(rules.artifact_rules) >= 1
     assert len(rules.knowledge_rules) >= 1
     assert len(rules.social_mobility_rules) >= 1
-    assert len(rules.global_constraints) >= 5
+    assert len(rules.technology_rules) >= 1
+    assert len(rules.global_constraints) >= 6
 
     magic_rule = rules.magic_rules[0]
     assert "approved institutions" in magic_rule.description
