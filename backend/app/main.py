@@ -92,3 +92,6 @@ def health() -> HealthResponse:
         environment=settings.environment,
         status="ok",
     )
+
+from backend.app.api.simulation_routes import router as simulation_router
+app.include_router(simulation_router)
