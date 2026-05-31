@@ -89,13 +89,23 @@ Foundation smoke test passed.
 
 ---
 
-# Chunk 2: World Intelligence Layer
+<<<<<<< HEAD
+# Stage 2: World Intelligence Layer
 
-Chunk 2 upgrades MythOS Engine from a foundation backend into a full world-generation, world-evaluation, world-persistence, and world-export system.
+Stage 2 upgrades MythOS Engine from a foundation backend into a full world-generation, world-evaluation, world-persistence, and world-export system.
+=======
+# Chunk 3: Character Intelligence Layer
+
+Chunk 3 upgrades MythOS Engine from a world-generation platform into a full character-intelligence system. It defines the people who live inside MythOS worlds: their origin, psychology, trauma, memories, goals, morality, skills, adaptability, destiny, relationships, dialogue voice, consistency, originality, quality, persistence, API access, benchmark validation, and Character Bible export.
+>>>>>>> 98e65c5 (Update README for Chunk 3 character intelligence layer)
 
 Chunk 3 is designed so characters are not simple archetypes or prompt-generated descriptions. They become structured, inspectable, testable, persistent, exportable, and future-training-ready intelligence objects.
 
-Chunk 2 focuses specifically on the **World Intelligence Layer**.
+<<<<<<< HEAD
+Stage 2 focuses specifically on the **World Intelligence Layer**.
+=======
+## Chunk 3 Completion Status
+>>>>>>> 98e65c5 (Update README for Chunk 3 character intelligence layer)
 
 Chunk 3 implements the first complete version of the **Character Intelligence Layer**.
 
@@ -238,11 +248,7 @@ character bible export
 
 ---
 
-# What Chunk 2 Does
-
-Chunk 2 creates a complete backend world intelligence pipeline.
-
-The full pipeline is:
+# Important Chunk 3 Files
 
 ```text
 backend/app/schemas/character.py
@@ -286,9 +292,47 @@ scripts/smoke_test_chunk3_character_pipeline.py
 
 ---
 
+<<<<<<< HEAD
+# What Stage 2 Does
+
+Stage 2 creates a complete backend world intelligence pipeline.
+
+The full pipeline is:
+
+```text
+template/raw seed
+→ identity
+→ rules
+→ chronology
+→ geography/environment/infrastructure
+→ demographics/society
+→ power/factions/military
+→ economy/law
+→ belief/culture
+→ knowledge/institutions
+→ technology/species
+→ artifacts/aesthetic
+→ civilization pressure/causality
+→ quality scoring
+→ dataset metadata
+→ snapshot/version metadata
+→ world bible export
+→ persistence
+→ embedding-style originality scoring
+```
+
+The result is a structured `world_state` object that can be inspected, saved, compared, scored, exported, and later used for training/research workflows.
+
+---
+
+# World Engine API
+
+Stage 2 exposes the world engines through FastAPI.
+=======
 # Character Engine API
 
-Chunk 2 exposes the world engines through FastAPI.
+Chunk 3 exposes character engines through FastAPI.
+>>>>>>> 98e65c5 (Update README for Chunk 3 character intelligence layer)
 
 ## Health
 
