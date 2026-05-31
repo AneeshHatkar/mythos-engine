@@ -5,6 +5,7 @@ from backend.app.api.routes_world import router as world_router
 from backend.app.api.routes_world_engines import router as world_engines_router
 from backend.app.api.routes_characters import router as characters_router
 from backend.app.api.routes_character_engines import router as character_engines_router
+from backend.app.api.routes_learning import router as learning_router
 from backend.app.core.config import settings
 from backend.app.schemas.foundation import HealthResponse, RootResponse
 
@@ -22,6 +23,7 @@ app.include_router(world_router)
 app.include_router(world_engines_router)
 app.include_router(characters_router)
 app.include_router(character_engines_router)
+app.include_router(learning_router)
 
 
 @app.get("/", response_model=RootResponse)
