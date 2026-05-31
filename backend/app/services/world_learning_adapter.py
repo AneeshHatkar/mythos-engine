@@ -2,6 +2,8 @@ from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
 from backend.app.services.learning_integration import LearningIntegrationService
+from backend.app.schemas.global_refs import EntityRef, EntityType, CanonStatus, ProjectUniverseRef
+from backend.app.schemas.handoffs import WorldToCharacterContract
 
 
 class WorldLearningAdapter:
@@ -159,6 +161,11 @@ class WorldLearningAdapter:
             "world_profile": world_profile,
             "learning_metadata": learning_metadata,
             "world_to_character_contract": self.build_world_to_character_contract(world_profile or data),
+            "world_simulation_constraint_export": self.build_world_simulation_constraint_export(
+                world_profile or data,
+                project_id=project_id,
+                universe_id=universe_id,
+            ),
         }
 
     def normalize_world_profile(
@@ -226,6 +233,111 @@ class WorldLearningAdapter:
             "contract_complete": True,
             "missing_contract_sections": [],
         }
+
+
+    def build_world_simulation_constraint_export(
+        self,
+        world_payload: Dict[str, Any],
+        *,
+        project_id: str = "default_project",
+        universe_id: str = "default_universe",
+    ) -> Dict[str, Any]:
+        """Export world constraints Chunk 4 simulation engines can enforce.
+
+        This keeps world logic out of simulation hardcoding. Simulation engines
+        should consume these constraints instead of inventing world rules.
+        """
+
+        world_id = self._extract_world_id(world_payload, world_payload)
+        contract = self.build_world_to_character_contract(world_payload)
+
+        entity_refs = [
+            EntityRef(
+                entity_type=EntityType.WORLD,
+                entity_id=world_id,
+                display_name=str(world_payload.get("world_name") or world_payload.get("name") or world_id),
+                project_id=project_id,
+                universe_id=universe_id,
+                canon_status=CanonStatus.DRAFT,
+            ).model_dump()
+        ]
+
+        for faction in contract.get("faction_constraints", []):
+            entity_refs.append(
+                EntityRef(
+                    entity_type=EntityType.FACTION,
+                    entity_id=self._slug_id("faction", faction),
+                    display_name=str(faction),
+                    project_id=project_id,
+                    universe_id=universe_id,
+                    canon_status=CanonStatus.DRAFT,
+                ).model_dump()
+            )
+
+        for location in contract.get("geography_travel_constraints", []):
+            entity_refs.append(
+                EntityRef(
+                    entity_type=EntityType.LOCATION,
+                    entity_id=self._slug_id("location", location),
+                    display_name=str(location),
+                    project_id=project_id,
+                    universe_id=universe_id,
+                    canon_status=CanonStatus.DRAFT,
+                ).model_dump()
+            )
+
+        simulation_constraints = {
+            "world_id": world_id,
+            "location_travel_constraints": contract.get("geography_travel_constraints", []),
+            "faction_constraints": contract.get("faction_constraints", []),
+            "legal_constraints": contract.get("legal_constraints", []),
+            "resource_constraints": contract.get("economy_resource_constraints", []),
+            "power_cost_rules": contract.get("power_laws", []),
+            "access_constraints": contract.get("education_access_constraints", []),
+            "culture_constraints": contract.get("religion_culture_constraints", []),
+            "character_permission_boundaries": contract.get("character_permission_boundaries", []),
+            "simulation_blockers": [],
+            "simulation_warnings": [],
+        }
+
+        ready_sections = [
+            bool(simulation_constraints["legal_constraints"]),
+            bool(simulation_constraints["power_cost_rules"]),
+            bool(simulation_constraints["character_permission_boundaries"]),
+        ]
+        readiness_score = sum(1 for item in ready_sections if item) / len(ready_sections)
+
+        handoff = WorldToCharacterContract(
+            project_ref=ProjectUniverseRef(project_id=project_id, universe_id=universe_id),
+            required_entity_refs=[EntityRef.model_validate(item) for item in entity_refs[:10]],
+            payload={
+                "world_to_character_contract": contract,
+                "world_simulation_constraints": simulation_constraints,
+                "entity_refs": entity_refs,
+            },
+            readiness_score=round(readiness_score, 3),
+            ready=readiness_score >= 0.67,
+            missing_fields=[] if readiness_score >= 0.67 else ["legal_constraints", "power_cost_rules", "permission_boundaries"],
+            warnings=[],
+        )
+
+        return {
+            "world_id": world_id,
+            "project_id": project_id,
+            "universe_id": universe_id,
+            "entity_refs": entity_refs,
+            "world_to_character_contract": contract,
+            "world_simulation_constraints": simulation_constraints,
+            "cross_chunk_handoff": handoff.model_dump(),
+            "chunk4_ready": handoff.ready,
+            "readiness_score": handoff.readiness_score,
+        }
+
+    def _slug_id(self, prefix: str, value: Any) -> str:
+        raw = str(value).lower().strip()
+        safe = "".join(ch if ch.isalnum() else "_" for ch in raw).strip("_")
+        safe = "_".join(part for part in safe.split("_") if part)
+        return f"{prefix}_{safe[:48] or 'unknown'}"
 
     def evaluate_world_learning_quality_gates(self, normalized_world_result: Dict[str, Any]) -> Dict[str, Any]:
         metadata = normalized_world_result.get("learning_metadata", {}) or {}

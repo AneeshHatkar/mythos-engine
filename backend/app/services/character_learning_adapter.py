@@ -2,6 +2,8 @@ from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
 from backend.app.services.learning_integration import LearningIntegrationService
+from backend.app.schemas.global_refs import EntityRef, EntityType, CanonStatus, ProjectUniverseRef
+from backend.app.schemas.handoffs import CharacterToSimulationContract
 
 
 class CharacterLearningAdapter:
@@ -174,6 +176,14 @@ class CharacterLearningAdapter:
             "learning_metadata": learning_metadata,
             "world_contract_validation": world_validation,
             "chunk4_handoff_contract": chunk4_handoff,
+            "character_to_simulation_contract": self.build_character_to_simulation_contract(
+                character_id=character_id,
+                character_profile=character_profile or data,
+                project_id=project_id,
+                universe_id=universe_id,
+                world_contract_validation=world_validation,
+                chunk4_handoff_contract=chunk4_handoff,
+            ),
         }
 
     def normalize_character_profile(
@@ -210,6 +220,14 @@ class CharacterLearningAdapter:
             "learning_metadata": {},
             "world_contract_validation": world_validation,
             "chunk4_handoff_contract": chunk4_handoff,
+            "character_to_simulation_contract": self.build_character_to_simulation_contract(
+                character_id=character_id,
+                character_profile=inner_profile,
+                project_id=project_id,
+                universe_id=universe_id,
+                world_contract_validation=world_validation,
+                chunk4_handoff_contract=chunk4_handoff,
+            ),
         }
 
     def validate_character_against_world_contract(
@@ -339,6 +357,151 @@ class CharacterLearningAdapter:
                 "ensemble dialogue pressure",
             ],
         }
+
+
+    def build_character_to_simulation_contract(
+        self,
+        *,
+        character_id: str,
+        character_profile: Dict[str, Any],
+        project_id: str = "default_project",
+        universe_id: str = "default_universe",
+        world_contract_validation: Optional[Dict[str, Any]] = None,
+        chunk4_handoff_contract: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Build the official Chunk 3 → Chunk 4 simulation handoff.
+
+        This separates stable character identity from mutable simulation state.
+        Chunk 4 should update simulation state, not corrupt the character bible.
+        """
+
+        profile = character_profile or {}
+        flat = self._flatten_character(profile)
+
+        character_ref = EntityRef(
+            entity_type=EntityType.CHARACTER,
+            entity_id=character_id,
+            display_name=self._extract_character_name(profile),
+            project_id=project_id,
+            universe_id=universe_id,
+            canon_status=CanonStatus.DRAFT,
+        )
+
+        simulation_state_seed = {
+            "character_id": character_id,
+            "current_emotion_state": {
+                "dominant_emotion": flat.get("dominant_emotion") or "controlled_pressure",
+                "emotion_intensity": float(flat.get("emotion_intensity") or 0.55),
+                "active_triggers": [],
+            },
+            "current_memory_state": {
+                "active_memory_ids": [
+                    str(item.get("memory_id"))
+                    for item in self._extract_memory_records(profile)
+                    if isinstance(item, dict) and item.get("memory_id")
+                ],
+                "new_memory_queue": [],
+            },
+            "current_agency_state": {
+                "agency_capacity": 0.72,
+                "fear_pressure": 0.35,
+                "resource_access": flat.get("resource_access") or "limited",
+                "legal_constraints_active": [],
+                "social_constraints_active": [],
+            },
+            "current_relationship_state": {
+                "known_relationship_edges": [],
+                "pending_relationship_deltas": [],
+            },
+            "current_knowledge_state": {
+                "known_secret_ids": [],
+                "suspected_secret_ids": [],
+                "evidence_seen_ids": [],
+                "rumors_heard_ids": [],
+            },
+            "current_goal_pressure": {
+                "surface_goal": flat.get("surface_goal"),
+                "hidden_goal": flat.get("hidden_goal"),
+                "true_need": flat.get("true_need"),
+                "false_need": flat.get("false_need"),
+            },
+        }
+
+        dialogue_constraint_seed = {
+            "character_id": character_id,
+            "base_voice_family": flat.get("voice_family") or flat.get("dialogue_voice_family"),
+            "what_cannot_be_said": [],
+            "what_is_hidden": [],
+            "subtext_defaults": [],
+            "relationship_specific_voice_modifiers": {},
+        }
+
+        relationship_state_seed = {
+            "character_id": character_id,
+            "relationship_readiness_family": flat.get("relationship_readiness_family"),
+            "trust_model": flat.get("trust_model"),
+            "attachment_style": flat.get("attachment_style"),
+            "repair_conditions": [],
+            "rupture_triggers": [],
+        }
+
+        agency_state_seed = simulation_state_seed["current_agency_state"]
+
+        required_sections = {
+            "identity": bool(character_id),
+            "psychology": bool(flat.get("core_wound") or flat.get("psychology_profile")),
+            "goals": bool(flat.get("surface_goal") or flat.get("hidden_goal") or flat.get("true_need")),
+            "memory": bool(simulation_state_seed["current_memory_state"]["active_memory_ids"]),
+            "dialogue": bool(dialogue_constraint_seed["base_voice_family"] or chunk4_handoff_contract),
+            "relationship": bool(relationship_state_seed["relationship_readiness_family"] or chunk4_handoff_contract),
+            "world_contract": bool(world_contract_validation is None or world_contract_validation.get("world_contract_valid", True)),
+        }
+
+        missing = [key for key, value in required_sections.items() if not value]
+        readiness_score = sum(1 for value in required_sections.values() if value) / len(required_sections)
+
+        handoff = CharacterToSimulationContract(
+            project_ref=ProjectUniverseRef(project_id=project_id, universe_id=universe_id),
+            required_entity_refs=[character_ref],
+            payload={
+                "character_id": character_id,
+                "character_ref": character_ref.model_dump(),
+                "simulation_state_seed": simulation_state_seed,
+                "dialogue_constraint_seed": dialogue_constraint_seed,
+                "agency_state_seed": agency_state_seed,
+                "relationship_state_seed": relationship_state_seed,
+                "world_contract_validation": world_contract_validation or {},
+                "chunk4_handoff_contract": chunk4_handoff_contract or {},
+            },
+            readiness_score=round(readiness_score, 3),
+            ready=readiness_score >= 0.72,
+            missing_fields=missing,
+            warnings=[] if not missing else [f"Missing simulation handoff sections: {', '.join(missing)}"],
+        )
+
+        return {
+            "character_id": character_id,
+            "project_id": project_id,
+            "universe_id": universe_id,
+            "character_ref": character_ref.model_dump(),
+            "simulation_state_seed": simulation_state_seed,
+            "dialogue_constraint_seed": dialogue_constraint_seed,
+            "agency_state_seed": agency_state_seed,
+            "relationship_state_seed": relationship_state_seed,
+            "cross_chunk_handoff": handoff.model_dump(),
+            "chunk4_ready": handoff.ready,
+            "readiness_score": handoff.readiness_score,
+            "missing_fields": missing,
+        }
+
+    def _extract_memory_records(self, profile: Dict[str, Any]) -> List[Any]:
+        memories = self._extract_nested(profile, ["psychology", "memory_records"])
+        if isinstance(memories, list):
+            return memories
+        direct = profile.get("memory_records")
+        if isinstance(direct, list):
+            return direct
+        return []
 
     def evaluate_character_learning_quality_gates(self, normalized_character_result: Dict[str, Any]) -> Dict[str, Any]:
         metadata = normalized_character_result.get("learning_metadata", {}) or {}
