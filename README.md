@@ -1,88 +1,85 @@
 # MythOS Engine
 
-## What This Project Is
+## Overview
 
 MythOS Engine is a research-grade AI story intelligence backend for generating, validating, evolving, and exporting high-complexity fictional universes, characters, relationships, plots, and franchise-scale narrative systems.
 
-This project is not a simple prompt-to-story generator. It is being built as a modular intelligence engine where each layer produces structured, testable, reusable, persistent, and learning-ready outputs. Worlds, characters, destinies, emotions, memories, relationships, events, plots, scenes, adaptation reports, research metrics, and training artifacts are represented as data rather than loose one-off text.
+It is not a simple prompt-to-story generator. MythOS is designed as a modular creative-intelligence platform where worlds, characters, memories, emotions, destinies, relationships, events, plots, scenes, exports, research metrics, and future training artifacts are represented as structured data instead of one-off text.
 
-The long-term goal is to support:
+The system is being built to support:
 
-- worldbuilding systems with rules, factions, economies, cultures, constraints, histories, geographies, and originality checks
-- character intelligence with psychology, memory, morality, skills, adaptability, destiny, dialogue, and relationship readiness
-- relationship and ensemble simulation where characters interact under world constraints
-- plot, scene, arc, franchise-bible, and adaptation strategy generation
+- worldbuilding with rules, factions, economies, cultures, geographies, histories, laws, power systems, constraints, and originality checks
+- character intelligence with origin, psychology, trauma, healing, memory, morality, goals, skills, adaptability, destiny, dialogue voice, and relationship readiness
+- relationship and ensemble simulation where characters interact under world rules, memories, trust, betrayal, rivalry, romance, family pressure, and social constraints
+- plot, scene, arc, franchise-bible, and adaptation-strategy generation
 - quality, originality, consistency, anti-genericity, and franchise-potential evaluation
 - provenance-aware dataset governance
 - embedding-based retrieval and semantic similarity search
 - RAG over world, character, relationship, plot, and story datasets
-- external dataset ingestion, cleaning, and governance
+- external dataset ingestion, cleaning, deduplication, and governance
 - human-feedback review queues
 - future ML training and fine-tuning experiments
-- learned scoring models for originality, quality, consistency, tropes, and franchise potential
+- learned scoring models for originality, quality, consistency, trope-risk, and franchise potential
 
-The architecture is designed so generated outputs do not disappear after one run. Instead, outputs can become structured learning artifacts with ontology records, provenance records, embedding metadata, training eligibility, auditability, and future training-queue entries.
+Generated outputs are designed to become reusable learning artifacts. A world, character, or story artifact can carry ontology records, provenance records, embedding metadata, training eligibility, quality gates, auditability, and future training-queue entries.
 
 ## Development Methodology
 
-This repository is being developed through deliberate milestone-based micro-commits. Each major engine, schema, API route, persistence layer, benchmark, smoke test, and integration pass is committed separately after verification.
+This repository is being developed through deliberate milestone-based micro-commits. Each major engine, schema, API route, persistence layer, benchmark, smoke test, and integration layer is committed separately after verification.
 
-The commit history is intentionally granular because the project is being built as a research-grade backend where every layer should be traceable, testable, and reversible. This makes it easier to inspect how the system evolved from foundation code into world intelligence, character intelligence, and learning-aware infrastructure.
+The commit history is intentionally granular because the project is being built as a research-grade backend where every layer should be traceable, testable, reversible, and independently inspectable. The micro-commit history shows the system evolving from foundation infrastructure into world intelligence, character intelligence, learning-aware infrastructure, and future ML/RAG readiness.
 
-## Current Architecture Direction
+## Architecture Direction
 
 ```text
-Foundation Layer
-→ World Intelligence Layer
-→ Character Intelligence Layer
+Foundation Platform
+→ World Intelligence
+→ Character Intelligence
 → Global Learning / Provenance / Embedding / Training-Queue Infrastructure
 → World Learning Integration
 → Character Learning Integration
 → Relationship + Ensemble Simulation
 → Plot / Scene / Franchise Systems
-→ Future Dataset Ingestion, RAG, Embeddings, Evaluation, and ML Training
+→ Dataset Ingestion, RAG, Embeddings, Evaluation, and ML Training
 ```
 
 ## Research-Grade Design Principles
 
-MythOS Engine is being built around these principles:
-
 ```text
 modular engine architecture
 structured schemas instead of loose text blobs
+deterministic testable scaffolding before ML training
 world-to-character dependency contracts
 quality and originality gates
 consistency validation
 provenance-aware learning records
 future embedding and vector-search readiness
 future dataset ingestion and governance
-future human feedback and review loops
+future human-feedback and review loops
 future model training / fine-tuning support
 extensive test coverage for every layer
 ```
 
-## Current Status
+## Current Implementation Status
 
-The project currently includes:
-
-```text
-Stage 1 / Chunk 1: Foundation and base engine infrastructure
-Stage 2 / Chunk 2: World intelligence layer
-Chunk 3: Character intelligence layer
-Upgrade Pass A: Global learning foundation
-Upgrade Pass B: Chunk 2 world learning integration
-```
-
-Future planned work includes:
+MythOS currently includes:
 
 ```text
-Upgrade Pass C: Chunk 3 character learning integration
-Chunk 4: Relationship and ensemble simulation
-Chunk 5+: Plot, scene, arc, franchise, evaluation, and export systems
-Chunk 8: Real embeddings, RAG, dataset ingestion, learning loops, and ML training experiments
+Foundation platform and base engine infrastructure
+World intelligence layer
+Character intelligence layer
+Global learning foundation
+World learning integration
+Character learning integration
 ```
 
----
+Planned next systems include:
+
+```text
+Relationship and ensemble simulation
+Plot, event, scene, arc, franchise, evaluation, and export systems
+Real embeddings, vector search, RAG, dataset ingestion, learning loops, and ML training experiments
+```
 
 ## Local Setup
 
@@ -115,11 +112,11 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## Stage 1 / Chunk 1 — Foundation Layer
+# Foundation Platform
 
-Stage 1 is the foundation operating system for MythOS Engine. It includes project management, universe management, registry types, versioning, audit records, feedback records, canon locks, branching timelines, engine contracts, SQLite persistence, and multi-format exports.
+The foundation platform is the operating layer of MythOS Engine. It includes backend setup, project/universe management, registry types, versioning, audit records, feedback records, canon locks, branching timelines, engine contracts, persistence, and multi-format exports.
 
-### Foundation Capabilities
+## Foundation Capabilities
 
 ```text
 FastAPI backend
@@ -143,7 +140,7 @@ DB snapshot metadata export
 export listing
 ```
 
-### Foundation Smoke Test
+## Foundation Smoke Test
 
 Start the backend:
 
@@ -166,17 +163,13 @@ Foundation smoke test passed.
 
 ---
 
-## Stage 2 / Chunk 2 — World Intelligence Layer
+# World Intelligence Layer
 
-Stage 2 upgrades MythOS Engine from a foundation backend into a full world-generation, world-evaluation, world-persistence, world-export, and world-learning-ready system.
+The world intelligence layer turns MythOS from a backend skeleton into a world-generation, world-evaluation, world-persistence, world-export, and world-learning-ready system.
 
-Stage 2 focuses on the World Intelligence Layer.
+It creates structured world outputs that later characters, relationships, plots, and scenes must obey.
 
-### What Stage 2 Does
-
-Stage 2 creates a complete backend world intelligence pipeline.
-
-The full pipeline is:
+## World Intelligence Pipeline
 
 ```text
 template/raw seed
@@ -197,16 +190,12 @@ template/raw seed
 → snapshot/version metadata
 → world bible export
 → persistence
-→ embedding-style originality scoring
+→ originality/similarity metadata
 ```
 
-The result is a structured `world_state` or `world_profile` object that can be inspected, saved, compared, scored, exported, and later used for character grounding, relationship simulation, retrieval, and training/research workflows.
+The result is a structured `world_state` or `world_profile` object that can be inspected, saved, compared, scored, exported, reused for character grounding, and prepared for retrieval or future training workflows.
 
-### World Engine API
-
-Stage 2 exposes world engines through FastAPI. The world layer is responsible for creating and validating the environment that later characters, relationships, plots, and scenes must obey.
-
-Important world outputs include:
+## Important World Outputs
 
 ```text
 world identity
@@ -230,59 +219,18 @@ causality pressure
 quality reports
 world bible exports
 originality / similarity metadata
+world-to-character dependency contracts
 ```
 
 ---
 
-## Chunk 3 — Character Intelligence Layer
+# Character Intelligence Layer
 
-Chunk 3 upgrades MythOS Engine from a world-generation platform into a full character-intelligence system. It defines the people who live inside MythOS worlds: their origin, psychology, trauma, memories, goals, morality, skills, adaptability, destiny, relationships, dialogue voice, consistency, originality, quality, persistence, API access, benchmark validation, and Character Bible export.
+The character intelligence layer defines the people who live inside MythOS worlds. It models their origin, psychology, trauma, memories, goals, morality, skills, adaptability, destiny, relationships, dialogue voice, consistency, originality, quality, persistence, API access, benchmark validation, and Character Bible export.
 
-Chunk 3 is designed so characters are not simple archetypes or prompt-generated descriptions. They become structured, inspectable, testable, persistent, exportable, and future-training-ready intelligence objects.
+Characters are not treated as simple archetypes or prompt-generated descriptions. They become structured, inspectable, testable, persistent, exportable, and future-training-ready intelligence objects.
 
-## Chunk 3 Completion Status
-
-Chunk 3 implements the first complete version of the Character Intelligence Layer.
-
-```text
-DONE  3.1   Deep Character Schemas
-DONE  3.2   Character Registry Seed Pack
-DONE  3.3   Character API + Basic Store Foundation
-DONE  3.4   Character Population Engine
-DONE  3.5   People Type Engine
-DONE  3.6   World-to-Character Constraint Mapper
-DONE  3.7   Character Agent State Engine
-DONE  3.8   Character Genesis Engine
-DONE  3.9   Origin + Social Class Engine
-DONE  3.10  Family Foundation Engine
-DONE  3.11  Psychology Engine
-DONE  3.12  Trauma + Healing Engine
-DONE  3.13  Emotion Engine
-DONE  3.14  Emotional Arc Engine
-DONE  3.15  Memory Engine
-DONE  3.16  Skill + Power Engine
-DONE  3.17  Skill Ontology Engine
-DONE  3.18  Character Type Ontology Engine
-DONE  3.19  Adaptability + Limit-Break Engine
-DONE  3.20  Destiny / Prophecy / Legacy Engine
-DONE  3.21  Relationship Readiness Engine
-DONE  3.22  Dialogue Voice / Speech Pattern Engine
-DONE  3.23  Character Consistency Validator
-DONE  3.24  Character Originality / Similarity Engine
-DONE  3.25  Character Quality Scorer
-DONE  3.26  Character Full Profile Orchestrator
-DONE  3.27  Character Persistence / Run Store
-DONE  3.28  Character Engine API Routes
-DONE  3.29  Character Benchmark Pack + Smoke Test
-DONE  3.30  Character Bible Export Engine
-DONE  3.31  README Update + Final Verification
-```
-
-## What Chunk 3 Does
-
-Chunk 3 creates a full backend character intelligence pipeline.
-
-The complete Chunk 3 pipeline is:
+## Character Intelligence Pipeline
 
 ```text
 character seed / world context
@@ -319,8 +267,6 @@ character seed / world context
 The output is a structured `character_full_profile` object that can be inspected, saved, scored, exported, benchmarked, and later used for relationship simulation, plot simulation, RAG retrieval, embeddings, and training workflows.
 
 ## Character Intelligence Capabilities
-
-Chunk 3 supports deep character modeling across these dimensions:
 
 ```text
 identity
@@ -379,7 +325,7 @@ training eligibility
 character bible export
 ```
 
-## Important Chunk 3 Files
+## Important Character Files
 
 ```text
 backend/app/schemas/character.py
@@ -412,6 +358,8 @@ backend/app/engines/character/character_bible_export_engine.py
 
 backend/app/services/character_store.py
 backend/app/services/character_run_store.py
+backend/app/services/character_learning_adapter.py
+backend/app/services/character_learning_metadata_verifier.py
 
 backend/app/api/routes_characters.py
 backend/app/api/routes_character_engines.py
@@ -419,44 +367,199 @@ backend/app/api/routes_character_engines.py
 backend/app/benchmarks/character_benchmark_pack.py
 
 scripts/smoke_test_chunk3_character_pipeline.py
+scripts/smoke_test_chunk3_character_learning_pipeline.py
 ```
 
 ---
 
-## Character Engine API
+# Learning, Provenance, Embedding, and Training-Queue Infrastructure
 
-Chunk 3 exposes character engines through FastAPI.
+MythOS includes a global learning foundation that turns engine outputs into governed, reusable, future-training-ready artifacts.
 
-### Health
+This layer does not train models yet. It creates the infrastructure needed for future dataset ingestion, retrieval, embeddings, fine-tuning, evaluation, and human-feedback learning.
+
+## Learning Infrastructure Services
+
+```text
+backend/app/services/learning_registry_store.py
+backend/app/services/provenance_store.py
+backend/app/services/training_queue_store.py
+backend/app/services/embedding_registry_store.py
+backend/app/services/learning_integration.py
+backend/app/api/routes_learning.py
+```
+
+## What the Learning Infrastructure Stores
+
+```text
+ontology records
+learned type candidates
+engine learning metadata
+dataset/source provenance
+training eligibility
+training queue records
+embedding metadata
+future vectorization tasks
+similarity/originality hooks
+```
+
+## Global Learning Flow
+
+```text
+engine output
+→ learning metadata
+→ learning integration service
+→ learning registry
+→ provenance governance
+→ embedding metadata registry
+→ training queue if eligible
+→ future learning/RAG/training
+```
+
+## Global Learning API Routes
+
+```text
+GET    /learning/health
+GET    /learning/summary
+POST   /learning/metadata
+POST   /learning/engine-result
+GET    /learning/records/{category}
+GET    /learning/records/{category}/{record_id}
+POST   /learning/provenance
+GET    /learning/provenance
+GET    /learning/provenance/{provenance_id}
+POST   /learning/training-queue
+GET    /learning/training-queue
+GET    /learning/training-queue/{training_queue_id}
+PATCH  /learning/training-queue/{training_queue_id}/status
+POST   /learning/embeddings
+GET    /learning/embeddings
+GET    /learning/embeddings/vectorization-queue
+GET    /learning/embeddings/{embedding_id}
+```
+
+---
+
+# World Learning Integration
+
+World outputs are connected to the global learning infrastructure through:
+
+```text
+backend/app/services/world_learning_adapter.py
+backend/app/services/world_learning_metadata_verifier.py
+```
+
+The world learning adapter can normalize world engine results, synthesize missing world learning metadata, register world outputs into global learning stores, build world-to-character dependency contracts, apply world learning quality gates, and block low-quality or unsafe world outputs.
+
+## World-to-Character Dependency Contract
+
+The world-to-character contract extracts:
+
+```text
+social classes
+power laws
+legal constraints
+faction constraints
+education/access constraints
+economy/resource constraints
+religion/culture constraints
+geography/travel constraints
+character permission boundaries
+```
+
+This ensures characters, relationships, and later plot/scene systems obey the world instead of generating disconnected content.
+
+## World Learning API Routes
+
+```text
+POST /world/engines/learning/register-result
+POST /world/engines/learning/register-profile
+POST /world/engines/learning/contract
+```
+
+## World Learning Smoke Test
+
+```bash
+PYTHONPATH=. python scripts/smoke_test_chunk2_world_learning_pipeline.py
+```
+
+This proves that world output normalization, contract creation, metadata verification, global learning registration, provenance storage, embedding registration, and training queue registration work end-to-end.
+
+---
+
+# Character Learning Integration
+
+Character outputs are connected to the global learning infrastructure through:
+
+```text
+backend/app/services/character_learning_adapter.py
+backend/app/services/character_learning_metadata_verifier.py
+```
+
+The character learning adapter can normalize character engine results, synthesize missing character learning metadata, register character outputs into global learning stores, validate characters against world contracts, build relationship-simulation handoff payloads, apply quality gates, and block unsafe or low-quality outputs from training queues.
+
+## Character Learning Quality Gates
+
+Character outputs are checked for:
+
+```text
+approved provenance
+quality score
+originality score
+consistency score
+genericity risk
+world contract compatibility
+psychology / goals / memory depth
+skill and power grounding
+relationship readiness
+dialogue voice
+human review requirements
+do_not_train flags
+```
+
+## Character-to-World Contract Validation
+
+Character outputs are validated against world contracts so their social class, family status, education route, power system, legal permissions, origin, and exception routes are compatible with the world.
+
+For example, if a world states that distrusted or erased family names require a sponsor to testify or enter an institution, then the character must have a sponsor, exam route, debt contract, illegal patron, exception, or visible consequence.
+
+## Character Learning API Routes
+
+```text
+POST /character/engines/learning/register-result
+POST /character/engines/learning/register-profile
+POST /character/engines/learning/verify
+POST /character/engines/learning/world-contract-check
+POST /character/engines/learning/chunk4-handoff
+```
+
+## Character Learning Smoke Test
+
+```bash
+PYTHONPATH=. python scripts/smoke_test_chunk3_character_learning_pipeline.py
+```
+
+This proves that character output normalization, metadata verification, world-contract validation, relationship-simulation handoff creation, global learning registration, provenance storage, embedding registration, and training queue registration work end-to-end.
+
+---
+
+# Character Engine API
+
+## Health
 
 ```http
 GET /character/engines/health
 ```
 
-Checks that the character engine API is available.
-
-### Adaptability Engine
+## Adaptability Engine
 
 ```http
 POST /character/engines/adaptability
 ```
 
-Runs the adaptability and limit-break engine.
+Runs adaptability and limit-break modeling.
 
-Returns:
-
-```text
-adaptability profile
-trigger model
-cost model
-limit-break rules
-adaptation pathways
-failure/cost metadata
-learning metadata
-training eligibility
-```
-
-### Destiny Engine
+## Destiny Engine
 
 ```http
 POST /character/engines/destiny
@@ -464,7 +567,7 @@ POST /character/engines/destiny
 
 Runs destiny, prophecy, legacy, and agency-conflict modeling.
 
-### Relationship Readiness Engine
+## Relationship Readiness Engine
 
 ```http
 POST /character/engines/relationship-readiness
@@ -472,7 +575,7 @@ POST /character/engines/relationship-readiness
 
 Prepares a character for future relationship simulation.
 
-### Dialogue Voice Engine
+## Dialogue Voice Engine
 
 ```http
 POST /character/engines/dialogue-voice
@@ -480,7 +583,7 @@ POST /character/engines/dialogue-voice
 
 Builds character-specific voice and speech-pattern metadata.
 
-### Consistency Validator
+## Consistency Validator
 
 ```http
 POST /character/engines/consistency-validator
@@ -488,7 +591,7 @@ POST /character/engines/consistency-validator
 
 Checks cross-engine character consistency.
 
-### Originality Engine
+## Originality Engine
 
 ```http
 POST /character/engines/originality
@@ -496,9 +599,9 @@ POST /character/engines/originality
 
 Runs deterministic originality and similarity-risk scoring.
 
-This is intentionally deterministic for Chunk 3. Real embeddings, vector retrieval, nearest-neighbor search, and learned originality scoring belong in Chunk 8.
+Real embeddings, vector retrieval, nearest-neighbor search, and learned originality scoring belong in the future ML/RAG layer.
 
-### Quality Scorer
+## Quality Scorer
 
 ```http
 POST /character/engines/quality-scorer
@@ -506,7 +609,7 @@ POST /character/engines/quality-scorer
 
 Scores the character across all major quality axes.
 
-### Full Profile Orchestrator
+## Full Profile Orchestrator
 
 ```http
 POST /character/engines/full-profile-orchestrator
@@ -532,25 +635,21 @@ Optional persistence:
 
 ---
 
-## Character Store API
+# Character Store API
 
-### Save Profile
+## Save Profile
 
 ```http
 POST /character/engines/save-profile
 ```
 
-Saves a character profile to the JSON-backed run store.
-
-### Get Profile
+## Get Profile
 
 ```http
 GET /character/engines/profiles/{character_id}
 ```
 
-Loads a stored character profile.
-
-### List Profiles
+## List Profiles
 
 ```http
 GET /character/engines/profiles
@@ -564,7 +663,7 @@ universe_id
 min_quality_score
 ```
 
-### List Runs
+## List Runs
 
 ```http
 GET /character/engines/runs
@@ -578,19 +677,17 @@ engine_name
 project_id
 ```
 
-### Store Summary
+## Store Summary
 
 ```http
 GET /character/engines/store-summary
 ```
 
-Returns store-level metadata.
-
 ---
 
-## Character Persistence
+# Character Persistence
 
-Chunk 3 stores character profiles and engine runs through:
+Character profiles and engine runs are stored through:
 
 ```text
 backend/app/services/character_run_store.py
@@ -617,6 +714,7 @@ profile
 orchestration_report
 quality_report
 learning_metadata
+global_learning_trace
 store metadata
 ```
 
@@ -633,15 +731,16 @@ created_at
 input_payload
 result_payload
 run_metadata
+global_learning_trace
 ```
 
 This makes generated characters persistent and usable for future review, comparison, exports, relationship simulation, plot simulation, embeddings, dataset curation, training workflows, and audit trails.
 
 ---
 
-## Character Benchmark Pack
+# Character Benchmark Pack
 
-Chunk 3 includes a deterministic character benchmark pack:
+The deterministic character benchmark pack is located at:
 
 ```text
 backend/app/benchmarks/character_benchmark_pack.py
@@ -657,13 +756,13 @@ char_bench_failed_prodigy_rival
 char_bench_generic_baseline
 ```
 
-The benchmark pack checks high-quality protagonist construction, institutional villain construction, independent romance-axis character construction, rival construction, weak generic baseline detection, full profile orchestration, relationship/dialogue readiness, future Chunk 4 payload readiness, and future Chunk 8 training metadata readiness.
+The benchmark pack checks high-quality protagonist construction, institutional villain construction, independent romance-axis character construction, rival construction, weak generic baseline detection, full profile orchestration, relationship/dialogue readiness, future relationship-simulation payload readiness, and future training metadata readiness.
 
 ---
 
-## Character Bible Export
+# Character Bible Export
 
-Chunk 3 adds a structured Character Bible export engine:
+The structured Character Bible export engine is located at:
 
 ```text
 backend/app/engines/character/character_bible_export_engine.py
@@ -683,8 +782,8 @@ relationship readiness
 dialogue voice
 validation, quality, and originality
 learning and training metadata
-Chunk 4 handoff
-Chunk 8 handoff
+relationship-simulation handoff
+future training handoff
 ```
 
 Optional disk export writes:
@@ -698,224 +797,7 @@ Physical PDF/DOCX export is planned for a later export/reporting phase after the
 
 ---
 
-## Chunk 3 Smoke Test
-
-Run the local Chunk 3 smoke test:
-
-```bash
-cd ~/Desktop/mythos-engine
-source .venv/bin/activate
-PYTHONPATH=. python scripts/smoke_test_chunk3_character_pipeline.py
-```
-
-Expected final line:
-
-```text
-Chunk 3 character pipeline smoke test passed.
-```
-
-It writes smoke-test output to:
-
-```text
-reports/characters_smoke/chunk3_character_smoke_summary.json
-```
-
-API mode is also supported after starting the backend:
-
-```bash
-cd ~/Desktop/mythos-engine
-source .venv/bin/activate
-PYTHONPATH=. uvicorn backend.app.main:app --reload
-```
-
-Then in a second terminal:
-
-```bash
-cd ~/Desktop/mythos-engine
-source .venv/bin/activate
-MYTHOS_CHARACTER_SMOKE_MODE=api PYTHONPATH=. python scripts/smoke_test_chunk3_character_pipeline.py
-```
-
----
-
-## Upgrade Pass A — Global Learning Foundation
-
-Upgrade Pass A adds the global learning infrastructure that allows MythOS Engine to move beyond isolated deterministic engine outputs and toward a research-grade, learning-aware story/franchise intelligence system.
-
-This pass does not train models yet. Instead, it creates the foundation required for future dataset ingestion, retrieval, embeddings, fine-tuning, evaluation, and human-feedback learning.
-
-### Why Upgrade Pass A Exists
-
-Earlier chunks created strong deterministic scaffolding:
-
-```text
-Chunk 1: foundation, schemas, base engine patterns
-Chunk 2: world intelligence layer
-Chunk 3: character intelligence layer
-```
-
-Upgrade Pass A turns those outputs into reusable learning assets by adding global stores for:
-
-```text
-ontology records
-learned type candidates
-engine learning metadata
-dataset/source provenance
-training eligibility
-training queue records
-embedding metadata
-future vectorization tasks
-similarity/originality hooks
-```
-
-### Upgrade Pass A Services
-
-```text
-backend/app/services/learning_registry_store.py
-backend/app/services/provenance_store.py
-backend/app/services/training_queue_store.py
-backend/app/services/embedding_registry_store.py
-backend/app/services/learning_integration.py
-backend/app/api/routes_learning.py
-```
-
-### Global Learning API Routes
-
-```text
-GET    /learning/health
-GET    /learning/summary
-POST   /learning/metadata
-POST   /learning/engine-result
-GET    /learning/records/{category}
-GET    /learning/records/{category}/{record_id}
-POST   /learning/provenance
-GET    /learning/provenance
-GET    /learning/provenance/{provenance_id}
-POST   /learning/training-queue
-GET    /learning/training-queue
-GET    /learning/training-queue/{training_queue_id}
-PATCH  /learning/training-queue/{training_queue_id}/status
-POST   /learning/embeddings
-GET    /learning/embeddings
-GET    /learning/embeddings/vectorization-queue
-GET    /learning/embeddings/{embedding_id}
-```
-
-### Upgrade Pass A Architecture
-
-```text
-engine output
-→ learning metadata
-→ learning integration service
-→ learning registry
-→ provenance governance
-→ embedding metadata registry
-→ training queue if eligible
-→ future Chunk 8 learning/RAG/training
-```
-
----
-
-## Upgrade Pass B — Chunk 2 World Learning Integration
-
-Upgrade Pass B connects the Chunk 2 world intelligence layer to the global learning foundation added in Upgrade Pass A.
-
-This pass does not train real ML models and does not compute real embeddings yet. Instead, it makes world outputs globally registered, provenance-aware, embedding-ready, training-queue-ready, and reusable by later character, relationship, plot, RAG, and training systems.
-
-### Why Upgrade Pass B Exists
-
-Before this pass, Chunk 2 world engines could generate structured world outputs, world bibles, originality checks, and benchmark data.
-
-After this pass, world outputs can flow into the global learning registry, provenance store, embedding registry, training queue, and future Chunk 8 learning/RAG/training pipeline.
-
-### New World Learning Adapter
-
-```text
-backend/app/services/world_learning_adapter.py
-```
-
-The adapter can normalize world engine results, synthesize missing world learning metadata, register world outputs into global learning stores, build world-to-character dependency contracts, apply world learning quality gates, and block low-quality or unsafe world outputs.
-
-### World-to-Character Dependency Contract
-
-Upgrade Pass B adds a formal contract that tells later chunks what the world requires.
-
-The contract extracts:
-
-```text
-social classes
-power laws
-legal constraints
-faction constraints
-education/access constraints
-economy/resource constraints
-religion/culture constraints
-geography/travel constraints
-character permission boundaries
-```
-
-This ensures Chunk 3 characters, Chunk 4 relationships, and later plot/scene systems obey the world instead of generating disconnected content.
-
-### World Learning Quality Gates
-
-World outputs are checked before they enter the global learning pipeline.
-
-The gate checks:
-
-```text
-source provenance approval
-world quality score
-world originality score
-world consistency score
-world-to-character contract usability
-training eligibility
-human review requirements
-do_not_train flags
-```
-
-### World Learning Metadata Verifier
-
-```text
-backend/app/services/world_learning_metadata_verifier.py
-```
-
-The verifier checks whether world outputs contain or can synthesize EngineLearningMetadata-style payloads, ontology records, learned type candidates, provenance records, embedding metadata, training eligibility, world-to-character contract, Chunk 3/4 readiness labels, and future Chunk 8 readiness labels.
-
-### Updated World API Learning Routes
-
-```text
-POST /world/engines/learning/register-result
-POST /world/engines/learning/register-profile
-POST /world/engines/learning/contract
-```
-
-These routes do not break older world routes.
-
-### World Run Store Learning Trace Helpers
-
-```text
-backend/app/services/world_run_store.py
-```
-
-The world run store now has helper support for attaching global learning trace data, including learning metadata IDs, provenance IDs, embedding IDs, training queue IDs, learning registration summaries, and world-to-character contracts.
-
-### World Learning Smoke Test
-
-```text
-scripts/smoke_test_chunk2_world_learning_pipeline.py
-```
-
-Run it with:
-
-```bash
-PYTHONPATH=. python scripts/smoke_test_chunk2_world_learning_pipeline.py
-```
-
-The smoke test proves that world output normalization, contract creation, metadata verification, global learning registration, provenance storage, embedding registration, and training queue registration work end-to-end.
-
----
-
-## Dataset, Learning, and Training Direction
+# Dataset, Learning, and Training Direction
 
 The project does not perform final model training yet.
 
@@ -934,10 +816,12 @@ quality scores
 originality scores
 consistency scores
 future retrieval queries
-future Chunk 8 training payloads
+future training payloads
 ```
 
-This is intentional. MythOS should not blindly train on generated content. The future ML/RAG layer must use:
+This is intentional. MythOS should not blindly train on generated content.
+
+The future ML/RAG layer must use:
 
 ```text
 licensed datasets
@@ -946,15 +830,29 @@ human-approved synthetic records
 quality-reviewed outputs
 deduplicated / originality-checked records
 provenance-safe artifacts
+human feedback
+evaluation benchmarks
 ```
 
-Actual ML/RAG training, real embeddings, vector databases, retrieval-augmented generation, model registry, learned scoring, and external dataset ingestion belong in Chunk 8 and later learning/evaluation phases.
+Planned future ML/RAG capabilities include:
+
+```text
+real embedding computation
+semantic similarity search
+vector database integration
+retrieval-augmented generation
+external dataset ingestion pipelines
+dataset cleaning and governance
+human-feedback review queues
+model training / fine-tuning experiments
+evaluation benchmarks
+learned scoring models
+learned originality / quality / trope detection models
+```
 
 ---
 
-## How MythOS Differs From Simple Story Generators
-
-MythOS Engine is not a basic prompt-to-story tool.
+# How MythOS Differs From Simple Story Generators
 
 A simple story generator usually works like:
 
@@ -963,7 +861,7 @@ prompt
 → generated text
 ```
 
-MythOS is being designed as:
+MythOS is designed as:
 
 ```text
 world data
@@ -1004,9 +902,9 @@ whether they are training-eligible
 
 ---
 
-## What Belongs Later
+# What Belongs Later
 
-The following are important but intentionally not completed yet:
+The following are planned but intentionally not completed yet:
 
 ```text
 real PDF/DOCX physical export
@@ -1026,17 +924,17 @@ Planned placement:
 ```text
 Physical PDF/DOCX export       → later export/reporting phase
 Frontend                       → later full-project frontend phase
-Real embeddings/vector DB       → Chunk 8
-Actual ML/RAG training          → Chunk 8
-Large-scale dataset ingestion   → Chunk 8
+Real embeddings/vector DB       → future ML/RAG layer
+Actual ML/RAG training          → future ML/RAG layer
+Large-scale dataset ingestion   → future ML/RAG layer
 Async job queue                 → production/long-running jobs phase
-Relationship simulation         → Chunk 4
-Plot/event/scene intelligence   → later story/plot chunks
+Relationship simulation         → next major system
+Plot/event/scene intelligence   → later story/plot systems
 ```
 
 ---
 
-## Verification
+# Verification
 
 Run all backend tests:
 
@@ -1059,25 +957,26 @@ Run available smoke tests:
 PYTHONPATH=. python scripts/smoke_test_foundation_api.py
 PYTHONPATH=. python scripts/smoke_test_chunk2_world_learning_pipeline.py
 PYTHONPATH=. python scripts/smoke_test_chunk3_character_pipeline.py
+PYTHONPATH=. python scripts/smoke_test_chunk3_character_learning_pipeline.py
 ```
 
 ---
 
-## Next Steps
+# Roadmap
 
-The approved next plan is:
+Next planned systems:
 
 ```text
-Upgrade Pass C: Chunk 3 character orchestrator/API/export integration with global learning
-Chunk 4: Relationship and ensemble simulation
-Chunk 5+: Plot/event/scene intelligence
-Chunk 8: Real embeddings, RAG, external dataset ingestion, evaluation, and ML training experiments
+Relationship and ensemble simulation
+Plot/event/scene intelligence
+Franchise bible and adaptation intelligence
+Full export/reporting system
+Frontend/admin dashboard
+Real embeddings and vector search
+RAG over project datasets
+External dataset ingestion
+Human-feedback review workflows
+Evaluation benchmarks
+Model training and fine-tuning experiments
+Learned scoring models
 ```
-
-Chunk 1 defines the platform foundation.
-
-Chunk 2 defines the worlds.
-
-Chunk 3 defines the characters.
-
-Chunk 4 should focus on relationships, interaction dynamics, ensemble simulation, trust/betrayal, romance/rivalry/family/friendship mechanics, and multi-character story pressure.
