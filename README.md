@@ -1216,3 +1216,52 @@ After Pass E, Chunks 1–3 are ready to feed the relationship/event simulation l
 The next major build phase is:
 
 `Chunk 4.1 — Simulation schemas and master state`
+
+---
+
+## Chunk 4 — Interaction Simulation Layer
+
+Chunk 4 turns MythOS Engine from a static world/character system into a simulation-driven story engine. It models character interactions, choices, consequences, relationships, emotions, conflicts, stakes, tension, causality, cast selection, handoff payloads, generation-control metadata, quality scoring, anti-genericity validation, benchmarks, smoke tests, and learning metadata.
+
+### What Chunk 4 can do
+
+- Simulate character interactions with causal consequences.
+- Support user-supplied and project-generated characters together.
+- Select casts from large character pools without fixed character-count constraints.
+- Preserve relationship state, emotional carryover, hidden knowledge, secrets, evidence, rumors, promises, leverage, bargains, factions, and consequences.
+- Build structured handoff payloads for future story generation.
+- Support multiple output formats such as novel, chapter, scene, movie, screenplay, series episode, and season outline.
+- Score simulation quality before generation.
+- Detect generic or weak simulation setups before they become boring stories.
+- Generate benchmark reports and smoke-test reports.
+- Build safe abstract learning metadata for future model improvement.
+
+### Key Chunk 4 API routes
+
+- GET /simulation/health
+- POST /simulation/run
+- GET /simulation/runs
+- GET /simulation/runs/{run_id}
+- GET /simulation/runs/{run_id}/summary
+- POST /simulation/runs/{run_id}/quality
+- POST /simulation/runs/{run_id}/anti-genericity
+- POST /simulation/runs/{run_id}/bundle
+
+### Final Chunk 4 verification commands
+
+Run these from the project root:
+
+    PYTHONPATH=. python scripts/verify_chunks_1_to_4_integrity.py
+    PYTHONPATH=. python scripts/verify_chunk4_final.py
+    PYTHONPATH=. pytest backend/app/tests -q
+
+Expected result:
+
+    Chunks 1–4 integrity verification passed.
+    Chunk 4 final verification passed.
+    full test suite passed
+
+### Important design rule
+
+Chunk 4 does not directly generate final prose yet. Instead, it creates the simulation state and structured payloads that Chunk 5 will use to generate actual stories, scenes, dialogue, chapters, novels, movies, and series outputs.
+
