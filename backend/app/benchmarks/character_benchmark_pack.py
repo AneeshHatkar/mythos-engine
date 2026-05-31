@@ -1,0 +1,267 @@
+from typing import Any, Dict, List
+
+
+def chunk3_character_benchmark_cases() -> List[Dict[str, Any]]:
+    """Benchmark cases for Chunk 3 character intelligence.
+
+    These are not training data. They are deterministic evaluation fixtures used
+    to prove that the character layer can handle different character patterns:
+    - protagonist / hidden kingmaker
+    - institutional villain
+    - independent love interest
+    - failed prodigy rival
+    - weak generic baseline
+    """
+
+    return [
+        {
+            "case_id": "char_bench_hidden_kingmaker",
+            "description": "High-quality protagonist with power-flow destiny, controlled subtext voice, and strong relationship hooks.",
+            "expected_min_quality": 0.76,
+            "expected_profile_tier": ["complete_profile_ready", "complete_high_quality_profile"],
+            "payload": {
+                "character_seed": {
+                    "character_id": "bench_kael",
+                    "name": "Kael Veyran",
+                    "role": "protagonist",
+                    "people_type": "Hidden Kingmaker",
+                    "project_id": "bench_project",
+                    "universe_id": "velmora",
+                    "social_class": "academy_sponsored",
+                    "family_name_status": "distrusted",
+                    "destiny_type": "hidden_kingmaker",
+                },
+                "origin_profile": {"social_class": "academy_sponsored", "family_name_status": "distrusted", "education_access": 0.82},
+                "family_profile": {"family_name_status": "distrusted"},
+                "psychology_profile": {
+                    "core_wound": "believes belonging can be revoked after public failure",
+                    "betrayal_response": "goes cold, protects family secrets, and remembers exact words",
+                    "love_response": "tests intimacy through duty, truth, and public pressure",
+                },
+                "goal_profile": {
+                    "hidden_goal": "find proof that the ranking system is edited",
+                    "true_need": "belonging is not the same as permission",
+                    "false_need": "worth can be revoked by public failure",
+                },
+                "moral_profile": {
+                    "dominant_moral_value": "justice",
+                    "forbidden_lines": ["will not knowingly sacrifice someone powerless for personal advancement"],
+                },
+                "memory_records": [{"memory_id": "mem_core", "content": "public failure and family secret memory"}],
+                "emotional_arc_profile": {"arc_type": "adaptive_breakthrough_arc"},
+                "skill_ontology": {
+                    "skill_family": "cognitive_inference",
+                    "skill_subtype": "pattern_detection",
+                    "cost_family": ["mental_fatigue"],
+                    "counter_family": ["false_signal"],
+                    "growth_model": "precision_refinement",
+                },
+                "character_type_ontology": {"type_family": "power_redirector", "type_subtype": "hidden_kingmaker"},
+                "adaptability_profile": {
+                    "adaptability_family": "earned_moral_breakthrough",
+                    "trigger_model": "moral_threshold: protects someone weaker",
+                    "cost_model": {"cost_families": ["mental_fatigue"]},
+                },
+                "limit_break_rules": {"hard_prohibitions": ["cannot activate for convenience"]},
+                "destiny_profile": {
+                    "destiny_family": "power_flow_destiny",
+                    "destiny_is_absolute": False,
+                    "destiny_burdens": ["others may treat the character as a means to power"],
+                },
+                "prophecy_model": {"prophecy_requires_choice": True},
+                "legacy_model": {"legacy_pressure_type": "contested_name_legacy"},
+                "relationship_readiness_profile": {
+                    "relationship_readiness_family": "high_loyalty_power_broker_readiness",
+                    "attachment_pattern": "guarded_attachment_with_secret_testing",
+                    "trust_model": "trust_requires_truth_protection_without_weaponization",
+                    "intimacy_risk": 0.72,
+                },
+                "boundary_model": {"relationship_boundaries": ["relationship cannot erase independent agency", "destiny cannot force love, loyalty, or forgiveness"]},
+                "dialogue_voice_profile": {"voice_family": "controlled_subtext_voice"},
+                "speech_pattern_model": {"sentence_rhythm": "short_precise_lines_with_held_back_explanations", "subtext_density": "high_subtext"},
+                "forbidden_dialogue_patterns": {"generic_voice_failure_modes": ["generic witty banter disconnected from wound"]},
+                "consistency_report": {"overall_consistency_score": 0.94, "critical_issue_count": 0, "violation_count": 0},
+                "originality_report": {"overall_originality_score": 0.78, "novelty_score": 0.82, "strong_originality_sources": ["power_redirector_plus_cognitive_inference"]},
+                "anti_genericity_report": {"genericity_risk_score": 0.12, "genericity_risks": []},
+                "repair_plan": {"requires_repair": False, "repair_count": 0},
+                "quality_report": {"overall_quality_score": 0.84, "quality_tier": "strong_character_ready", "weak_axes": []},
+                "readiness_report": {"character_bible_ready": True, "orchestrator_ready": True, "training_queue_ready": True, "chunk4_relationship_ready": True},
+                "source_mode": "human_approved_synthetic",
+                "user_rating": 9,
+            },
+        },
+        {
+            "case_id": "char_bench_institutional_villain",
+            "description": "Institutional villain with legal/procedural voice and ideological pressure.",
+            "expected_min_quality": 0.68,
+            "expected_profile_tier": ["complete_profile_ready", "partial_profile_needs_completion", "complete_high_quality_profile"],
+            "payload": {
+                "character_seed": {
+                    "character_id": "bench_oren",
+                    "name": "Magister Oren Vaul",
+                    "role": "villain",
+                    "people_type": "Institutional Villain",
+                    "project_id": "bench_project",
+                    "universe_id": "velmora",
+                    "social_class": "old_nobility",
+                    "family_name_status": "trusted",
+                },
+                "origin_profile": {"social_class": "old_nobility", "family_name_status": "trusted"},
+                "psychology_profile": {
+                    "core_wound": "believes chaos proves mercy is dangerous",
+                    "betrayal_response": "turns betrayal into legal precedent",
+                },
+                "goal_profile": {
+                    "surface_goal": "preserve institutional order",
+                    "hidden_goal": "prove that order was worth the people it harmed",
+                    "true_need": "accountability without collapse",
+                    "false_need": "control prevents grief",
+                },
+                "moral_profile": {"dominant_moral_value": "order", "corruption_risk": 0.72, "corruption_test": "sacrifice truth for institutional continuity"},
+                "memory_records": [{"memory_id": "mem_collapse", "content": "archive collapse and public riot memory"}],
+                "skill_ontology": {
+                    "skill_family": "institutional_authority",
+                    "skill_subtype": "legal_weaponization",
+                    "cost_family": ["public_hypocrisy", "moral_corrosion"],
+                    "counter_family": ["public_truth", "legal_contradiction"],
+                },
+                "character_type_ontology": {"type_family": "oppositional_force", "type_subtype": "institutional_villain"},
+                "relationship_readiness_profile": {"relationship_readiness_family": "antagonistic_mirror_readiness", "attachment_pattern": "control_as_safety"},
+                "dialogue_voice_profile": {"voice_family": "institutional_authority_voice"},
+                "speech_pattern_model": {"sentence_rhythm": "measured_declarative_sentences", "subtext_density": "medium_high_subtext"},
+                "forbidden_dialogue_patterns": {"generic_voice_failure_modes": ["villain monologue without ideology or pressure"]},
+                "consistency_report": {"overall_consistency_score": 0.86, "critical_issue_count": 0, "violation_count": 0},
+                "originality_report": {"overall_originality_score": 0.72, "novelty_score": 0.76, "strong_originality_sources": ["ideological_institutional_antagonist"]},
+                "anti_genericity_report": {"genericity_risk_score": 0.18, "genericity_risks": []},
+                "repair_plan": {"requires_repair": False, "repair_count": 0},
+                "quality_report": {"overall_quality_score": 0.78, "quality_tier": "strong_character_ready", "weak_axes": []},
+                "readiness_report": {"character_bible_ready": True, "orchestrator_ready": True, "training_queue_ready": True},
+                "source_mode": "human_approved_synthetic",
+                "user_rating": 9,
+            },
+        },
+        {
+            "case_id": "char_bench_independent_love_interest",
+            "description": "Romantic-axis character with independent agency and non-romance goal.",
+            "expected_min_quality": 0.68,
+            "expected_profile_tier": ["complete_profile_ready", "partial_profile_needs_completion", "complete_high_quality_profile"],
+            "payload": {
+                "character_seed": {
+                    "character_id": "bench_mira",
+                    "name": "Mira Vaul",
+                    "role": "love_interest",
+                    "people_type": "Independent Investigator",
+                    "project_id": "bench_project",
+                    "universe_id": "velmora",
+                    "social_class": "imperial_elite",
+                    "family_name_status": "trusted",
+                },
+                "origin_profile": {"social_class": "imperial_elite", "family_name_status": "trusted"},
+                "psychology_profile": {"core_wound": "believes affection becomes ownership", "healing_condition": "trust without ownership"},
+                "goal_profile": {
+                    "hidden_goal": "protect her own investigation",
+                    "true_need": "love must coexist with agency",
+                    "false_need": "distance prevents control",
+                },
+                "moral_profile": {"dominant_moral_value": "truth"},
+                "memory_records": [{"memory_id": "mem_control", "content": "family used affection to control choices"}],
+                "skill_ontology": {
+                    "skill_family": "investigative_deduction",
+                    "skill_subtype": "court_signal_reading",
+                    "cost_family": ["political_exposure"],
+                    "counter_family": ["false_witness", "court_misdirection"],
+                },
+                "character_type_ontology": {"type_family": "intimacy_axis_character", "type_subtype": "independent_love_interest"},
+                "relationship_readiness_profile": {"relationship_readiness_family": "romantic_agency_readiness", "attachment_pattern": "intimacy_independence_tension", "intimacy_risk": 0.66},
+                "boundary_model": {"relationship_boundaries": ["romance cannot replace personal goal"]},
+                "dialogue_voice_profile": {"voice_family": "independent_intimacy_voice"},
+                "speech_pattern_model": {"sentence_rhythm": "warm_but_boundary_marked_sentences", "subtext_density": "medium_subtext"},
+                "forbidden_dialogue_patterns": {"generic_voice_failure_modes": ["romance without independent goal"]},
+                "consistency_report": {"overall_consistency_score": 0.88, "critical_issue_count": 0, "violation_count": 0},
+                "originality_report": {"overall_originality_score": 0.7, "novelty_score": 0.74, "strong_originality_sources": ["romance_with_independent_agency"]},
+                "anti_genericity_report": {"genericity_risk_score": 0.16, "genericity_risks": []},
+                "repair_plan": {"requires_repair": False, "repair_count": 0},
+                "quality_report": {"overall_quality_score": 0.77, "quality_tier": "strong_character_ready", "weak_axes": []},
+                "readiness_report": {"character_bible_ready": True, "orchestrator_ready": True, "training_queue_ready": True},
+                "source_mode": "human_approved_synthetic",
+                "user_rating": 9,
+            },
+        },
+        {
+            "case_id": "char_bench_failed_prodigy_rival",
+            "description": "Rival whose collapse creates pressure, respect hunger, and mirror conflict.",
+            "expected_min_quality": 0.66,
+            "expected_profile_tier": ["complete_profile_ready", "partial_profile_needs_completion", "complete_high_quality_profile"],
+            "payload": {
+                "character_seed": {
+                    "character_id": "bench_riven",
+                    "name": "Riven Sol",
+                    "role": "rival",
+                    "people_type": "Failed Prodigy Rival",
+                    "project_id": "bench_project",
+                    "universe_id": "velmora",
+                    "social_class": "academy_sponsored",
+                    "family_name_status": "distrusted",
+                },
+                "origin_profile": {"social_class": "academy_sponsored", "family_name_status": "distrusted"},
+                "psychology_profile": {"core_wound": "believes rank collapse proves love was conditional"},
+                "goal_profile": {"surface_goal": "surpass the protagonist", "true_need": "respect without comparison", "false_need": "victory restores worth"},
+                "moral_profile": {"dominant_moral_value": "recognition"},
+                "memory_records": [{"memory_id": "mem_rank_loss", "content": "rank collapse in front of academy peers"}],
+                "skill_ontology": {
+                    "skill_family": "combat_analysis",
+                    "skill_subtype": "duel_pattern_adaptation",
+                    "cost_family": ["obsession", "fatigue"],
+                    "counter_family": ["emotional_disruption", "unpredictable_mercy"],
+                },
+                "character_type_ontology": {"type_family": "mirror_pressure_character", "type_subtype": "failed_prodigy_rival"},
+                "relationship_readiness_profile": {"relationship_readiness_family": "rivalry_pressure_readiness", "attachment_pattern": "comparison_sensitive_attachment"},
+                "dialogue_voice_profile": {"voice_family": "competitive_pressure_voice"},
+                "speech_pattern_model": {"sentence_rhythm": "sharp_compressed_challenges", "subtext_density": "medium_subtext"},
+                "forbidden_dialogue_patterns": {"generic_voice_failure_modes": ["rivalry without respect hunger"]},
+                "consistency_report": {"overall_consistency_score": 0.84, "critical_issue_count": 0, "violation_count": 0},
+                "originality_report": {"overall_originality_score": 0.68, "novelty_score": 0.72, "strong_originality_sources": ["rank_collapse_rival"]},
+                "anti_genericity_report": {"genericity_risk_score": 0.2, "genericity_risks": []},
+                "repair_plan": {"requires_repair": False, "repair_count": 0},
+                "quality_report": {"overall_quality_score": 0.74, "quality_tier": "good_but_needs_polish", "weak_axes": []},
+                "readiness_report": {"character_bible_ready": True, "orchestrator_ready": True, "training_queue_ready": False},
+                "source_mode": "human_approved_synthetic",
+                "user_rating": 8,
+            },
+        },
+        {
+            "case_id": "char_bench_generic_baseline",
+            "description": "Intentionally weak generic baseline that should not pass high-quality thresholds.",
+            "expected_min_quality": 0.0,
+            "expected_profile_tier": ["incomplete_profile", "partial_profile_needs_completion"],
+            "payload": {
+                "character_seed": {
+                    "character_id": "bench_generic",
+                    "name": "Arin",
+                    "role": "protagonist",
+                    "project_id": "bench_project",
+                    "universe_id": "velmora",
+                },
+                "quality_report": {"overall_quality_score": 0.48, "quality_tier": "repair_needed", "weak_axes": ["psychological_depth", "dialogue_voice"]},
+                "readiness_report": {"character_bible_ready": False, "orchestrator_ready": False, "training_queue_ready": False},
+                "source_mode": "human_approved_synthetic",
+                "user_rating": 6,
+            },
+        },
+    ]
+
+
+def benchmark_summary() -> Dict[str, Any]:
+    cases = chunk3_character_benchmark_cases()
+    return {
+        "benchmark_name": "chunk3_character_intelligence_benchmark",
+        "case_count": len(cases),
+        "case_ids": [case["case_id"] for case in cases],
+        "expected_capabilities": [
+            "full profile orchestration",
+            "quality thresholding",
+            "relationship/dialogue readiness",
+            "weak baseline detection",
+            "future Chunk 4/8 payload readiness",
+        ],
+    }
