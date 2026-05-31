@@ -3,6 +3,8 @@ from typing import Any, Dict, Optional
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
+from backend.app.services.character_learning_adapter import CharacterLearningAdapter
+from backend.app.services.character_learning_metadata_verifier import CharacterLearningMetadataVerifier
 from backend.app.engines.character.adaptability_engine import AdaptabilityEngine
 from backend.app.engines.character.character_consistency_validator import CharacterConsistencyValidator
 from backend.app.engines.character.character_full_profile_orchestrator import CharacterFullProfileOrchestrator
@@ -269,4 +271,135 @@ def get_character_store_summary() -> Dict[str, Any]:
     return {
         "success": True,
         "data": _store().get_store_summary(),
+    }
+
+# ---------------------------------------------------------------------------
+# Upgrade Pass C: Character global learning registration routes
+# ---------------------------------------------------------------------------
+
+class CharacterLearningRegistrationRequest(BaseModel):
+    result_payload: Dict[str, Any] = Field(default_factory=dict)
+    project_id: str = "default_project"
+    universe_id: str = "default_universe"
+    source_payload: Dict[str, Any] = Field(default_factory=dict)
+    world_contract: Dict[str, Any] = Field(default_factory=dict)
+    enforce_quality_gates: bool = True
+
+
+class CharacterProfileLearningRegistrationRequest(BaseModel):
+    character_profile: Dict[str, Any] = Field(default_factory=dict)
+    project_id: str = "default_project"
+    universe_id: str = "default_universe"
+    world_contract: Dict[str, Any] = Field(default_factory=dict)
+    enforce_quality_gates: bool = True
+
+
+class CharacterLearningVerifyRequest(BaseModel):
+    result_payload: Dict[str, Any] = Field(default_factory=dict)
+    project_id: str = "default_project"
+    universe_id: str = "default_universe"
+    world_contract: Dict[str, Any] = Field(default_factory=dict)
+    allow_synthesis: bool = True
+
+
+class CharacterWorldContractCheckRequest(BaseModel):
+    character_profile: Dict[str, Any] = Field(default_factory=dict)
+    world_contract: Dict[str, Any] = Field(default_factory=dict)
+
+
+class CharacterChunk4HandoffRequest(BaseModel):
+    character_id: str = "unknown_character"
+    character_profile: Dict[str, Any] = Field(default_factory=dict)
+
+
+def _character_learning_adapter() -> CharacterLearningAdapter:
+    return CharacterLearningAdapter()
+
+
+def _character_learning_verifier() -> CharacterLearningMetadataVerifier:
+    return CharacterLearningMetadataVerifier()
+
+
+@router.post("/learning/register-result")
+def register_character_engine_result_to_learning(request: CharacterLearningRegistrationRequest) -> Dict[str, Any]:
+    """Register an existing character engine result into the global learning foundation."""
+
+    result = _character_learning_adapter().register_character_engine_result(
+        result_payload=request.result_payload,
+        project_id=request.project_id,
+        universe_id=request.universe_id,
+        source_payload=request.source_payload or None,
+        world_contract=request.world_contract or None,
+        enforce_quality_gates=request.enforce_quality_gates,
+    )
+
+    return {
+        "success": True,
+        "data": result,
+    }
+
+
+@router.post("/learning/register-profile")
+def register_character_profile_to_learning(request: CharacterProfileLearningRegistrationRequest) -> Dict[str, Any]:
+    """Register learning metadata found inside a character profile or Character Bible."""
+
+    result = _character_learning_adapter().register_character_profile(
+        character_profile=request.character_profile,
+        project_id=request.project_id,
+        universe_id=request.universe_id,
+        world_contract=request.world_contract or None,
+        enforce_quality_gates=request.enforce_quality_gates,
+    )
+
+    return {
+        "success": True,
+        "data": result,
+    }
+
+
+@router.post("/learning/verify")
+def verify_character_learning_metadata(request: CharacterLearningVerifyRequest) -> Dict[str, Any]:
+    """Verify whether a character result is global-learning-ready and Chunk-4-ready."""
+
+    result = _character_learning_verifier().verify_character_result(
+        result_payload=request.result_payload,
+        project_id=request.project_id,
+        universe_id=request.universe_id,
+        world_contract=request.world_contract or None,
+        allow_synthesis=request.allow_synthesis,
+    )
+
+    return {
+        "success": True,
+        "data": result,
+    }
+
+
+@router.post("/learning/world-contract-check")
+def check_character_world_contract(request: CharacterWorldContractCheckRequest) -> Dict[str, Any]:
+    """Validate that a character obeys the world-to-character dependency contract."""
+
+    result = _character_learning_adapter().validate_character_against_world_contract(
+        character_profile=request.character_profile,
+        world_contract=request.world_contract,
+    )
+
+    return {
+        "success": True,
+        "data": result,
+    }
+
+
+@router.post("/learning/chunk4-handoff")
+def build_character_chunk4_handoff(request: CharacterChunk4HandoffRequest) -> Dict[str, Any]:
+    """Build the character handoff payload needed for Chunk 4 relationship simulation."""
+
+    result = _character_learning_adapter().build_chunk4_handoff_contract(
+        character_id=request.character_id,
+        character_profile=request.character_profile,
+    )
+
+    return {
+        "success": True,
+        "data": result,
     }
