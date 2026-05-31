@@ -980,3 +980,119 @@ Evaluation benchmarks
 Model training and fine-tuning experiments
 Learned scoring models
 ```
+
+---
+
+## Cross-Layer Architecture Readiness
+
+MythOS Engine is designed as a connected system rather than a collection of isolated generators. The current backend includes a cross-layer readiness foundation that allows world outputs, character outputs, and future simulation outputs to communicate through shared schemas, references, contracts, artifacts, canon status, timeline state, evaluation cases, and learning metadata.
+
+This layer exists to prevent the common failure modes of generative story systems:
+
+- characters knowing information they never learned
+- relationships changing without events or consequences
+- world rules being ignored by character or plot engines
+- generated outputs disappearing after one run
+- canon changing without versioning or branch control
+- training data being created without provenance
+- engine thresholds being hidden as untraceable hardcoded values
+- future plot, genre, adaptation, and ML layers receiving inconsistent payloads
+
+### Shared Cross-Layer Schemas
+
+The backend now includes shared schema infrastructure for:
+
+- entity references
+- artifact references
+- canon status
+- branch references
+- timeline references
+- state snapshot references
+- artifact records
+- canon locks
+- engine run metrics
+- engine error taxonomy
+- engine configuration records
+- evaluation cases
+- invariant check results
+- human review records
+- cross-layer handoff contracts
+
+These schemas allow the system to treat generated worlds, characters, relationships, events, consequences, scenes, datasets, embeddings, and training records as auditable objects rather than temporary text outputs.
+
+### Cross-Layer Handoff Contracts
+
+MythOS uses structured handoff contracts between major subsystems:
+
+- world-to-character contract
+- character-to-simulation contract
+- simulation-to-scene contract
+- scene-to-genre contract
+- genre-to-adaptation contract
+- system-to-ML-training contract
+
+This allows the system to preserve continuity as outputs move from worldbuilding into character intelligence, relationship simulation, plot/scene generation, genre specialization, adaptation planning, and ML/data infrastructure.
+
+### Simulation Readiness
+
+The world and character layers now expose simulation-ready payloads.
+
+World outputs can provide:
+
+- social class constraints
+- legal constraints
+- faction constraints
+- resource constraints
+- culture constraints
+- power cost rules
+- location/travel constraints
+- character permission boundaries
+
+Character outputs can provide:
+
+- simulation state seeds
+- current emotion state
+- current memory state
+- current agency state
+- relationship state seed
+- knowledge state seed
+- dialogue constraint seed
+- character-to-simulation handoff contracts
+
+This is important because the simulation layer should not invent world rules or character behavior from scratch. It should consume structured world and character contracts.
+
+### Readiness Verification
+
+The project includes a cross-layer readiness verifier:
+
+`backend/app/services/cross_chunk_readiness_verifier.py`
+
+The verifier checks that:
+
+- foundation schemas validate
+- world outputs expose simulation-ready constraints
+- character outputs expose simulation-ready state and handoff contracts
+- required invariants are available
+- handoff chains are ready
+- the system is structurally ready for relationship and event simulation
+
+Smoke test:
+
+`PYTHONPATH=. python scripts/smoke_test_cross_chunk_readiness.py`
+
+Output:
+
+`reports/cross_chunk_readiness/cross_chunk_readiness_summary.json`
+
+### Core Invariants
+
+The architecture is designed around several non-negotiable story-simulation invariants:
+
+- no magic knowledge
+- no consequence-free major choice
+- no relationship jump without cause
+- no canon violation
+- no world-contract violation
+- no training without provenance
+
+These invariants help keep the project from becoming a generic prompt wrapper. The goal is a schema-driven, state-driven, contract-driven, provenance-aware, learning-ready story intelligence backend.
