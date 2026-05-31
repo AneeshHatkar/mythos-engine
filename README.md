@@ -990,3 +990,101 @@ Chunk 2 defines the worlds.
 Chunk 3 defines the characters.
 
 Chunk 4 should focus on relationships, interaction dynamics, ensemble simulation, trust/betrayal, romance/rivalry/family/friendship mechanics, and multi-character story pressure.
+
+---
+
+## Upgrade Pass B — Chunk 2 World Learning Integration
+
+Upgrade Pass B connects the Chunk 2 world intelligence layer to the global learning foundation added in Upgrade Pass A.
+
+This pass does not train real ML models and does not compute real embeddings yet. Instead, it makes world outputs globally registered, provenance-aware, embedding-ready, training-queue-ready, and reusable by later character, relationship, plot, RAG, and training systems.
+
+### Why Upgrade Pass B Exists
+
+Before this pass, Chunk 2 world engines could generate structured world outputs, world bibles, originality checks, and benchmark data.
+
+After this pass, world outputs can flow into the global learning registry, provenance store, embedding registry, training queue, and future Chunk 8 learning/RAG/training pipeline.
+
+### New World Learning Adapter
+
+File:
+
+`backend/app/services/world_learning_adapter.py`
+
+The adapter can normalize world engine results, synthesize missing world learning metadata, register world outputs into global learning stores, build world-to-character dependency contracts, apply world learning quality gates, and block low-quality or unsafe world outputs.
+
+### World-to-Character Dependency Contract
+
+Upgrade Pass B adds a formal contract that tells later chunks what the world requires.
+
+The contract extracts social classes, power laws, legal constraints, faction constraints, education/access constraints, economy/resource constraints, religion/culture constraints, geography/travel constraints, and character permission boundaries.
+
+This ensures Chunk 3 characters, Chunk 4 relationships, and later plot/scene systems obey the world instead of generating disconnected content.
+
+### World Learning Quality Gates
+
+World outputs are checked before they enter the global learning pipeline.
+
+The gate checks source provenance approval, world quality score, world originality score, world consistency score, world-to-character contract usability, training eligibility, human review requirements, and do_not_train flags.
+
+### World Learning Metadata Verifier
+
+File:
+
+`backend/app/services/world_learning_metadata_verifier.py`
+
+The verifier checks whether world outputs contain or can synthesize EngineLearningMetadata-style payloads, ontology records, learned type candidates, provenance records, embedding metadata, training eligibility, world-to-character contract, Chunk 3/4 readiness labels, and future Chunk 8 readiness labels.
+
+### Updated World API Learning Routes
+
+Upgrade Pass B adds safe, backward-compatible learning routes:
+
+`POST /world/engines/learning/register-result`
+
+`POST /world/engines/learning/register-profile`
+
+`POST /world/engines/learning/contract`
+
+These routes do not break older world routes.
+
+### World Run Store Learning Trace Helpers
+
+File updated:
+
+`backend/app/services/world_run_store.py`
+
+The world run store now has helper support for attaching global learning trace data, including learning metadata IDs, provenance IDs, embedding IDs, training queue IDs, learning registration summaries, and world-to-character contracts.
+
+### World Learning Smoke Test
+
+New script:
+
+`scripts/smoke_test_chunk2_world_learning_pipeline.py`
+
+Run it with:
+
+`PYTHONPATH=. python scripts/smoke_test_chunk2_world_learning_pipeline.py`
+
+The smoke test proves that world output normalization, contract creation, metadata verification, global learning registration, provenance storage, embedding registration, and training queue registration work end-to-end.
+
+### Tests Added
+
+Upgrade Pass B adds tests for world learning adapter, world API learning registration, world run store learning trace helpers, world learning metadata verifier, and the Chunk 2 world learning smoke script.
+
+### Upgrade Pass B Verification
+
+Run:
+
+`PYTHONPATH=. pytest backend/app/tests -q`
+
+`PYTHONPATH=. python scripts/smoke_test_chunk2_world_learning_pipeline.py`
+
+### Upgrade Pass B Status
+
+Upgrade Pass B completes the world layer’s global learning integration.
+
+Next:
+
+Upgrade Pass C — Chunk 3 character orchestrator/API/export integration with global learning.
+
+Then Chunk 4 — relationship and ensemble simulation.
