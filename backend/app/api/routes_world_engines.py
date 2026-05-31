@@ -1,9 +1,11 @@
+from pydantic import BaseModel, Field
 from datetime import datetime, timezone
 from typing import Any, Dict
 from uuid import uuid4
 
 from fastapi import APIRouter
 
+from backend.app.services.world_learning_adapter import WorldLearningAdapter
 from backend.app.engines.world.embedding_originality_engine import EmbeddingOriginalityEngine
 from backend.app.engines.world.world_orchestrator_engine import WorldOrchestratorEngine
 from backend.app.engines.world.world_quality_engine import WorldQualityEngine
@@ -277,4 +279,80 @@ def get_world_generation_run(run_id: str) -> Dict[str, Any]:
     return {
         "success": True,
         "run": run,
+    }
+
+# ---------------------------------------------------------------------------
+# Upgrade Pass B: World global learning registration routes
+# ---------------------------------------------------------------------------
+
+class WorldLearningRegistrationRequest(BaseModel):
+    result_payload: Dict[str, Any] = Field(default_factory=dict)
+    project_id: str = "default_project"
+    universe_id: str = "default_universe"
+    source_payload: Dict[str, Any] = Field(default_factory=dict)
+    enforce_quality_gates: bool = True
+
+
+class WorldProfileLearningRegistrationRequest(BaseModel):
+    world_profile: Dict[str, Any] = Field(default_factory=dict)
+    project_id: str = "default_project"
+    universe_id: str = "default_universe"
+    enforce_quality_gates: bool = True
+
+
+def _world_learning_adapter() -> WorldLearningAdapter:
+    return WorldLearningAdapter()
+
+
+@router.post("/learning/register-result")
+def register_world_engine_result_to_learning(request: WorldLearningRegistrationRequest) -> Dict[str, Any]:
+    """Register an existing world engine result into the global learning foundation.
+
+    This endpoint is intentionally separate from the existing world engine routes so
+    older Chunk 2 routes stay backward-compatible. Pass B/C can later call this
+    internally from orchestration routes.
+    """
+
+    result = _world_learning_adapter().register_world_engine_result(
+        result_payload=request.result_payload,
+        project_id=request.project_id,
+        universe_id=request.universe_id,
+        source_payload=request.source_payload or None,
+        enforce_quality_gates=request.enforce_quality_gates,
+    )
+
+    return {
+        "success": True,
+        "data": result,
+    }
+
+
+@router.post("/learning/register-profile")
+def register_world_profile_to_learning(request: WorldProfileLearningRegistrationRequest) -> Dict[str, Any]:
+    """Register learning metadata found inside a world profile/bible."""
+
+    result = _world_learning_adapter().register_world_profile(
+        world_profile=request.world_profile,
+        project_id=request.project_id,
+        universe_id=request.universe_id,
+        enforce_quality_gates=request.enforce_quality_gates,
+    )
+
+    return {
+        "success": True,
+        "data": result,
+    }
+
+
+@router.post("/learning/contract")
+def build_world_to_character_contract(request: WorldProfileLearningRegistrationRequest) -> Dict[str, Any]:
+    """Build the dependency contract that Chunk 3/4 consume from a world profile."""
+
+    contract = _world_learning_adapter().build_world_to_character_contract(request.world_profile)
+
+    return {
+        "success": True,
+        "data": {
+            "world_to_character_contract": contract,
+        },
     }
