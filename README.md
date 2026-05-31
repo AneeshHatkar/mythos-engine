@@ -45,9 +45,9 @@ http://127.0.0.1:8000/docs
 ```
 
 
-## Chunk 1 Completion Status
+## Stage 1 Completion Status
 
-Chunk 1 is the foundation operating system for MythOS Engine. It includes project management, universe management, registry types, versioning, audit records, feedback records, canon locks, branching timelines, engine contracts, SQLite persistence, and multi-format exports.
+Stage 1 is the foundation operating system for MythOS Engine. It includes project management, universe management, registry types, versioning, audit records, feedback records, canon locks, branching timelines, engine contracts, SQLite persistence, and multi-format exports.
 
 ### Verified Foundation Workflow
 
@@ -89,13 +89,13 @@ Foundation smoke test passed.
 
 ---
 
-# Chunk 2: World Intelligence Layer
+# Stage 2: World Intelligence Layer
 
-Chunk 2 upgrades MythOS Engine from a foundation backend into a full world-generation, world-evaluation, world-persistence, and world-export system.
+Stage 2 upgrades MythOS Engine from a foundation backend into a full world-generation, world-evaluation, world-persistence, and world-export system.
 
 MythOS Engine is not a simple prompt-to-story generator. It is being built as a research-grade creative intelligence platform where worlds, characters, plots, adaptations, franchises, and IP systems become structured, inspectable, persistent, testable data objects.
 
-Chunk 2 focuses specifically on the **World Intelligence Layer**.
+Stage 2 focuses specifically on the **World Intelligence Layer**.
 
 It can create worlds with:
 
@@ -205,9 +205,9 @@ DONE  2.25C README Update + Final Chunk 2 Push
 
 ---
 
-# What Chunk 2 Does
+# What Stage 2 Does
 
-Chunk 2 creates a complete backend world intelligence pipeline.
+Stage 2 creates a complete backend world intelligence pipeline.
 
 The full pipeline is:
 
@@ -239,7 +239,7 @@ The result is a structured `world_state` object that can be inspected, saved, co
 
 # World Engine API
 
-Chunk 2 exposes the world engines through FastAPI.
+Stage 2 exposes the world engines through FastAPI.
 
 ## Health
 
