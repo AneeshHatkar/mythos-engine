@@ -256,3 +256,91 @@ class WorldRunStore:
 
 
 world_run_store = WorldRunStore()
+
+# ---------------------------------------------------------------------------
+# Upgrade Pass B: World learning registration tracking helpers
+# ---------------------------------------------------------------------------
+
+def _extract_world_learning_registration_summary(learning_registration):
+    if not isinstance(learning_registration, dict):
+        return {
+            "registered_to_global_learning": False,
+            "learning_metadata_ids": [],
+            "provenance_ids": [],
+            "embedding_ids": [],
+            "training_queue_ids": [],
+        }
+
+    learning = learning_registration.get("learning_registration", learning_registration)
+
+    learning_metadata_ids = []
+    provenance_ids = []
+    embedding_ids = []
+    training_queue_ids = []
+
+    registry = learning.get("learning_registry", {})
+    if registry.get("metadata_id"):
+        learning_metadata_ids.append(registry["metadata_id"])
+
+    for item in learning.get("provenance_results", []) or []:
+        if item.get("provenance_id"):
+            provenance_ids.append(item["provenance_id"])
+
+    embedding_result = learning.get("embedding_result")
+    if isinstance(embedding_result, dict) and embedding_result.get("embedding_id"):
+        embedding_ids.append(embedding_result["embedding_id"])
+
+    training_result = learning.get("training_result")
+    if isinstance(training_result, dict) and training_result.get("training_queue_id"):
+        training_queue_ids.append(training_result["training_queue_id"])
+
+    return {
+        "registered_to_global_learning": bool(learning.get("registered", False)),
+        "learning_metadata_ids": learning_metadata_ids,
+        "provenance_ids": provenance_ids,
+        "embedding_ids": embedding_ids,
+        "training_queue_ids": training_queue_ids,
+    }
+
+
+def attach_learning_registration_to_world_record(record, learning_registration=None, world_to_character_contract=None):
+    """Attach global learning traceability to a world run/store record.
+
+    This function is intentionally standalone so it can be used by existing
+    world storage code without forcing a breaking refactor of WorldRunStore.
+    """
+
+    if not isinstance(record, dict):
+        raise ValueError("record must be a dictionary")
+
+    summary = _extract_world_learning_registration_summary(learning_registration or {})
+
+    record["global_learning_trace"] = {
+        **summary,
+        "learning_registration_summary": learning_registration or {},
+        "world_to_character_contract": world_to_character_contract or {},
+        "trace_schema_version": "world_learning_trace_v0.1.0",
+    }
+
+    return record
+
+
+def extract_world_learning_trace(record):
+    """Return learning trace block from a stored world record."""
+
+    if not isinstance(record, dict):
+        raise ValueError("record must be a dictionary")
+
+    return record.get(
+        "global_learning_trace",
+        {
+            "registered_to_global_learning": False,
+            "learning_metadata_ids": [],
+            "provenance_ids": [],
+            "embedding_ids": [],
+            "training_queue_ids": [],
+            "learning_registration_summary": {},
+            "world_to_character_contract": {},
+            "trace_schema_version": "world_learning_trace_v0.1.0",
+        },
+    )
