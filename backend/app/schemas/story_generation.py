@@ -389,6 +389,38 @@ class GeneratedSceneDraft(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class GeneratedDialogueLine(BaseModel):
+    """Generated dialogue line with traceable beat and voice data."""
+
+    line_id: str
+    scene_id: str
+    dialogue_beat_id: str
+    speaker_id: str
+    listener_ids: List[str] = Field(default_factory=list)
+    line_text: str
+    subtext: Optional[str] = None
+    hidden_meaning: Optional[str] = None
+    emotion: Optional[str] = None
+    secret_risk: float = Field(default=0.0, ge=0.0, le=1.0)
+    relationship_effect: Optional[str] = None
+    voice_rules_used: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
+class GeneratedDialogueBlock(BaseModel):
+    """Generated dialogue block for a scene."""
+
+    dialogue_block_id: str
+    scene_id: str
+    selected_format: str = "scene"
+    lines: List[GeneratedDialogueLine] = Field(default_factory=list)
+    rendered_text: str = ""
+    used_speaker_ids: List[str] = Field(default_factory=list)
+    used_dialogue_beat_ids: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
