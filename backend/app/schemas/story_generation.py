@@ -489,6 +489,30 @@ class GeneratedChapter(BaseModel):
 
 
 
+
+class PlotOutline(BaseModel):
+    """Structured plot outline for long-form story generation."""
+
+    outline_id: str
+    source_id: str
+    title: str = ""
+    outline_format: str = "chapter_outline"
+    premise: str = ""
+    act_structure: List[Dict[str, Any]] = Field(default_factory=list)
+    scene_sequence: List[Dict[str, Any]] = Field(default_factory=list)
+    major_turning_points: List[Dict[str, Any]] = Field(default_factory=list)
+    character_arc_threads: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_arc_threads: List[Dict[str, Any]] = Field(default_factory=list)
+    secret_threads: List[Dict[str, Any]] = Field(default_factory=list)
+    causal_threads: List[Dict[str, Any]] = Field(default_factory=list)
+    world_state_threads: List[Dict[str, Any]] = Field(default_factory=list)
+    open_loops: List[Dict[str, Any]] = Field(default_factory=list)
+    payoff_setups: List[Dict[str, Any]] = Field(default_factory=list)
+    next_outline_hooks: List[str] = Field(default_factory=list)
+    continuity_requirements: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class LongFormContinuationAnchor(BaseModel):
     """Continuity anchor for continuing long-form story generation."""
 
