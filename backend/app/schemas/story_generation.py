@@ -548,6 +548,28 @@ class SeriesEpisodeStructure(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class ChapterExpansionPlan(BaseModel):
+    """Expansion plan for turning a generated chapter into richer long-form output."""
+
+    expansion_plan_id: str
+    chapter_id: str
+    source_word_count: int = 0
+    target_word_count: int = 0
+    expansion_ratio: float = 1.0
+    expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    scene_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    emotional_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    world_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    dialogue_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    secret_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    causal_expansion_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    format_specific_rules: Dict[str, Any] = Field(default_factory=dict)
+    revision_prompt_payload: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
