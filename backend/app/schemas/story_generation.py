@@ -1100,6 +1100,30 @@ class StoryMemoryUpdateContract(BaseModel):
     open_loops: List[str] = Field(default_factory=list)
 
 
+
+class StoryGenerationOrchestrationReport(BaseModel):
+    """End-to-end orchestration report for Chunk 5 story generation."""
+
+    orchestration_report_id: str
+    source_id: str
+    request_id: str = ""
+    orchestration_status: str = "completed"
+    ready_for_export: bool = False
+    ready_for_memory_apply: bool = False
+    pipeline_stage_results: List[Dict[str, Any]] = Field(default_factory=list)
+    required_inputs: List[str] = Field(default_factory=list)
+    missing_inputs: List[str] = Field(default_factory=list)
+    available_artifacts: Dict[str, Any] = Field(default_factory=dict)
+    quality_gate_summary: Dict[str, Any] = Field(default_factory=dict)
+    risk_gate_summary: Dict[str, Any] = Field(default_factory=dict)
+    memory_gate_summary: Dict[str, Any] = Field(default_factory=dict)
+    final_handoff_package: Dict[str, Any] = Field(default_factory=dict)
+    next_actions: List[Dict[str, Any]] = Field(default_factory=list)
+    blocked_reasons: List[Dict[str, Any]] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class AdaptiveLearningSignal(BaseModel):
     model_config = ConfigDict(extra="allow")
 
