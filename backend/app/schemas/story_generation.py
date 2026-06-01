@@ -349,6 +349,24 @@ class ConstraintSatisfactionReport(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class CommercialAppealReport(BaseModel):
+    """Audience-pull and market-positioning score for a planned story unit."""
+
+    report_id: str
+    overall_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    hook_strength: float = Field(default=0.0, ge=0.0, le=1.0)
+    emotional_investment: float = Field(default=0.0, ge=0.0, le=1.0)
+    character_appeal: float = Field(default=0.0, ge=0.0, le=1.0)
+    relationship_appeal: float = Field(default=0.0, ge=0.0, le=1.0)
+    stakes_clarity: float = Field(default=0.0, ge=0.0, le=1.0)
+    world_uniqueness: float = Field(default=0.0, ge=0.0, le=1.0)
+    scene_momentum: float = Field(default=0.0, ge=0.0, le=1.0)
+    continuation_pull: float = Field(default=0.0, ge=0.0, le=1.0)
+    adaptation_potential: float = Field(default=0.0, ge=0.0, le=1.0)
+    improvement_suggestions: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
