@@ -319,7 +319,6 @@ class SceneDraftEngine:
     def _dialogue_by_beat_type(self, dialogue_beats: List[DialogueBeat]) -> Dict[str, List[DialogueBeat]]:
         grouped: Dict[str, List[DialogueBeat]] = {}
         for beat in dialogue_beats:
-            # dialogue beat IDs end with the originating beat type in this project.
             beat_type = beat.dialogue_beat_id.split("_")[-1]
             grouped.setdefault(beat_type, []).append(beat)
 
