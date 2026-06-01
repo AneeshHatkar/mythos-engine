@@ -1,0 +1,132 @@
+{
+  "checks": {
+    "commands": {
+      "passed": true,
+      "results": {
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_api_story_generation_routes.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/api/story_generation_routes.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_engines_story_generation_learning_feedback_adapter.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/engines/story_generation/learning_feedback_adapter.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_engines_story_generation_story_benchmark_pack.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/engines/story_generation/story_benchmark_pack.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_engines_story_generation_story_export_store.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/engines/story_generation/story_export_store.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_engines_story_generation_story_generation_orchestrator.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/engines/story_generation/story_generation_orchestrator.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_engines_story_generation_story_smoke_test.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/engines/story_generation/story_smoke_test.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_py_compile_backend_app_schemas_story_generation.py": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m py_compile backend/app/schemas/story_generation.py",
+          "ok": true,
+          "output_tail": "",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_pytest_backend_app_tests_test_learning_feedback_adapter.py_-q": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_learning_feedback_adapter.py -q",
+          "ok": true,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.12s\n",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_pytest_backend_app_tests_test_story_benchmark_pack.py_-q": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_story_benchmark_pack.py -q",
+          "ok": true,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.11s\n",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_pytest_backend_app_tests_test_story_export_store.py_-q": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_story_export_store.py -q",
+          "ok": true,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.11s\n",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_pytest_backend_app_tests_test_story_generation_api_routes.py_-q": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_story_generation_api_routes.py -q",
+          "ok": true,
+          "output_tail": ".....                                                                    [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.11/site-packages/fastapi/testclient.py:1\n  /Users/aneeshh/Desktop/mythos-engine/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n5 passed, 1 warning in 0.44s\n",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_pytest_backend_app_tests_test_story_generation_orchestrator.py_-q": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_story_generation_orchestrator.py -q",
+          "ok": true,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.11s\n",
+          "returncode": 0
+        },
+        "_Users_aneeshh_Desktop_mythos-engine_.venv_bin_python_-m_pytest_backend_app_tests_test_story_smoke_test.py_-q": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_story_smoke_test.py -q",
+          "ok": true,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.13s\n",
+          "returncode": 0
+        }
+      }
+    },
+    "imports": {
+      "errors": {},
+      "missing": [],
+      "passed": true,
+      "required_count": 6
+    },
+    "late_chunk5_chain": {
+      "artifacts": {
+        "benchmark_pack_id": "story_benchmark_integration_source_integration_draft_integration_request",
+        "export_package_id": "story_export_integration_source_integration_draft_integration_request",
+        "learning_feedback_id": "learning_feedback_integration_source_integration_draft_integration_request",
+        "orchestration_report_id": "story_generation_orchestration_integration_source_integration_request",
+        "smoke_test_report_id": "story_smoke_test_integration_source_integration_draft_integration_request"
+      },
+      "checks": {
+        "benchmark_no_critical_failures": true,
+        "export_approved": true,
+        "learning_feedback_created": true,
+        "orchestration_ready": true,
+        "smoke_passed": true
+      },
+      "passed": true
+    },
+    "main_router_registration": {
+      "missing_fragments": [],
+      "passed": true
+    },
+    "required_files": {
+      "missing": [],
+      "passed": true,
+      "required_count": 13
+    },
+    "schema_classes": {
+      "missing": [],
+      "passed": true,
+      "required_count": 8
+    }
+  },
+  "created_at_utc": "2026-06-01T19:20:34.147662+00:00",
+  "passed": true,
+  "report_id": "chunk_1_5_integration_verification",
+  "summary": {
+    "check_count": 6,
+    "message": "Chunk 1-5 integration verification passed.",
+    "passed": true
+  }
+}
