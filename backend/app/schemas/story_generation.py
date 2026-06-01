@@ -1004,3 +1004,26 @@ class StoryExportBundle(BaseModel):
     export_paths: List[str] = Field(default_factory=list)
     included_report_ids: List[str] = Field(default_factory=list)
     metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class MultiWorldMultiCastScalingPlan(BaseModel):
+    """Scaling plan for multi-world and multi-cast story generation."""
+
+    scaling_plan_id: str
+    source_id: str
+    world_count: int = 0
+    cast_count: int = 0
+    total_character_count: int = 0
+    world_registry: List[Dict[str, Any]] = Field(default_factory=list)
+    cast_registry: List[Dict[str, Any]] = Field(default_factory=list)
+    protagonist_group_registry: List[Dict[str, Any]] = Field(default_factory=list)
+    storyline_lanes: List[Dict[str, Any]] = Field(default_factory=list)
+    cross_world_links: List[Dict[str, Any]] = Field(default_factory=list)
+    cross_cast_relationships: List[Dict[str, Any]] = Field(default_factory=list)
+    continuity_partition_rules: List[Dict[str, Any]] = Field(default_factory=list)
+    scaling_pressure_report: Dict[str, Any] = Field(default_factory=dict)
+    generation_batch_plan: List[Dict[str, Any]] = Field(default_factory=list)
+    collision_risk_flags: List[str] = Field(default_factory=list)
+    recommendations: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
