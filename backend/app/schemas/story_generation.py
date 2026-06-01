@@ -985,6 +985,51 @@ class DraftComparisonReport(BaseModel):
     ranking: List[Dict[str, Any]] = Field(default_factory=list)
     selection_reason: Optional[str] = None
 
+    # Chunk 5.37 compatibility fields for story draft comparison.
+    source_id: str = ""
+    original_draft_id: str = ""
+    revised_draft_id: str = ""
+    approved: bool = False
+    improvement_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    regression_risk_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    quality_delta: float = 0.0
+    anti_genericity_delta: float = 0.0
+    continuity_delta: float = 0.0
+    originality_delta: float = 0.0
+    text_change_summary: Dict[str, Any] = Field(default_factory=dict)
+    preserved_elements: List[Dict[str, Any]] = Field(default_factory=list)
+    lost_protected_elements: List[Dict[str, Any]] = Field(default_factory=list)
+    added_elements: List[Dict[str, Any]] = Field(default_factory=list)
+    removed_elements: List[Dict[str, Any]] = Field(default_factory=list)
+    task_completion_results: List[Dict[str, Any]] = Field(default_factory=list)
+    regression_flags: List[Dict[str, Any]] = Field(default_factory=list)
+    approval_requirements: List[Dict[str, Any]] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
+class GenerationImprovementLoopDecision(BaseModel):
+    """Decision package for the generation improvement loop."""
+
+    loop_decision_id: str
+    source_id: str
+    current_iteration: int = 0
+    max_iterations: int = 3
+    action: str = "revise_again"
+    approved_for_handoff: bool = False
+    stop_loop: bool = False
+    improvement_status: str = "in_progress"
+    decision_reason: str = ""
+    next_revision_mode: str = "targeted"
+    next_priority: str = "medium"
+    required_actions: List[Dict[str, Any]] = Field(default_factory=list)
+    resolved_items: List[Dict[str, Any]] = Field(default_factory=list)
+    unresolved_items: List[Dict[str, Any]] = Field(default_factory=list)
+    loop_metrics: Dict[str, Any] = Field(default_factory=dict)
+    next_engine_payload: Dict[str, Any] = Field(default_factory=dict)
+    handoff_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
 
 class StoryProvenanceRecord(BaseModel):
     model_config = ConfigDict(extra="allow")
