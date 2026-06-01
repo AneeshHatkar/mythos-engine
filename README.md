@@ -1297,4 +1297,17 @@ The warning comes from the current FastAPI/Starlette TestClient dependency stack
 5.50 — Push to GitHub
 
 After Chunk 5 is pushed, the next phase is to review and update the full project roadmap before beginning Chunk 6.
+---
+
+## Pre-Chunk 6 Roadmap Lock
+
+Before Chunk 6 begins, the project locks the updated 1 to 9 chunk roadmap and confirms that Chunks 1 to 5 remain compatible with the upcoming Deep World, Ecology, Civilization, Species, Culture, Object, and Life Simulation Expansion layer.
+
+Next locked implementation step:
+
+6.1 — Deep World Expansion Schemas + Chunk 6 Design Contract
+
+Verification command:
+
+PYTHONPATH=. python scripts/verify_pre_chunk6_readiness.py
 
