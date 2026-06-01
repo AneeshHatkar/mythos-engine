@@ -1050,6 +1050,29 @@ class StoryProvenanceRecord(BaseModel):
     quality_report_ids: List[str] = Field(default_factory=list)
 
 
+
+class GeneratedStoryDeltaReport(BaseModel):
+    """Delta extraction report for generated or revised story material."""
+
+    delta_report_id: str
+    source_id: str
+    draft_id: str
+    extraction_status: str = "completed"
+    character_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    secret_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    causal_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    world_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    object_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    open_loop_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    resolved_loop_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    memory_update_candidates: List[Dict[str, Any]] = Field(default_factory=list)
+    protected_element_impacts: List[Dict[str, Any]] = Field(default_factory=list)
+    delta_summary: Dict[str, Any] = Field(default_factory=dict)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class GeneratedSceneDelta(BaseModel):
     model_config = ConfigDict(extra="allow")
 
