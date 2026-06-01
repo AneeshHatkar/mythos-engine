@@ -852,6 +852,36 @@ class StoryAntiGenericityReport(BaseModel):
     recommendations: List[str] = Field(default_factory=list)
 
 
+
+class StoryContinuityValidationReport(BaseModel):
+    """Story-level continuity validation report."""
+
+    continuity_report_id: str
+    source_id: str
+    valid: bool = True
+    continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    readiness_level: str = "needs_revision"
+    character_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    relationship_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    secret_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    causal_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    world_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    open_loop_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    format_continuity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    checked_character_ids: List[str] = Field(default_factory=list)
+    checked_relationship_ids: List[str] = Field(default_factory=list)
+    checked_secret_ids: List[str] = Field(default_factory=list)
+    checked_causal_ids: List[str] = Field(default_factory=list)
+    checked_world_details: List[str] = Field(default_factory=list)
+    checked_open_loop_ids: List[str] = Field(default_factory=list)
+    continuity_breaks: List[Dict[str, Any]] = Field(default_factory=list)
+    continuity_warnings: List[Dict[str, Any]] = Field(default_factory=list)
+    repair_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    preserved_threads: List[Dict[str, Any]] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class StoryContinuityReport(BaseModel):
     model_config = ConfigDict(extra="allow")
 
