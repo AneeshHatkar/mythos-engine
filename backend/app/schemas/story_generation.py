@@ -570,6 +570,27 @@ class ChapterExpansionPlan(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class MultiScenePacingReport(BaseModel):
+    """Pacing report for multiple scenes inside a chapter, episode, or long-form unit."""
+
+    pacing_report_id: str
+    source_id: str
+    scene_count: int = 0
+    overall_pacing_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    tension_curve_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    emotional_variety_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    relationship_rhythm_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    secret_pressure_spacing_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    causal_spacing_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    world_detail_spacing_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    dialogue_action_balance_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    scene_pacing_map: List[Dict[str, Any]] = Field(default_factory=list)
+    act_break_recommendations: List[Dict[str, Any]] = Field(default_factory=list)
+    pacing_repair_targets: List[Dict[str, Any]] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
