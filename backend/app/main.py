@@ -1,3 +1,4 @@
+from backend.app.api.story_generation_routes import router as story_generation_router
 from fastapi import FastAPI
 
 from backend.app.api.routes_foundation import router as foundation_router
@@ -95,3 +96,5 @@ def health() -> HealthResponse:
 
 from backend.app.api.simulation_routes import router as simulation_router
 app.include_router(simulation_router)
+
+app.include_router(story_generation_router)
