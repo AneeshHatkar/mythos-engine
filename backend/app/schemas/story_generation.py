@@ -1124,6 +1124,32 @@ class StoryGenerationOrchestrationReport(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class StoryExportPackage(BaseModel):
+    """Export package for approved generated story artifacts."""
+
+    export_package_id: str
+    source_id: str
+    draft_id: str = ""
+    request_id: str = ""
+    export_status: str = "staged"
+    export_format: str = "json"
+    approved_for_export: bool = False
+    export_path: str = ""
+    manifest_path: str = ""
+    artifact_paths: Dict[str, str] = Field(default_factory=dict)
+    export_manifest: Dict[str, Any] = Field(default_factory=dict)
+    story_payload: Dict[str, Any] = Field(default_factory=dict)
+    orchestration_snapshot: Dict[str, Any] = Field(default_factory=dict)
+    provenance_snapshot: Dict[str, Any] = Field(default_factory=dict)
+    delta_snapshot: Dict[str, Any] = Field(default_factory=dict)
+    memory_contract_snapshot: Dict[str, Any] = Field(default_factory=dict)
+    export_checks: List[Dict[str, Any]] = Field(default_factory=list)
+    blocked_reasons: List[Dict[str, Any]] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class AdaptiveLearningSignal(BaseModel):
     model_config = ConfigDict(extra="allow")
 
