@@ -1265,3 +1265,36 @@ Expected result:
 
 Chunk 4 does not directly generate final prose yet. Instead, it creates the simulation state and structured payloads that Chunk 5 will use to generate actual stories, scenes, dialogue, chapters, novels, movies, and series outputs.
 
+---
+
+## Chunk 5 Status — Story Generation Pipeline
+
+Chunk 5 builds the story generation layer of MythOS Engine. It connects story intent, generation contracts, story context, scene planning, dialogue/prose generation, format adaptation, revision loops, provenance, memory update contracts, export packaging, benchmark evaluation, smoke testing, and learning feedback preparation.
+
+### Late Chunk 5 Handoff Chain
+
+StoryGenerationOrchestrator -> StoryExportStore -> StoryBenchmarkPackBuilder -> StorySmokeTestRunner -> LearningFeedbackAdapter -> Chunk 1-5 Integration Verifier
+
+### Verification Commands
+
+Run the full test suite:
+PYTHONPATH=. pytest backend/app/tests -q
+
+Run the Chunk 1-5 integration verifier:
+PYTHONPATH=. python scripts/verify_chunk_1_5_integration.py
+
+Run the final Chunk 5 verification script:
+PYTHONPATH=. python scripts/final_chunk5_verification.py
+
+### Latest Verified Result
+
+Chunk 1-5 integration verification passed.
+Latest observed result: 1326 passed, 1 warning.
+The warning comes from the current FastAPI/Starlette TestClient dependency stack and does not break functionality.
+
+### Next Locked Step
+
+5.50 — Push to GitHub
+
+After Chunk 5 is pushed, the next phase is to review and update the full project roadmap before beginning Chunk 6.
+

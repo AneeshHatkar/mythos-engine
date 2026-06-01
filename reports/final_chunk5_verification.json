@@ -1,0 +1,54 @@
+{
+  "checks": {
+    "commands": {
+      "passed": true,
+      "results": {
+        "chunk_1_5_integration": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python scripts/verify_chunk_1_5_integration.py",
+          "ok": true,
+          "output_tail": "{\n  \"check_count\": 6,\n  \"message\": \"Chunk 1-5 integration verification passed.\",\n  \"passed\": true\n}\nFull report written to: /Users/aneeshh/Desktop/mythos-engine/reports/chunk_1_5_integration_verification.json\n",
+          "returncode": 0
+        },
+        "full_pytest_suite": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests -q --ignore=backend/app/tests/test_final_chunk5_verification.py",
+          "ok": true,
+          "output_tail": "........................................................................ [  5%]\n........................................................................ [ 10%]\n........................................................................ [ 16%]\n........................................................................ [ 21%]\n........................................................................ [ 27%]\n........................................................................ [ 32%]\n........................................................................ [ 38%]\n........................................................................ [ 43%]\n........................................................................ [ 48%]\n........................................................................ [ 54%]\n........................................................................ [ 59%]\n........................................................................ [ 65%]\n........................................................................ [ 70%]\n........................................................................ [ 76%]\n........................................................................ [ 81%]\n........................................................................ [ 86%]\n........................................................................ [ 92%]\n........................................................................ [ 97%]\n..............................                                           [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.11/site-packages/fastapi/testclient.py:1\n  /Users/aneeshh/Desktop/mythos-engine/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n1326 passed, 1 warning in 7.59s\n",
+          "returncode": 0
+        },
+        "learning_feedback_tests": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_learning_feedback_adapter.py -q",
+          "ok": true,
+          "output_tail": "......                                                                   [100%]\n6 passed in 0.11s\n",
+          "returncode": 0
+        },
+        "story_generation_api_tests": {
+          "command": "/Users/aneeshh/Desktop/mythos-engine/.venv/bin/python -m pytest backend/app/tests/test_story_generation_api_routes.py -q",
+          "ok": true,
+          "output_tail": ".....                                                                    [100%]\n=============================== warnings summary ===============================\n.venv/lib/python3.11/site-packages/fastapi/testclient.py:1\n  /Users/aneeshh/Desktop/mythos-engine/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n5 passed, 1 warning in 0.42s\n",
+          "returncode": 0
+        }
+      }
+    },
+    "git_status": {
+      "passed": true,
+      "status_short": " M README.md\n M reports/chunk_1_5_integration_verification.json\n?? backend/app/tests/test_final_chunk5_verification.py\n?? scripts/final_chunk5_verification.py\n"
+    },
+    "readme_chunk5_section": {
+      "missing_fragments": [],
+      "passed": true
+    },
+    "required_files": {
+      "missing": [],
+      "passed": true,
+      "required_count": 9
+    }
+  },
+  "created_at_utc": "2026-06-01T19:46:06.921599+00:00",
+  "passed": true,
+  "report_id": "final_chunk5_verification",
+  "summary": {
+    "message": "Final Chunk 5 verification passed.",
+    "next_locked_step": "5.50 Push to GitHub",
+    "passed": true
+  }
+}
