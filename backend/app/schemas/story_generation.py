@@ -509,6 +509,24 @@ class LongFormContinuationAnchor(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class FormatAdaptationPlan(BaseModel):
+    """Format-specific adaptation plan for generated story material."""
+
+    adaptation_plan_id: str
+    source_id: str
+    target_format: str
+    structure_rules: Dict[str, Any] = Field(default_factory=dict)
+    prose_rules: Dict[str, Any] = Field(default_factory=dict)
+    dialogue_rules: Dict[str, Any] = Field(default_factory=dict)
+    pacing_rules: Dict[str, Any] = Field(default_factory=dict)
+    continuity_rules: Dict[str, Any] = Field(default_factory=dict)
+    required_sections: List[str] = Field(default_factory=list)
+    forbidden_patterns: List[str] = Field(default_factory=list)
+    adaptation_notes: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
