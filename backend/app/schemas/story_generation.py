@@ -552,6 +552,26 @@ class FormatAdaptationPlan(BaseModel):
 
 
 
+
+class ScreenplayMovieFormatPackage(BaseModel):
+    """Screenplay/movie formatted story package."""
+
+    format_package_id: str
+    source_id: str
+    target_format: str = "screenplay"
+    title: str = ""
+    logline: str = ""
+    scene_headings: List[Dict[str, Any]] = Field(default_factory=list)
+    action_blocks: List[Dict[str, Any]] = Field(default_factory=list)
+    dialogue_blocks: List[Dict[str, Any]] = Field(default_factory=list)
+    movie_sequence_beats: List[Dict[str, Any]] = Field(default_factory=list)
+    visual_motifs: List[Dict[str, Any]] = Field(default_factory=list)
+    continuity_requirements: Dict[str, Any] = Field(default_factory=dict)
+    formatted_text: str = ""
+    export_payload: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class SeriesEpisodeStructure(BaseModel):
     """Series/episode structure plan with act breaks and plot lanes."""
 
