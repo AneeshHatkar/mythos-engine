@@ -177,3 +177,49 @@ def test_continuation_anchor_flags_failed_quality():
     )["continuation_anchor"]
 
     assert any("failed quality gate" in flag for flag in anchor.risk_flags)
+
+
+def test_continuation_anchor_accepts_plot_outline():
+    from backend.app.schemas.story_generation import PlotOutline
+
+    engine = LongFormContinuationAnchorEngine()
+
+    outline = PlotOutline(
+        outline_id="plot_outline_anchor",
+        source_id="chapter_001",
+        title="Outline Anchor",
+        premise="A court secret continues.",
+        scene_sequence=[
+            {"scene_id": "scene_001", "purpose": "Continue court pressure."}
+        ],
+        act_structure=[
+            {"act_number": 1, "act_purpose": "Setup", "scene_ids": ["scene_001"]}
+        ],
+        character_arc_threads=[
+            {"thread_id": "character_arc_char_kael", "character_id": "char_kael"}
+        ],
+        relationship_arc_threads=[
+            {"thread_id": "relationship_arc_rel_kael_seren", "relationship_id": "rel_kael_seren"}
+        ],
+        secret_threads=[
+            {"thread_id": "secret_thread_secret_seren_source", "secret_id": "secret_seren_source"}
+        ],
+        causal_threads=[
+            {"thread_id": "causal_thread_cause_trial_reveal", "causal_id": "cause_trial_reveal"}
+        ],
+        open_loops=[
+            {"loop_id": "open_loop_outline", "description": "The outline loop remains open."}
+        ],
+        next_outline_hooks=["Outline hook carries forward."],
+    )
+
+    anchor = engine.build_continuation_anchor(
+        chapter=build_chapter(),
+        plot_outline=outline,
+    )["continuation_anchor"]
+
+    assert "Outline hook carries forward." in anchor.next_chapter_hooks
+    assert any(
+        item["update_type"] == "plot_outline_thread"
+        for item in anchor.memory_update_candidates
+    )

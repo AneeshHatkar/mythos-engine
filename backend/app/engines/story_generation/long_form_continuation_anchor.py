@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from backend.app.schemas.story_generation import GeneratedChapter, LongFormContinuationAnchor
+from backend.app.schemas.story_generation import GeneratedChapter, LongFormContinuationAnchor, PlotOutline
 
 
 class LongFormContinuationAnchorEngine:
@@ -21,6 +21,7 @@ class LongFormContinuationAnchorEngine:
         chapter: GeneratedChapter,
         story_context: Dict[str, Any] | None = None,
         previous_anchor: LongFormContinuationAnchor | None = None,
+        plot_outline: PlotOutline | None = None,
     ) -> Dict[str, Any]:
         story_context = story_context or {}
 
@@ -55,9 +56,9 @@ class LongFormContinuationAnchorEngine:
                 previous_anchor.active_world_details if previous_anchor else [],
             ),
             open_loops=open_loops,
-            next_chapter_hooks=self._next_hooks(chapter=chapter, open_loops=open_loops),
+            next_chapter_hooks=self._next_hooks(chapter=chapter, open_loops=open_loops, plot_outline=plot_outline),
             continuity_reminders=self._continuity_reminders(chapter=chapter, open_loops=open_loops),
-            memory_update_candidates=self._memory_update_candidates(chapter=chapter, story_context=story_context),
+            memory_update_candidates=self._memory_update_candidates(chapter=chapter, story_context=story_context, plot_outline=plot_outline),
             chapter_summary=self._chapter_summary(chapter=chapter),
             risk_flags=self._risk_flags(chapter=chapter, open_loops=open_loops),
             warnings=self._warnings(chapter=chapter, open_loops=open_loops),
@@ -73,6 +74,7 @@ class LongFormContinuationAnchorEngine:
                 "payload_keys": [
                     "continuation_anchor",
                     "generated_chapter",
+                    "plot_outline",
                     "story_context",
                     "generation_contract",
                 ],
@@ -192,8 +194,11 @@ class LongFormContinuationAnchorEngine:
 
         return self._unique_loops(loops)
 
-    def _next_hooks(self, *, chapter: GeneratedChapter, open_loops: List[Dict[str, Any]]) -> List[str]:
+    def _next_hooks(self, *, chapter: GeneratedChapter, open_loops: List[Dict[str, Any]], plot_outline: PlotOutline | None = None) -> List[str]:
         hooks = list(chapter.next_chapter_hooks)
+
+        if plot_outline:
+            hooks.extend(plot_outline.next_outline_hooks)
 
         for loop in open_loops:
             description = loop.get("description")
@@ -231,6 +236,7 @@ class LongFormContinuationAnchorEngine:
         *,
         chapter: GeneratedChapter,
         story_context: Dict[str, Any],
+        plot_outline: PlotOutline | None = None,
     ) -> List[Dict[str, Any]]:
         candidates: List[Dict[str, Any]] = []
 
@@ -271,6 +277,23 @@ class LongFormContinuationAnchorEngine:
                     "target_id": causal_id,
                     "source_chapter_id": chapter.chapter_id,
                     "reason": "Causal thread appeared and may need consequence tracking.",
+                }
+            )
+
+        if plot_outline:
+            candidates.append(
+                {
+                    "update_type": "plot_outline_thread",
+                    "target_id": plot_outline.outline_id,
+                    "source_chapter_id": chapter.chapter_id,
+                    "reason": "Plot outline exists and should guide future long-form continuation.",
+                    "thread_counts": {
+                        "characters": len(plot_outline.character_arc_threads),
+                        "relationships": len(plot_outline.relationship_arc_threads),
+                        "secrets": len(plot_outline.secret_threads),
+                        "causal": len(plot_outline.causal_threads),
+                        "open_loops": len(plot_outline.open_loops),
+                    },
                 }
             )
 
