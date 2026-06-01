@@ -616,6 +616,31 @@ class SeriesSeasonFormatPackage(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class GameInteractiveScenePackage(BaseModel):
+    """Game/interactive scene formatted story package."""
+
+    game_package_id: str
+    source_id: str
+    target_format: str = "game_scene"
+    scene_title: str = ""
+    player_objective: str = ""
+    scene_setup: Dict[str, Any] = Field(default_factory=dict)
+    npc_dialogue_blocks: List[Dict[str, Any]] = Field(default_factory=list)
+    choice_menu: List[Dict[str, Any]] = Field(default_factory=list)
+    branching_outcomes: List[Dict[str, Any]] = Field(default_factory=list)
+    state_deltas: List[Dict[str, Any]] = Field(default_factory=list)
+    quest_log_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    inventory_hooks: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_state_hooks: List[Dict[str, Any]] = Field(default_factory=list)
+    secret_state_hooks: List[Dict[str, Any]] = Field(default_factory=list)
+    causal_state_hooks: List[Dict[str, Any]] = Field(default_factory=list)
+    world_state_hooks: List[Dict[str, Any]] = Field(default_factory=list)
+    formatted_text: str = ""
+    export_payload: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ChapterExpansionPlan(BaseModel):
     """Expansion plan for turning a generated chapter into richer long-form output."""
 
