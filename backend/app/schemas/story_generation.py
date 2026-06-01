@@ -1191,6 +1191,32 @@ class StorySmokeTestReport(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class LearningFeedbackPackage(BaseModel):
+    """Learning feedback package for future ML/research training loops."""
+
+    learning_feedback_id: str
+    source_id: str
+    request_id: str = ""
+    draft_id: str = ""
+    feedback_status: str = "created"
+    feedback_version: str = "chunk_5_47_v1"
+    approved_for_learning: bool = False
+    feedback_rows: List[Dict[str, Any]] = Field(default_factory=list)
+    quality_feedback: List[Dict[str, Any]] = Field(default_factory=list)
+    risk_feedback: List[Dict[str, Any]] = Field(default_factory=list)
+    memory_feedback: List[Dict[str, Any]] = Field(default_factory=list)
+    export_feedback: List[Dict[str, Any]] = Field(default_factory=list)
+    benchmark_feedback: List[Dict[str, Any]] = Field(default_factory=list)
+    smoke_feedback: List[Dict[str, Any]] = Field(default_factory=list)
+    training_signal_candidates: List[Dict[str, Any]] = Field(default_factory=list)
+    dataset_manifest: Dict[str, Any] = Field(default_factory=dict)
+    feedback_summary: Dict[str, Any] = Field(default_factory=dict)
+    recommended_actions: List[Dict[str, Any]] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class AdaptiveLearningSignal(BaseModel):
     model_config = ConfigDict(extra="allow")
 
