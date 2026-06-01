@@ -367,6 +367,28 @@ class CommercialAppealReport(BaseModel):
     improvement_suggestions: List[str] = Field(default_factory=list)
 
 
+
+class GeneratedSceneDraft(BaseModel):
+    """Generated draft text and trace data for a scene."""
+
+    draft_id: str
+    scene_id: str
+    blueprint_id: Optional[str] = None
+    selected_format: str = "scene"
+    title: str = ""
+    draft_text: str = ""
+    sections: List[Dict[str, Any]] = Field(default_factory=list)
+    used_world_details: List[str] = Field(default_factory=list)
+    used_character_ids: List[str] = Field(default_factory=list)
+    used_relationship_ids: List[str] = Field(default_factory=list)
+    used_secret_ids: List[str] = Field(default_factory=list)
+    used_causal_ids: List[str] = Field(default_factory=list)
+    style_profile_id: Optional[str] = None
+    commercial_report_id: Optional[str] = None
+    generation_notes: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
