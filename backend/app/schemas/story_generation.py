@@ -591,6 +591,25 @@ class MultiScenePacingReport(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class LongFormMemoryBridgeReport(BaseModel):
+    """Memory bridge report for converting generated story output into structured memory updates."""
+
+    memory_bridge_id: str
+    source_id: str
+    chapter_id: Optional[str] = None
+    character_memory_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_memory_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    secret_memory_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    causal_memory_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    world_memory_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    open_loop_updates: List[Dict[str, Any]] = Field(default_factory=list)
+    continuity_ledger_entries: List[Dict[str, Any]] = Field(default_factory=list)
+    next_generation_memory_payload: Dict[str, Any] = Field(default_factory=dict)
+    memory_risk_flags: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
