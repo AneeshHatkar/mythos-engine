@@ -1337,3 +1337,110 @@ class StoryQualityScoreReport(BaseModel):
     risks: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
 
+
+# ---------------------------------------------------------------------------
+# Upgrade Pass - Pre-Chunk 6 Future Compatibility Schemas
+# ---------------------------------------------------------------------------
+# Additive compatibility hooks only. Existing Chunk 1-5 behavior is not changed.
+
+from typing import Any as _FutureAny, Dict as _FutureDict, List as _FutureList
+from pydantic import BaseModel as _FutureBaseModel, Field as _FutureField
+
+
+class FutureWorldReferencePacket(_FutureBaseModel):
+    packet_id: str
+    packet_type: str
+    source_chunk: str = "chunk_6"
+    title: str = ""
+    summary: str = ""
+    priority: str = "medium"
+    tags: _FutureList[str] = _FutureField(default_factory=list)
+    references: _FutureList[str] = _FutureField(default_factory=list)
+    metadata: _FutureDict[str, _FutureAny] = _FutureField(default_factory=dict)
+
+
+class DeepWorldReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "deep_world"
+
+
+class GeographyReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "geography"
+
+
+class EcologyReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "ecology"
+
+
+class CivilizationReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "civilization"
+
+
+class SpeciesReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "species"
+
+
+class CultureReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "culture"
+
+
+class SettlementReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "settlement"
+
+
+class ObjectArtifactReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "object_artifact"
+
+
+class WeatherReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "weather"
+
+
+class TravelConstraintReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "travel_constraint"
+
+
+class DailyLifeReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "daily_life"
+
+
+class SecretLocationReferencePacket(FutureWorldReferencePacket):
+    packet_type: str = "secret_location"
+
+
+class WorldStateMemoryReference(_FutureBaseModel):
+    memory_reference_id: str
+    memory_type: str
+    source_packet_id: str
+    affected_entity_id: str = ""
+    state_summary: str
+    persistence_level: str = "story"
+    causal_importance: str = "medium"
+    tags: _FutureList[str] = _FutureField(default_factory=list)
+    metadata: _FutureDict[str, _FutureAny] = _FutureField(default_factory=dict)
+
+
+class StoryWorldExpansionBridge(_FutureBaseModel):
+    bridge_id: str
+    source_id: str
+    packets: _FutureList[FutureWorldReferencePacket] = _FutureField(default_factory=list)
+    story_context_injections: _FutureDict[str, _FutureList[_FutureDict[str, _FutureAny]]] = _FutureField(default_factory=dict)
+    generation_injection_hints: _FutureList[_FutureDict[str, _FutureAny]] = _FutureField(default_factory=list)
+    memory_update_candidates: _FutureList[WorldStateMemoryReference] = _FutureField(default_factory=list)
+    benchmark_expectations: _FutureList[_FutureDict[str, _FutureAny]] = _FutureField(default_factory=list)
+    smoke_test_expectations: _FutureList[_FutureDict[str, _FutureAny]] = _FutureField(default_factory=list)
+    learning_feedback_tags: _FutureList[str] = _FutureField(default_factory=list)
+    warnings: _FutureList[str] = _FutureField(default_factory=list)
+
+
+class ChunkFutureCompatibilityContract(_FutureBaseModel):
+    compatibility_contract_id: str
+    source_id: str
+    target_future_chunk: str = "chunk_6"
+    supported_packet_types: _FutureList[str] = _FutureField(default_factory=list)
+    required_chunk_1_to_5_hooks: _FutureList[str] = _FutureField(default_factory=list)
+    bridge: StoryWorldExpansionBridge | None = None
+    approved_for_chunk6_start: bool = False
+    validation_results: _FutureList[_FutureDict[str, _FutureAny]] = _FutureField(default_factory=list)
+    downstream_constraints: _FutureDict[str, _FutureAny] = _FutureField(default_factory=dict)
+    warnings: _FutureList[str] = _FutureField(default_factory=list)
+

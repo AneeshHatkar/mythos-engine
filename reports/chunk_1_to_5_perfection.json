@@ -1,0 +1,43 @@
+{
+  "checks": {
+    "bridge_tests": {
+      "output_tail": ".....                                                                    [100%]\n5 passed in 0.12s\n",
+      "passed": true
+    },
+    "future_schema_terms": {
+      "missing": [],
+      "passed": true
+    },
+    "prior_reports": {
+      "passed": true,
+      "reports": {
+        "reports/chunk_1_5_integration_verification.json": {
+          "passed": true
+        },
+        "reports/final_chunk5_verification.json": {
+          "passed": true
+        }
+      }
+    },
+    "py_compile": {
+      "failures": [],
+      "passed": true
+    },
+    "required_docs": {
+      "missing": [],
+      "passed": true
+    },
+    "required_files": {
+      "missing": [],
+      "passed": true
+    }
+  },
+  "created_at_utc": "2026-06-01T23:40:35.481198+00:00",
+  "passed": true,
+  "report_id": "chunk_1_to_5_perfection",
+  "summary": {
+    "message": "Chunk 1-5 perfection verification passed.",
+    "next_locked_step": "verify_pre_chunk6_readiness",
+    "passed": true
+  }
+}

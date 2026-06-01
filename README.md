@@ -1324,3 +1324,29 @@ Acceptance rule:
 
 The perfection verifier, final Chunk 5 verifier, and full pytest suite must pass before Chunk 6 begins.
 \n
+
+
+## Pre-Chunk 6 Hardening Status
+
+Chunk 5 is complete and verified.
+
+Chunks 1–5 have been hardened for future deep-world expansion through an additive future compatibility layer.
+
+Added compatibility support includes:
+
+- Future world reference packets
+- Deep world reference packets
+- Geography, ecology, civilization, species, culture, settlement, object/artifact, weather, travel, daily-life, and secret-location packets
+- World-state memory references
+- Story world expansion bridge
+- Chunk future compatibility contract
+- Bridge tests
+- Chunk 1–5 perfection verifier
+- Pre-Chunk 6 readiness verifier
+
+The system is locked to remain additive and backward-compatible. Existing Chunk 1–5 engines must not be renamed, deleted, or replaced during Chunk 6.
+
+Next locked step:
+
+6.1 — Deep World Expansion Schemas + Chunk 6 Design Contract
+
