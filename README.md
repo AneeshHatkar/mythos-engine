@@ -1309,5 +1309,18 @@ Next locked implementation step:
 
 Verification command:
 
-PYTHONPATH=. python scripts/verify_pre_chunk6_readiness.py
+PYTHONPATH=. python scripts/verify_pre_chunk6_readiness.py\n
+---
 
+## Chunk 1 to 5 Perfection Pass
+
+Before Chunk 6 begins, Chunks 1 to 5 are hardened with a perfection standard, deep world hook contract, and engine coverage matrix. This pass does not rewrite working engines. It locks the compatibility rules needed for future deep world, genre, commercial, ML, frontend, backend, and deployment chunks.
+
+Verification command:
+
+PYTHONPATH=. python scripts/verify_chunk_1_to_5_perfection.py
+
+Acceptance rule:
+
+The perfection verifier, final Chunk 5 verifier, and full pytest suite must pass before Chunk 6 begins.
+\n
