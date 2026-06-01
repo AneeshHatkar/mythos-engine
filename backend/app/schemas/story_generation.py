@@ -1171,6 +1171,26 @@ class StoryBenchmarkPack(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class StorySmokeTestReport(BaseModel):
+    """Smoke test report for the Chunk 5 story generation pipeline."""
+
+    smoke_test_report_id: str
+    source_id: str
+    request_id: str = ""
+    draft_id: str = ""
+    smoke_status: str = "completed"
+    passed: bool = False
+    smoke_cases: List[Dict[str, Any]] = Field(default_factory=list)
+    smoke_results: List[Dict[str, Any]] = Field(default_factory=list)
+    artifact_summary: Dict[str, Any] = Field(default_factory=dict)
+    readiness_summary: Dict[str, Any] = Field(default_factory=dict)
+    failure_summary: Dict[str, Any] = Field(default_factory=dict)
+    recommended_actions: List[Dict[str, Any]] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class AdaptiveLearningSignal(BaseModel):
     model_config = ConfigDict(extra="allow")
 
