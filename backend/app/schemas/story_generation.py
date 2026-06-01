@@ -527,6 +527,27 @@ class FormatAdaptationPlan(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class SeriesEpisodeStructure(BaseModel):
+    """Series/episode structure plan with act breaks and plot lanes."""
+
+    episode_structure_id: str
+    source_id: str
+    episode_number: int = 1
+    season_number: int = 1
+    episode_title: str = ""
+    cold_open: Dict[str, Any] = Field(default_factory=dict)
+    act_structure: List[Dict[str, Any]] = Field(default_factory=list)
+    plot_lanes: Dict[str, List[Dict[str, Any]]] = Field(default_factory=dict)
+    season_arc_links: List[Dict[str, Any]] = Field(default_factory=list)
+    character_continuity: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_continuity: List[Dict[str, Any]] = Field(default_factory=list)
+    open_loop_carryover: List[Dict[str, Any]] = Field(default_factory=list)
+    episode_cliffhanger: Optional[str] = None
+    pacing_notes: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
