@@ -488,6 +488,27 @@ class GeneratedChapter(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class LongFormContinuationAnchor(BaseModel):
+    """Continuity anchor for continuing long-form story generation."""
+
+    anchor_id: str
+    chapter_id: str
+    chapter_number: int = 1
+    active_character_ids: List[str] = Field(default_factory=list)
+    active_relationship_ids: List[str] = Field(default_factory=list)
+    active_secret_ids: List[str] = Field(default_factory=list)
+    active_causal_ids: List[str] = Field(default_factory=list)
+    active_world_details: List[str] = Field(default_factory=list)
+    open_loops: List[Dict[str, Any]] = Field(default_factory=list)
+    next_chapter_hooks: List[str] = Field(default_factory=list)
+    continuity_reminders: List[str] = Field(default_factory=list)
+    memory_update_candidates: List[Dict[str, Any]] = Field(default_factory=list)
+    chapter_summary: Dict[str, Any] = Field(default_factory=dict)
+    risk_flags: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
