@@ -907,6 +907,28 @@ class OriginalityCopyRiskReport(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class StoryRevisionPlan(BaseModel):
+    """Structured story revision plan."""
+
+    revision_plan_id: str
+    source_id: str
+    ready_for_revision: bool = True
+    revision_mode: str = "targeted"
+    overall_revision_priority: str = "medium"
+    revision_goals: List[Dict[str, Any]] = Field(default_factory=list)
+    quality_revision_tasks: List[Dict[str, Any]] = Field(default_factory=list)
+    anti_genericity_revision_tasks: List[Dict[str, Any]] = Field(default_factory=list)
+    continuity_repair_tasks: List[Dict[str, Any]] = Field(default_factory=list)
+    originality_rewrite_tasks: List[Dict[str, Any]] = Field(default_factory=list)
+    protected_elements: List[Dict[str, Any]] = Field(default_factory=list)
+    rewrite_order: List[Dict[str, Any]] = Field(default_factory=list)
+    revision_constraints: Dict[str, Any] = Field(default_factory=dict)
+    expected_improvements: Dict[str, Any] = Field(default_factory=dict)
+    blocking_issues: List[Dict[str, Any]] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class StoryContinuityReport(BaseModel):
     model_config = ConfigDict(extra="allow")
 
