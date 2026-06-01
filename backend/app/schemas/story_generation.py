@@ -882,6 +882,31 @@ class StoryContinuityValidationReport(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class OriginalityCopyRiskReport(BaseModel):
+    """Originality and copy-risk report for generated story material."""
+
+    originality_report_id: str
+    source_id: str
+    safe_for_export: bool = True
+    overall_originality_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    copy_risk_level: str = "medium"
+    phrase_overlap_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    style_imitation_risk_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    character_similarity_risk_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    world_similarity_risk_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    plot_similarity_risk_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    originality_strength_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    detected_risks: List[Dict[str, Any]] = Field(default_factory=list)
+    protected_style_warnings: List[Dict[str, Any]] = Field(default_factory=list)
+    source_policy_results: List[Dict[str, Any]] = Field(default_factory=list)
+    originality_evidence: List[Dict[str, Any]] = Field(default_factory=list)
+    rewrite_requirements: List[Dict[str, Any]] = Field(default_factory=list)
+    approved_original_elements: List[str] = Field(default_factory=list)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class StoryContinuityReport(BaseModel):
     model_config = ConfigDict(extra="allow")
 
