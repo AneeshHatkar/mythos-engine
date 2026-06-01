@@ -62,6 +62,46 @@ def build_anchor():
     )
 
 
+def build_plot_outline():
+    from backend.app.schemas.story_generation import PlotOutline
+
+    return PlotOutline(
+        outline_id="plot_outline_format",
+        source_id="chapter_format",
+        title="Format Outline",
+        premise="A court secret changes public power.",
+        scene_sequence=[
+            {"scene_id": "scene_001", "purpose": "Expose the badge."}
+        ],
+        act_structure=[
+            {"act_number": 1, "act_purpose": "Setup", "scene_ids": ["scene_001"]}
+        ],
+        character_arc_threads=[
+            {"thread_id": "character_arc_char_kael", "character_id": "char_kael"}
+        ],
+        relationship_arc_threads=[
+            {"thread_id": "relationship_arc_rel_kael_seren", "relationship_id": "rel_kael_seren"}
+        ],
+        secret_threads=[
+            {"thread_id": "secret_thread_secret_seren_source", "secret_id": "secret_seren_source"}
+        ],
+        causal_threads=[
+            {"thread_id": "causal_thread_cause_trial_reveal", "causal_id": "cause_trial_reveal"}
+        ],
+        open_loops=[
+            {"loop_id": "open_loop_secret", "description": "Secret remains hidden."}
+        ],
+        next_outline_hooks=["Outline hook carries into the adapted format."],
+        continuity_requirements={
+            "required_character_ids": ["char_kael", "char_seren"],
+            "required_relationship_ids": ["rel_kael_seren"],
+            "required_secret_ids": ["secret_seren_source"],
+            "required_causal_ids": ["cause_trial_reveal"],
+            "open_loop_ids": ["open_loop_secret"],
+        },
+    )
+
+
 def test_format_adapter_builds_novel_plan():
     engine = FormatAdapterEngine()
 
@@ -195,3 +235,41 @@ def test_format_adapter_warns_when_target_not_allowed():
     )["format_adaptation_plan"]
 
     assert any("not in generation contract allowed formats" in warning for warning in plan.warnings)
+
+
+def test_format_adapter_accepts_plot_outline_context():
+    engine = FormatAdapterEngine()
+
+    plan = engine.build_format_adaptation_plan(
+        target_format=StoryFormat.novel,
+        source_id="chapter_format",
+        generation_contract=build_contract(StoryFormat.novel),
+        chapter=build_chapter(),
+        continuation_anchor=build_anchor(),
+        plot_outline=build_plot_outline(),
+    )["format_adaptation_plan"]
+
+    assert plan.continuity_rules["plot_outline_id"] == "plot_outline_format"
+    assert "secret_seren_source" in plan.continuity_rules["required_plot_secret_ids"]
+    assert "Outline hook carries into the adapted format." in plan.continuity_rules["plot_next_hooks"]
+
+
+def test_format_adapter_builds_movie_skeleton():
+    engine = FormatAdapterEngine()
+
+    plan = engine.build_format_adaptation_plan(
+        target_format=StoryFormat.movie,
+        source_id="chapter_format",
+        chapter=build_chapter(),
+        continuation_anchor=build_anchor(),
+        plot_outline=build_plot_outline(),
+    )["format_adaptation_plan"]
+
+    skeleton = engine.adapt_text_skeleton(
+        plan=plan,
+        source_text="source",
+    )["adapted_text_skeleton"]
+
+    assert plan.target_format == "movie"
+    assert "FILM SEQUENCE PURPOSE" in skeleton
+    assert "VISUAL ESCALATION" in skeleton

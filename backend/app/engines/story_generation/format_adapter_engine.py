@@ -7,6 +7,7 @@ from backend.app.schemas.story_generation import (
     GeneratedChapter,
     GenerationContract,
     LongFormContinuationAnchor,
+    PlotOutline,
     StoryFormat,
 )
 
@@ -245,6 +246,7 @@ class FormatAdapterEngine:
         generation_contract: GenerationContract | None = None,
         chapter: GeneratedChapter | None = None,
         continuation_anchor: LongFormContinuationAnchor | None = None,
+        plot_outline: PlotOutline | None = None,
         story_context: Dict[str, Any] | None = None,
     ) -> Dict[str, Any]:
         story_context = story_context or {}
@@ -269,6 +271,7 @@ class FormatAdapterEngine:
                 preset=preset,
                 chapter=chapter,
                 continuation_anchor=continuation_anchor,
+                plot_outline=plot_outline,
                 story_context=story_context,
             ),
             required_sections=list(preset["required_sections"]),
@@ -292,6 +295,7 @@ class FormatAdapterEngine:
                     "format_adaptation_plan",
                     "generated_chapter",
                     "continuation_anchor",
+                    "plot_outline",
                     "generation_contract",
                     "story_context",
                 ],
@@ -308,6 +312,8 @@ class FormatAdapterEngine:
             adapted = self._screenplay_skeleton(plan=plan, source_text=source_text)
         elif plan.target_format == "game_scene":
             adapted = self._game_scene_skeleton(plan=plan, source_text=source_text)
+        elif plan.target_format == "movie":
+            adapted = self._movie_skeleton(plan=plan, source_text=source_text)
         elif plan.target_format == "multi_book_arc":
             adapted = self._multi_book_skeleton(plan=plan, source_text=source_text)
         elif plan.target_format in {"novel", "chapter"}:
@@ -457,6 +463,7 @@ class FormatAdapterEngine:
         preset: Dict[str, Any],
         chapter: GeneratedChapter | None,
         continuation_anchor: LongFormContinuationAnchor | None,
+        plot_outline: PlotOutline | None = None,
         story_context: Dict[str, Any],
     ) -> Dict[str, Any]:
         rules = dict(preset["continuity_rules"])
@@ -470,6 +477,15 @@ class FormatAdapterEngine:
         if continuation_anchor:
             rules["active_open_loop_ids"] = [loop.get("loop_id") for loop in continuation_anchor.open_loops]
             rules["continuity_reminders"] = continuation_anchor.continuity_reminders
+
+        if plot_outline:
+            rules["plot_outline_id"] = plot_outline.outline_id
+            rules["required_plot_character_ids"] = plot_outline.continuity_requirements.get("required_character_ids", [])
+            rules["required_plot_relationship_ids"] = plot_outline.continuity_requirements.get("required_relationship_ids", [])
+            rules["required_plot_secret_ids"] = plot_outline.continuity_requirements.get("required_secret_ids", [])
+            rules["required_plot_causal_ids"] = plot_outline.continuity_requirements.get("required_causal_ids", [])
+            rules["plot_open_loop_ids"] = plot_outline.continuity_requirements.get("open_loop_ids", [])
+            rules["plot_next_hooks"] = plot_outline.next_outline_hooks
 
         if story_context.get("story_context_id"):
             rules["story_context_id"] = story_context["story_context_id"]
@@ -534,6 +550,17 @@ class FormatAdapterEngine:
             "ACTION: Convert the source scene into visible, performable action.\n\n"
             "CHARACTER\n"
             "Dialogue should carry subtext without inner narration.\n\n"
+            f"CONTINUITY TO PRESERVE: {', '.join(plan.continuity_rules.get('must_preserve_causal_ids', []))}\n"
+        )
+
+    def _movie_skeleton(self, *, plan: FormatAdaptationPlan, source_text: str) -> str:
+        return (
+            "FILM SEQUENCE PURPOSE\n"
+            "Convert the source into visual sequence logic.\n\n"
+            "VISUAL ESCALATION\n"
+            "Each beat must be performable, visible, and tied to consequence.\n\n"
+            "SET PIECE / TURN\n"
+            "Identify the scene turn, reversal, or cinematic payoff.\n\n"
             f"CONTINUITY TO PRESERVE: {', '.join(plan.continuity_rules.get('must_preserve_causal_ids', []))}\n"
         )
 
