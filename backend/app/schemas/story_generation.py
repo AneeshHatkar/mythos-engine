@@ -1049,3 +1049,29 @@ class AdaptiveStoryPatternPlan(BaseModel):
     downstream_generation_constraints: Dict[str, Any] = Field(default_factory=dict)
     warnings: List[str] = Field(default_factory=list)
 
+
+
+class StoryQualityScoreReport(BaseModel):
+    """Story-level quality score report for generated narrative material."""
+
+    quality_report_id: str
+    source_id: str
+    overall_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    readiness_level: str = "needs_revision"
+    structure_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    character_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    relationship_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    secret_mystery_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    causal_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    world_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    pacing_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    format_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    anti_generic_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    commercial_potential_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    dimension_breakdown: List[Dict[str, Any]] = Field(default_factory=list)
+    quality_gates: List[Dict[str, Any]] = Field(default_factory=list)
+    revision_priorities: List[Dict[str, Any]] = Field(default_factory=list)
+    strengths: List[str] = Field(default_factory=list)
+    risks: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
