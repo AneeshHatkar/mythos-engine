@@ -593,6 +593,29 @@ class SeriesEpisodeStructure(BaseModel):
 
 
 
+
+class SeriesSeasonFormatPackage(BaseModel):
+    """Series/season formatted story package."""
+
+    series_package_id: str
+    source_id: str
+    target_format: str = "series_season"
+    series_title: str = ""
+    season_number: int = 1
+    episode_count: int = 0
+    season_premise: str = ""
+    season_arc_summary: Dict[str, Any] = Field(default_factory=dict)
+    episode_cards: List[Dict[str, Any]] = Field(default_factory=list)
+    act_breaks: List[Dict[str, Any]] = Field(default_factory=list)
+    plot_lanes: Dict[str, List[Dict[str, Any]]] = Field(default_factory=dict)
+    recurring_character_dynamics: List[Dict[str, Any]] = Field(default_factory=list)
+    season_arc_carryover: List[Dict[str, Any]] = Field(default_factory=list)
+    cliffhanger_registry: List[Dict[str, Any]] = Field(default_factory=list)
+    formatted_text: str = ""
+    export_payload: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ChapterExpansionPlan(BaseModel):
     """Expansion plan for turning a generated chapter into richer long-form output."""
 
