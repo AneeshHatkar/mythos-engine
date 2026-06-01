@@ -1027,3 +1027,25 @@ class MultiWorldMultiCastScalingPlan(BaseModel):
     recommendations: List[str] = Field(default_factory=list)
     warnings: List[str] = Field(default_factory=list)
 
+
+
+class AdaptiveStoryPatternPlan(BaseModel):
+    """Adaptive story pattern plan for non-generic story generation."""
+
+    pattern_plan_id: str
+    source_id: str
+    selected_primary_pattern: str = ""
+    selected_secondary_patterns: List[str] = Field(default_factory=list)
+    pattern_blend_strategy: Dict[str, Any] = Field(default_factory=dict)
+    genre_pattern_map: Dict[str, Any] = Field(default_factory=dict)
+    format_pattern_rules: Dict[str, Any] = Field(default_factory=dict)
+    character_pattern_assignments: List[Dict[str, Any]] = Field(default_factory=list)
+    relationship_pattern_assignments: List[Dict[str, Any]] = Field(default_factory=list)
+    secret_pattern_assignments: List[Dict[str, Any]] = Field(default_factory=list)
+    causal_pattern_assignments: List[Dict[str, Any]] = Field(default_factory=list)
+    world_pattern_assignments: List[Dict[str, Any]] = Field(default_factory=list)
+    anti_template_rules: List[str] = Field(default_factory=list)
+    adaptation_reasons: List[str] = Field(default_factory=list)
+    downstream_generation_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
