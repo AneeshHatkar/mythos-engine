@@ -464,6 +464,30 @@ class SceneQualityReport(BaseModel):
     improvement_targets: List[str] = Field(default_factory=list)
 
 
+
+class GeneratedChapter(BaseModel):
+    """Generated chapter package built from assembled scenes."""
+
+    chapter_id: str
+    chapter_number: int = 1
+    title: str = ""
+    chapter_text: str = ""
+    scene_ids: List[str] = Field(default_factory=list)
+    assembled_scene_ids: List[str] = Field(default_factory=list)
+    sections: List[Dict[str, Any]] = Field(default_factory=list)
+    continuity_trace: Dict[str, Any] = Field(default_factory=dict)
+    used_character_ids: List[str] = Field(default_factory=list)
+    used_relationship_ids: List[str] = Field(default_factory=list)
+    used_secret_ids: List[str] = Field(default_factory=list)
+    used_causal_ids: List[str] = Field(default_factory=list)
+    used_world_details: List[str] = Field(default_factory=list)
+    open_loops: List[Dict[str, Any]] = Field(default_factory=list)
+    next_chapter_hooks: List[str] = Field(default_factory=list)
+    quality_summary: Dict[str, Any] = Field(default_factory=dict)
+    generation_notes: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
