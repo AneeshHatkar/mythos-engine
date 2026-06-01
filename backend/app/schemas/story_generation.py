@@ -1150,6 +1150,27 @@ class StoryExportPackage(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class StoryBenchmarkPack(BaseModel):
+    """Benchmark pack for evaluating generated story packages."""
+
+    benchmark_pack_id: str
+    source_id: str
+    request_id: str = ""
+    draft_id: str = ""
+    benchmark_status: str = "completed"
+    benchmark_version: str = "chunk_5_45_v1"
+    benchmark_cases: List[Dict[str, Any]] = Field(default_factory=list)
+    benchmark_results: List[Dict[str, Any]] = Field(default_factory=list)
+    score_summary: Dict[str, Any] = Field(default_factory=dict)
+    readiness_summary: Dict[str, Any] = Field(default_factory=dict)
+    regression_summary: Dict[str, Any] = Field(default_factory=dict)
+    recommended_actions: List[Dict[str, Any]] = Field(default_factory=list)
+    benchmark_manifest: Dict[str, Any] = Field(default_factory=dict)
+    downstream_constraints: Dict[str, Any] = Field(default_factory=dict)
+    warnings: List[str] = Field(default_factory=list)
+
+
 class AdaptiveLearningSignal(BaseModel):
     model_config = ConfigDict(extra="allow")
 
