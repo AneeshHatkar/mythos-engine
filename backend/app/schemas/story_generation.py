@@ -443,6 +443,27 @@ class AssembledScene(BaseModel):
     warnings: List[str] = Field(default_factory=list)
 
 
+
+class SceneQualityReport(BaseModel):
+    """Quality gate report for an assembled scene."""
+
+    report_id: str
+    scene_id: str
+    passed: bool = False
+    overall_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    length_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    world_specificity_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    character_presence_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    relationship_pressure_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    secret_pressure_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    causal_trace_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    dialogue_presence_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    generic_phrase_risk: float = Field(default=0.0, ge=0.0, le=1.0)
+    blockers: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+    improvement_targets: List[str] = Field(default_factory=list)
+
+
 class ProseStyleProfile(BaseModel):
     model_config = ConfigDict(extra="allow")
 
