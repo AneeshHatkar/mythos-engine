@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T06:44:17.240088+00:00",
+  "generated_at_utc": "2026-06-02T06:47:19.790991+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1303,6 +1303,28 @@
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_climate_weather_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/country_political_unit_system.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T06:46:40.844092+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_country_political_unit_system.py"
+      ],
+      "line_count": 507,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_country_political_unit_system.py"
       ],
       "status": "active_project_file"
     },
@@ -7792,6 +7814,25 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/country_political_unit_system.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_country_political_unit_system.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.country_political_unit_system"
+      ],
+      "last_modified_utc": "2026-06-02T06:46:47.413746+00:00",
+      "likely_dependents": [],
+      "line_count": 133,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_country_political_unit_system.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/creature_behavior_simulation_engine.py",
         "backend/app/engines/deep_world/fauna_generator.py"
       ],
@@ -10679,9 +10720,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:35:31.880012+00:00",
+      "last_modified_utc": "2026-06-02T06:44:17.244544+00:00",
       "likely_dependents": [],
-      "line_count": 11081,
+      "line_count": 11125,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10692,9 +10733,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:35:31.880899+00:00",
+      "last_modified_utc": "2026-06-02T06:44:17.245494+00:00",
       "likely_dependents": [],
-      "line_count": 8031,
+      "line_count": 8063,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11121,5 +11162,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 469
+  "total_tracked_files": 471
 }
