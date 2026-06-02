@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T08:26:49.143645+00:00",
+  "generated_at_utc": "2026-06-02T08:33:01.190147+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1369,6 +1369,7 @@
         "backend/app/tests/test_chunk6_country_political_unit_system.py",
         "backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py",
         "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py",
         "backend/app/tests/test_chunk6_migration_demographic_movement_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
@@ -1514,12 +1515,35 @@
         "backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py",
         "backend/app/tests/test_chunk6_economy_commerce_upgrade.py",
         "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py",
         "backend/app/tests/test_chunk6_migration_demographic_movement_engine.py"
       ],
       "line_count": 1101,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/education_schools_apprenticeship_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T08:31:41.473857+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py"
+      ],
+      "line_count": 596,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py"
       ],
       "status": "active_project_file"
     },
@@ -1677,6 +1701,7 @@
       "last_modified_utc": "2026-06-02T06:43:39.442075+00:00",
       "likely_dependents": [
         "backend/app/tests/test_chunk6_civilization_life_engine.py",
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py",
         "backend/app/tests/test_chunk6_migration_demographic_movement_engine.py",
         "backend/app/tests/test_chunk6_population_diversity_engine.py",
         "backend/app/tests/test_chunk6_settlement_engine.py"
@@ -1776,6 +1801,7 @@
         "backend/app/tests/test_chunk6_civilization_life_engine.py",
         "backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py",
         "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py",
         "backend/app/tests/test_chunk6_migration_demographic_movement_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
@@ -8293,6 +8319,33 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/economy_resource_ecology_engine.py",
+        "backend/app/engines/deep_world/education_schools_apprenticeship_engine.py",
+        "backend/app/engines/deep_world/population_diversity_engine.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.economy_resource_ecology_engine",
+        "backend.app.engines.deep_world.education_schools_apprenticeship_engine",
+        "backend.app.engines.deep_world.population_diversity_engine",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T08:32:00.221827+00:00",
+      "likely_dependents": [],
+      "line_count": 175,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_education_schools_apprenticeship_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/fauna_generator.py",
         "backend/app/schemas/deep_world.py"
       ],
@@ -11201,9 +11254,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:53:11.319747+00:00",
+      "last_modified_utc": "2026-06-02T08:26:49.148214+00:00",
       "likely_dependents": [],
-      "line_count": 11627,
+      "line_count": 11647,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11214,9 +11267,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:53:11.320857+00:00",
+      "last_modified_utc": "2026-06-02T08:26:49.149162+00:00",
       "likely_dependents": [],
-      "line_count": 8444,
+      "line_count": 8458,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11643,5 +11696,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 490
+  "total_tracked_files": 492
 }
