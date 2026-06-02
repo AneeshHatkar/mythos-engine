@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T05:32:17.035549+00:00
-Total tracked files: 453
+Generated at UTC: 2026-06-02T05:49:30.102170+00:00
+Total tracked files: 455
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -5417,6 +5417,23 @@ This file records every current project file, what it does, and what it connects
 - Related tests:
   - `backend/app/tests/__init__.py`
 
+### `backend/app/engines/deep_world/climate_weather_engine.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 374
+- Imports:
+  - `__future__`
+  - `backend.app.schemas.deep_world`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_climate_weather_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_climate_weather_engine.py`
+
 ### `backend/app/engines/deep_world/deep_lore_history_contract.py`
 
 - Type: `engine`
@@ -5513,11 +5530,13 @@ This file records every current project file, what it does, and what it connects
   - `pydantic`
   - `typing`
 - Likely dependents:
+  - `backend/app/engines/deep_world/climate_weather_engine.py`
   - `backend/app/engines/deep_world/deep_lore_history_contract.py`
   - `backend/app/engines/deep_world/deep_world_design_contract.py`
   - `backend/app/engines/deep_world/generated_identity_contract.py`
   - `backend/app/engines/deep_world/geography_terrain_engine.py`
   - `backend/app/engines/deep_world/region_identity_system.py`
+  - `backend/app/tests/test_chunk6_climate_weather_engine.py`
   - `backend/app/tests/test_chunk6_deep_lore_history_contract.py`
   - `backend/app/tests/test_chunk6_deep_world_schemas.py`
   - `backend/app/tests/test_chunk6_design_contract.py`
@@ -5525,6 +5544,21 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk6_geography_terrain_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_deep_world_schemas.py`
+
+### `backend/app/tests/test_chunk6_climate_weather_engine.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 118
+- Imports:
+  - `backend.app.engines.deep_world.climate_weather_engine`
+  - `backend.app.schemas.deep_world`
+- Connected files:
+  - `backend/app/engines/deep_world/climate_weather_engine.py`
+  - `backend/app/schemas/deep_world.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_climate_weather_engine.py`
 
 ### `backend/app/tests/test_chunk6_deep_lore_history_contract.py`
 
@@ -7677,14 +7711,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 304762
+- Line count: 10763
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 166118
+- Line count: 7797
 
 ### `requirements.txt`
 
