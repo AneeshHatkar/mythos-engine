@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T07:08:35.528379+00:00",
+  "generated_at_utc": "2026-06-02T07:14:18.400417+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1321,6 +1321,7 @@
       "likely_dependents": [
         "backend/app/tests/test_chunk6_country_political_unit_system.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_chunk6_settlement_engine.py"
       ],
       "line_count": 507,
@@ -1597,12 +1598,35 @@
       ],
       "last_modified_utc": "2026-06-02T07:08:04.901714+00:00",
       "likely_dependents": [
-        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py"
+        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py"
       ],
       "line_count": 493,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/secret_places_hidden_world_layer.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T07:13:50.381784+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py"
+      ],
+      "line_count": 499,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py"
       ],
       "status": "active_project_file"
     },
@@ -1620,6 +1644,7 @@
       "last_modified_utc": "2026-06-02T06:51:54.336400+00:00",
       "likely_dependents": [
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_chunk6_settlement_engine.py",
         "backend/app/tests/test_chunk6_settlement_soul_system.py"
       ],
@@ -5338,6 +5363,7 @@
       "purpose": "Defines structured data contracts and validation models.",
       "related_tests": [
         "backend/app/tests/test_chunk6_deep_world_schemas.py",
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_multi_world_multi_cast_scaling_controller.py",
         "backend/app/tests/test_pass_e_world_hardening.py",
         "backend/app/tests/test_world_api.py",
@@ -8179,6 +8205,31 @@
       "chunk_owner": "chunk_6",
       "connected_files": [
         "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/roads_routes_travel_distance_engine.py",
+        "backend/app/engines/deep_world/secret_places_hidden_world_layer.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.roads_routes_travel_distance_engine",
+        "backend.app.engines.deep_world.secret_places_hidden_world_layer",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T07:13:56.676205+00:00",
+      "likely_dependents": [],
+      "line_count": 165,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/engines/deep_world/country_political_unit_system.py",
         "backend/app/engines/deep_world/population_diversity_engine.py",
         "backend/app/engines/deep_world/settlement_engine.py"
       ],
@@ -10858,9 +10909,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:59:40.714530+00:00",
+      "last_modified_utc": "2026-06-02T07:08:35.532748+00:00",
       "likely_dependents": [],
-      "line_count": 11257,
+      "line_count": 11304,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10871,9 +10922,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:59:40.715358+00:00",
+      "last_modified_utc": "2026-06-02T07:08:35.533543+00:00",
       "likely_dependents": [],
-      "line_count": 8159,
+      "line_count": 8194,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11300,5 +11351,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 477
+  "total_tracked_files": 479
 }

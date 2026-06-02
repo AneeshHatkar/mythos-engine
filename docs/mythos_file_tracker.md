@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T07:08:35.528379+00:00
-Total tracked files: 477
+Generated at UTC: 2026-06-02T07:14:18.400417+00:00
+Total tracked files: 479
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -958,6 +958,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_economy_law_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_deep_world_schemas.py`
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_multi_world_multi_cast_scaling_controller.py`
   - `backend/app/tests/test_pass_e_world_hardening.py`
   - `backend/app/tests/test_world_api.py`
@@ -976,7 +977,6 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_world_rules_engine.py`
   - `backend/app/tests/test_world_run_persistence.py`
   - `backend/app/tests/test_world_run_store_learning_trace.py`
-  - `backend/app/tests/test_world_schemas.py`
 
 ### `backend/app/services/world_learning_adapter.py`
 
@@ -5449,6 +5449,7 @@ This file records every current project file, what it does, and what it connects
 - Likely dependents:
   - `backend/app/tests/test_chunk6_country_political_unit_system.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_country_political_unit_system.py`
@@ -5654,8 +5655,25 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
+
+### `backend/app/engines/deep_world/secret_places_hidden_world_layer.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 499
+- Imports:
+  - `__future__`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
 
 ### `backend/app/engines/deep_world/settlement_engine.py`
 
@@ -5670,6 +5688,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
   - `backend/app/tests/test_chunk6_settlement_soul_system.py`
 - Related tests:
@@ -5966,6 +5985,25 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/engines/deep_world/settlement_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
+
+### `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 165
+- Imports:
+  - `backend.app.engines.deep_world.country_political_unit_system`
+  - `backend.app.engines.deep_world.roads_routes_travel_distance_engine`
+  - `backend.app.engines.deep_world.secret_places_hidden_world_layer`
+  - `backend.app.engines.deep_world.settlement_engine`
+- Connected files:
+  - `backend/app/engines/deep_world/country_political_unit_system.py`
+  - `backend/app/engines/deep_world/roads_routes_travel_distance_engine.py`
+  - `backend/app/engines/deep_world/secret_places_hidden_world_layer.py`
+  - `backend/app/engines/deep_world/settlement_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
 
 ### `backend/app/tests/test_chunk6_settlement_engine.py`
 
@@ -8074,14 +8112,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 11257
+- Line count: 11304
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 8159
+- Line count: 8194
 
 ### `requirements.txt`
 
