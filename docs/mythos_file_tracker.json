@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T06:26:53.105331+00:00",
+  "generated_at_utc": "2026-06-02T06:30:07.660562+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1311,6 +1311,29 @@
       "connected_files": [
         "backend/app/schemas/deep_world.py"
       ],
+      "file_path": "backend/app/engines/deep_world/creature_behavior_simulation_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "backend.app.schemas.deep_world",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T06:29:42.135720+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py"
+      ],
+      "line_count": 390,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
       "file_path": "backend/app/engines/deep_world/deep_lore_history_contract.py",
       "file_type": "engine",
       "imports": [
@@ -1387,6 +1410,7 @@
       ],
       "last_modified_utc": "2026-06-02T06:26:27.358284+00:00",
       "likely_dependents": [
+        "backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py",
         "backend/app/tests/test_chunk6_fauna_generator.py"
       ],
       "line_count": 446,
@@ -4499,6 +4523,7 @@
       "last_modified_utc": "2026-06-02T03:16:59.262708+00:00",
       "likely_dependents": [
         "backend/app/engines/deep_world/climate_weather_engine.py",
+        "backend/app/engines/deep_world/creature_behavior_simulation_engine.py",
         "backend/app/engines/deep_world/deep_lore_history_contract.py",
         "backend/app/engines/deep_world/deep_world_design_contract.py",
         "backend/app/engines/deep_world/ecology_engine.py",
@@ -4951,6 +4976,7 @@
         "backend/app/tests/test_chunk4_simulation_schemas.py",
         "backend/app/tests/test_chunk4_simulation_smoke_test.py",
         "backend/app/tests/test_chunk4_simulation_state_delta_resolver.py",
+        "backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py",
         "backend/app/tests/test_cross_chunk_simulation_handoffs.py"
       ],
       "status": "active_project_file"
@@ -7715,6 +7741,27 @@
       "purpose": "Tests related MythOS functionality.",
       "related_tests": [
         "backend/app/tests/test_chunk6_climate_weather_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/engines/deep_world/creature_behavior_simulation_engine.py",
+        "backend/app/engines/deep_world/fauna_generator.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.creature_behavior_simulation_engine",
+        "backend.app.engines.deep_world.fauna_generator"
+      ],
+      "last_modified_utc": "2026-06-02T06:29:47.294258+00:00",
+      "likely_dependents": [],
+      "line_count": 141,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py"
       ],
       "status": "active_project_file"
     },
@@ -10547,9 +10594,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:06:19.464235+00:00",
+      "last_modified_utc": "2026-06-02T06:26:53.109695+00:00",
       "likely_dependents": [],
-      "line_count": 10947,
+      "line_count": 10993,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10560,9 +10607,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:06:19.465027+00:00",
+      "last_modified_utc": "2026-06-02T06:26:53.110515+00:00",
       "likely_dependents": [],
-      "line_count": 7933,
+      "line_count": 7967,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10989,5 +11036,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 463
+  "total_tracked_files": 465
 }

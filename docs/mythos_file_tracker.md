@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T06:26:53.105331+00:00
-Total tracked files: 463
+Generated at UTC: 2026-06-02T06:30:07.660562+00:00
+Total tracked files: 465
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -3601,6 +3601,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk4_simulation_schemas.py`
   - `backend/app/tests/test_chunk4_simulation_smoke_test.py`
   - `backend/app/tests/test_chunk4_simulation_state_delta_resolver.py`
+  - `backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py`
   - `backend/app/tests/test_cross_chunk_simulation_handoffs.py`
 
 ### `backend/app/tests/test_chunk4_agency_model_engine.py`
@@ -5434,6 +5435,23 @@ This file records every current project file, what it does, and what it connects
 - Related tests:
   - `backend/app/tests/test_chunk6_climate_weather_engine.py`
 
+### `backend/app/engines/deep_world/creature_behavior_simulation_engine.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 390
+- Imports:
+  - `__future__`
+  - `backend.app.schemas.deep_world`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py`
+
 ### `backend/app/engines/deep_world/deep_lore_history_contract.py`
 
 - Type: `engine`
@@ -5496,6 +5514,7 @@ This file records every current project file, what it does, and what it connects
 - Connected files:
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
+  - `backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py`
   - `backend/app/tests/test_chunk6_fauna_generator.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_fauna_generator.py`
@@ -5600,6 +5619,7 @@ This file records every current project file, what it does, and what it connects
   - `typing`
 - Likely dependents:
   - `backend/app/engines/deep_world/climate_weather_engine.py`
+  - `backend/app/engines/deep_world/creature_behavior_simulation_engine.py`
   - `backend/app/engines/deep_world/deep_lore_history_contract.py`
   - `backend/app/engines/deep_world/deep_world_design_contract.py`
   - `backend/app/engines/deep_world/ecology_engine.py`
@@ -5635,6 +5655,21 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_climate_weather_engine.py`
+
+### `backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 141
+- Imports:
+  - `backend.app.engines.deep_world.creature_behavior_simulation_engine`
+  - `backend.app.engines.deep_world.fauna_generator`
+- Connected files:
+  - `backend/app/engines/deep_world/creature_behavior_simulation_engine.py`
+  - `backend/app/engines/deep_world/fauna_generator.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_creature_behavior_simulation_engine.py`
 
 ### `backend/app/tests/test_chunk6_deep_lore_history_contract.py`
 
@@ -7847,14 +7882,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 10947
+- Line count: 10993
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 7933
+- Line count: 7967
 
 ### `requirements.txt`
 
