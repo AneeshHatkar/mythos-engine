@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T06:59:40.710143+00:00",
+  "generated_at_utc": "2026-06-02T07:08:35.528379+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1320,6 +1320,7 @@
       "last_modified_utc": "2026-06-02T06:46:40.844092+00:00",
       "likely_dependents": [
         "backend/app/tests/test_chunk6_country_political_unit_system.py",
+        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_settlement_engine.py"
       ],
       "line_count": 507,
@@ -1588,6 +1589,28 @@
       "connected_files": [
         "backend/app/schemas/deep_world.py"
       ],
+      "file_path": "backend/app/engines/deep_world/roads_routes_travel_distance_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T07:08:04.901714+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py"
+      ],
+      "line_count": 493,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
       "file_path": "backend/app/engines/deep_world/settlement_engine.py",
       "file_type": "engine",
       "imports": [
@@ -1596,6 +1619,7 @@
       ],
       "last_modified_utc": "2026-06-02T06:51:54.336400+00:00",
       "likely_dependents": [
+        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_settlement_engine.py",
         "backend/app/tests/test_chunk6_settlement_soul_system.py"
       ],
@@ -8132,6 +8156,29 @@
       "chunk_owner": "chunk_6",
       "connected_files": [
         "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/roads_routes_travel_distance_engine.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.roads_routes_travel_distance_engine",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T07:08:14.568700+00:00",
+      "likely_dependents": [],
+      "line_count": 147,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/engines/deep_world/country_political_unit_system.py",
         "backend/app/engines/deep_world/population_diversity_engine.py",
         "backend/app/engines/deep_world/settlement_engine.py"
       ],
@@ -10811,9 +10858,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:52:21.563289+00:00",
+      "last_modified_utc": "2026-06-02T06:59:40.714530+00:00",
       "likely_dependents": [],
-      "line_count": 11213,
+      "line_count": 11257,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10824,9 +10871,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:52:21.564140+00:00",
+      "last_modified_utc": "2026-06-02T06:59:40.715358+00:00",
       "likely_dependents": [],
-      "line_count": 8127,
+      "line_count": 8159,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11253,5 +11300,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 475
+  "total_tracked_files": 477
 }
