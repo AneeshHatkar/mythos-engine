@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T07:14:18.400417+00:00",
+  "generated_at_utc": "2026-06-02T07:22:20.245718+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1288,6 +1288,28 @@
       "connected_files": [
         "backend/app/schemas/deep_world.py"
       ],
+      "file_path": "backend/app/engines/deep_world/architecture_built_environment_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T07:21:51.113025+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_architecture_built_environment_engine.py"
+      ],
+      "line_count": 517,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_architecture_built_environment_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
       "file_path": "backend/app/engines/deep_world/climate_weather_engine.py",
       "file_type": "engine",
       "imports": [
@@ -1319,6 +1341,7 @@
       ],
       "last_modified_utc": "2026-06-02T06:46:40.844092+00:00",
       "likely_dependents": [
+        "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
         "backend/app/tests/test_chunk6_country_political_unit_system.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
@@ -1643,6 +1666,7 @@
       ],
       "last_modified_utc": "2026-06-02T06:51:54.336400+00:00",
       "likely_dependents": [
+        "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_chunk6_settlement_engine.py",
@@ -7890,6 +7914,29 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/architecture_built_environment_engine.py",
+        "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.architecture_built_environment_engine",
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T07:21:57.330277+00:00",
+      "likely_dependents": [],
+      "line_count": 166,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_architecture_built_environment_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/climate_weather_engine.py",
         "backend/app/schemas/deep_world.py"
       ],
@@ -10909,9 +10956,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:08:35.532748+00:00",
+      "last_modified_utc": "2026-06-02T07:14:18.405431+00:00",
       "likely_dependents": [],
-      "line_count": 11304,
+      "line_count": 11355,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10922,9 +10969,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:08:35.533543+00:00",
+      "last_modified_utc": "2026-06-02T07:14:18.406382+00:00",
       "likely_dependents": [],
-      "line_count": 8194,
+      "line_count": 8232,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11351,5 +11398,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 479
+  "total_tracked_files": 481
 }
