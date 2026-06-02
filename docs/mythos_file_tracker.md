@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T05:49:30.102170+00:00
-Total tracked files: 455
+Generated at UTC: 2026-06-02T05:52:08.017458+00:00
+Total tracked files: 457
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -5466,6 +5466,23 @@ This file records every current project file, what it does, and what it connects
 - Likely dependents:
   - `backend/app/tests/test_chunk6_design_contract.py`
 
+### `backend/app/engines/deep_world/ecology_engine.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 389
+- Imports:
+  - `__future__`
+  - `backend.app.schemas.deep_world`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_ecology_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_ecology_engine.py`
+
 ### `backend/app/engines/deep_world/generated_identity_contract.py`
 
 - Type: `engine`
@@ -5533,6 +5550,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/engines/deep_world/climate_weather_engine.py`
   - `backend/app/engines/deep_world/deep_lore_history_contract.py`
   - `backend/app/engines/deep_world/deep_world_design_contract.py`
+  - `backend/app/engines/deep_world/ecology_engine.py`
   - `backend/app/engines/deep_world/generated_identity_contract.py`
   - `backend/app/engines/deep_world/geography_terrain_engine.py`
   - `backend/app/engines/deep_world/region_identity_system.py`
@@ -5540,6 +5558,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk6_deep_lore_history_contract.py`
   - `backend/app/tests/test_chunk6_deep_world_schemas.py`
   - `backend/app/tests/test_chunk6_design_contract.py`
+  - `backend/app/tests/test_chunk6_ecology_engine.py`
   - `backend/app/tests/test_chunk6_generated_identity_contract.py`
   - `backend/app/tests/test_chunk6_geography_terrain_engine.py`
 - Related tests:
@@ -5603,6 +5622,21 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_design_contract.py`
+
+### `backend/app/tests/test_chunk6_ecology_engine.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 121
+- Imports:
+  - `backend.app.engines.deep_world.ecology_engine`
+  - `backend.app.schemas.deep_world`
+- Connected files:
+  - `backend/app/engines/deep_world/ecology_engine.py`
+  - `backend/app/schemas/deep_world.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_ecology_engine.py`
 
 ### `backend/app/tests/test_chunk6_generated_identity_contract.py`
 
@@ -7711,14 +7745,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 10763
+- Line count: 10809
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 7797
+- Line count: 7831
 
 ### `requirements.txt`
 
