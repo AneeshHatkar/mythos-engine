@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T05:57:42.922490+00:00
-Total tracked files: 459
+Generated at UTC: 2026-06-02T06:06:19.460151+00:00
+Total tracked files: 461
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -5497,8 +5497,26 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_flora_generator.py`
+  - `backend/app/tests/test_chunk6_flora_lifecycle_use_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_flora_generator.py`
+
+### `backend/app/engines/deep_world/flora_lifecycle_use_engine.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 409
+- Imports:
+  - `__future__`
+  - `backend.app.schemas.deep_world`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_flora_lifecycle_use_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_flora_lifecycle_use_engine.py`
 
 ### `backend/app/engines/deep_world/generated_identity_contract.py`
 
@@ -5569,6 +5587,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/engines/deep_world/deep_world_design_contract.py`
   - `backend/app/engines/deep_world/ecology_engine.py`
   - `backend/app/engines/deep_world/flora_generator.py`
+  - `backend/app/engines/deep_world/flora_lifecycle_use_engine.py`
   - `backend/app/engines/deep_world/generated_identity_contract.py`
   - `backend/app/engines/deep_world/geography_terrain_engine.py`
   - `backend/app/engines/deep_world/region_identity_system.py`
@@ -5671,6 +5690,21 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_flora_generator.py`
+
+### `backend/app/tests/test_chunk6_flora_lifecycle_use_engine.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 151
+- Imports:
+  - `backend.app.engines.deep_world.flora_generator`
+  - `backend.app.engines.deep_world.flora_lifecycle_use_engine`
+- Connected files:
+  - `backend/app/engines/deep_world/flora_generator.py`
+  - `backend/app/engines/deep_world/flora_lifecycle_use_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_flora_lifecycle_use_engine.py`
 
 ### `backend/app/tests/test_chunk6_generated_identity_contract.py`
 
@@ -7779,14 +7813,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 10855
+- Line count: 10901
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 7865
+- Line count: 7899
 
 ### `requirements.txt`
 
