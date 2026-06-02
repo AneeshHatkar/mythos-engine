@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T07:22:20.245718+00:00",
+  "generated_at_utc": "2026-06-02T07:28:00.987958+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1310,6 +1310,28 @@
       "connected_files": [
         "backend/app/schemas/deep_world.py"
       ],
+      "file_path": "backend/app/engines/deep_world/civilization_life_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T07:27:32.694809+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_civilization_life_engine.py"
+      ],
+      "line_count": 553,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_civilization_life_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
       "file_path": "backend/app/engines/deep_world/climate_weather_engine.py",
       "file_type": "engine",
       "imports": [
@@ -1342,6 +1364,7 @@
       "last_modified_utc": "2026-06-02T06:46:40.844092+00:00",
       "likely_dependents": [
         "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
+        "backend/app/tests/test_chunk6_civilization_life_engine.py",
         "backend/app/tests/test_chunk6_country_political_unit_system.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
@@ -1575,6 +1598,7 @@
       ],
       "last_modified_utc": "2026-06-02T06:43:39.442075+00:00",
       "likely_dependents": [
+        "backend/app/tests/test_chunk6_civilization_life_engine.py",
         "backend/app/tests/test_chunk6_population_diversity_engine.py",
         "backend/app/tests/test_chunk6_settlement_engine.py"
       ],
@@ -1667,6 +1691,7 @@
       "last_modified_utc": "2026-06-02T06:51:54.336400+00:00",
       "likely_dependents": [
         "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
+        "backend/app/tests/test_chunk6_civilization_life_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_chunk6_settlement_engine.py",
@@ -7937,6 +7962,31 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/civilization_life_engine.py",
+        "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/population_diversity_engine.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_civilization_life_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.civilization_life_engine",
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.population_diversity_engine",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T07:27:39.045687+00:00",
+      "likely_dependents": [],
+      "line_count": 168,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_civilization_life_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/climate_weather_engine.py",
         "backend/app/schemas/deep_world.py"
       ],
@@ -10956,9 +11006,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:14:18.405431+00:00",
+      "last_modified_utc": "2026-06-02T07:22:20.250234+00:00",
       "likely_dependents": [],
-      "line_count": 11355,
+      "line_count": 11402,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10969,9 +11019,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:14:18.406382+00:00",
+      "last_modified_utc": "2026-06-02T07:22:20.251131+00:00",
       "likely_dependents": [],
-      "line_count": 8232,
+      "line_count": 8267,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11398,5 +11448,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 481
+  "total_tracked_files": 483
 }
