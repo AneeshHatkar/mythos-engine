@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T06:47:19.790991+00:00",
+  "generated_at_utc": "2026-06-02T06:52:21.558690+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1319,7 +1319,8 @@
       ],
       "last_modified_utc": "2026-06-02T06:46:40.844092+00:00",
       "likely_dependents": [
-        "backend/app/tests/test_chunk6_country_political_unit_system.py"
+        "backend/app/tests/test_chunk6_country_political_unit_system.py",
+        "backend/app/tests/test_chunk6_settlement_engine.py"
       ],
       "line_count": 507,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
@@ -1549,7 +1550,8 @@
       ],
       "last_modified_utc": "2026-06-02T06:43:39.442075+00:00",
       "likely_dependents": [
-        "backend/app/tests/test_chunk6_population_diversity_engine.py"
+        "backend/app/tests/test_chunk6_population_diversity_engine.py",
+        "backend/app/tests/test_chunk6_settlement_engine.py"
       ],
       "line_count": 544,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
@@ -1578,6 +1580,28 @@
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_region_identity_system.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/settlement_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T06:51:54.336400+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_settlement_engine.py"
+      ],
+      "line_count": 540,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_settlement_engine.py"
       ],
       "status": "active_project_file"
     },
@@ -8084,6 +8108,29 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/population_diversity_engine.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_settlement_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.population_diversity_engine",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T06:52:01.291855+00:00",
+      "likely_dependents": [],
+      "line_count": 154,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_settlement_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/species_people_type_expansion_engine.py"
       ],
       "file_path": "backend/app/tests/test_chunk6_species_people_type_expansion_engine.py",
@@ -10720,9 +10767,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:44:17.244544+00:00",
+      "last_modified_utc": "2026-06-02T06:47:19.795418+00:00",
       "likely_dependents": [],
-      "line_count": 11125,
+      "line_count": 11166,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10733,9 +10780,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:44:17.245494+00:00",
+      "last_modified_utc": "2026-06-02T06:47:19.796226+00:00",
       "likely_dependents": [],
-      "line_count": 8063,
+      "line_count": 8092,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11162,5 +11209,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 471
+  "total_tracked_files": 473
 }
