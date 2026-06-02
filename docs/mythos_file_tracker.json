@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T06:30:07.660562+00:00",
+  "generated_at_utc": "2026-06-02T06:35:31.875472+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1534,6 +1534,28 @@
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_region_identity_system.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/species_people_type_expansion_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T06:35:05.153046+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_species_people_type_expansion_engine.py"
+      ],
+      "line_count": 494,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_species_people_type_expansion_engine.py"
       ],
       "status": "active_project_file"
     },
@@ -7975,6 +7997,25 @@
       "status": "active_project_file"
     },
     {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/engines/deep_world/species_people_type_expansion_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_species_people_type_expansion_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.species_people_type_expansion_engine"
+      ],
+      "last_modified_utc": "2026-06-02T06:35:12.043476+00:00",
+      "likely_dependents": [],
+      "line_count": 148,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_species_people_type_expansion_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
       "chunk_owner": "unknown_or_cross_chunk",
       "connected_files": [],
       "file_path": "backend/app/tests/test_chunk_1_5_integration_verifier.py",
@@ -10594,9 +10635,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:26:53.109695+00:00",
+      "last_modified_utc": "2026-06-02T06:30:07.664782+00:00",
       "likely_dependents": [],
-      "line_count": 10993,
+      "line_count": 11040,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10607,9 +10648,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:26:53.110515+00:00",
+      "last_modified_utc": "2026-06-02T06:30:07.665536+00:00",
       "likely_dependents": [],
-      "line_count": 7967,
+      "line_count": 8002,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11036,5 +11077,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 465
+  "total_tracked_files": 467
 }
