@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T05:52:08.017458+00:00",
+  "generated_at_utc": "2026-06-02T05:57:42.922490+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1370,6 +1370,29 @@
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_ecology_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/flora_generator.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "backend.app.schemas.deep_world",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T05:57:17.345556+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_flora_generator.py"
+      ],
+      "line_count": 438,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_flora_generator.py"
       ],
       "status": "active_project_file"
     },
@@ -4432,6 +4455,7 @@
         "backend/app/engines/deep_world/deep_lore_history_contract.py",
         "backend/app/engines/deep_world/deep_world_design_contract.py",
         "backend/app/engines/deep_world/ecology_engine.py",
+        "backend/app/engines/deep_world/flora_generator.py",
         "backend/app/engines/deep_world/generated_identity_contract.py",
         "backend/app/engines/deep_world/geography_terrain_engine.py",
         "backend/app/engines/deep_world/region_identity_system.py",
@@ -4440,6 +4464,7 @@
         "backend/app/tests/test_chunk6_deep_world_schemas.py",
         "backend/app/tests/test_chunk6_design_contract.py",
         "backend/app/tests/test_chunk6_ecology_engine.py",
+        "backend/app/tests/test_chunk6_flora_generator.py",
         "backend/app/tests/test_chunk6_generated_identity_contract.py",
         "backend/app/tests/test_chunk6_geography_terrain_engine.py"
       ],
@@ -7729,6 +7754,27 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/flora_generator.py",
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_flora_generator.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.flora_generator",
+        "backend.app.schemas.deep_world"
+      ],
+      "last_modified_utc": "2026-06-02T05:57:23.568489+00:00",
+      "likely_dependents": [],
+      "line_count": 116,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_flora_generator.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/generated_identity_contract.py",
         "backend/app/schemas/deep_world.py"
       ],
@@ -10409,9 +10455,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T05:49:30.106185+00:00",
+      "last_modified_utc": "2026-06-02T05:52:08.021600+00:00",
       "likely_dependents": [],
-      "line_count": 10809,
+      "line_count": 10855,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10422,9 +10468,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T05:49:30.106915+00:00",
+      "last_modified_utc": "2026-06-02T05:52:08.022374+00:00",
       "likely_dependents": [],
-      "line_count": 7831,
+      "line_count": 7865,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10851,5 +10897,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 457
+  "total_tracked_files": 459
 }
