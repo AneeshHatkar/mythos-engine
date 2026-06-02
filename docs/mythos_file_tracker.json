@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T07:28:00.987958+00:00",
+  "generated_at_utc": "2026-06-02T07:34:38.450347+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1366,6 +1366,7 @@
         "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
         "backend/app/tests/test_chunk6_civilization_life_engine.py",
         "backend/app/tests/test_chunk6_country_political_unit_system.py",
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_chunk6_settlement_engine.py"
@@ -1458,12 +1459,36 @@
       ],
       "last_modified_utc": "2026-06-02T05:51:43.906142+00:00",
       "likely_dependents": [
-        "backend/app/tests/test_chunk6_ecology_engine.py"
+        "backend/app/tests/test_chunk6_ecology_engine.py",
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
       ],
       "line_count": 389,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
-        "backend/app/tests/test_chunk6_ecology_engine.py"
+        "backend/app/tests/test_chunk6_ecology_engine.py",
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/economy_resource_ecology_engine.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T07:34:04.678144+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
+      ],
+      "line_count": 551,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
       ],
       "status": "active_project_file"
     },
@@ -1645,6 +1670,7 @@
       ],
       "last_modified_utc": "2026-06-02T07:08:04.901714+00:00",
       "likely_dependents": [
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py"
       ],
@@ -1692,6 +1718,7 @@
       "likely_dependents": [
         "backend/app/tests/test_chunk6_architecture_built_environment_engine.py",
         "backend/app/tests/test_chunk6_civilization_life_engine.py",
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
         "backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py",
         "backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py",
         "backend/app/tests/test_chunk6_settlement_engine.py",
@@ -8131,6 +8158,33 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/country_political_unit_system.py",
+        "backend/app/engines/deep_world/ecology_engine.py",
+        "backend/app/engines/deep_world/economy_resource_ecology_engine.py",
+        "backend/app/engines/deep_world/roads_routes_travel_distance_engine.py",
+        "backend/app/engines/deep_world/settlement_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.country_political_unit_system",
+        "backend.app.engines.deep_world.ecology_engine",
+        "backend.app.engines.deep_world.economy_resource_ecology_engine",
+        "backend.app.engines.deep_world.roads_routes_travel_distance_engine",
+        "backend.app.engines.deep_world.settlement_engine"
+      ],
+      "last_modified_utc": "2026-06-02T07:34:12.233695+00:00",
+      "likely_dependents": [],
+      "line_count": 192,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/fauna_generator.py",
         "backend/app/schemas/deep_world.py"
       ],
@@ -11006,9 +11060,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:22:20.250234+00:00",
+      "last_modified_utc": "2026-06-02T07:28:00.992421+00:00",
       "likely_dependents": [],
-      "line_count": 11402,
+      "line_count": 11452,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11019,9 +11073,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:22:20.251131+00:00",
+      "last_modified_utc": "2026-06-02T07:28:00.993200+00:00",
       "likely_dependents": [],
-      "line_count": 8267,
+      "line_count": 8305,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11448,5 +11502,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 483
+  "total_tracked_files": 485
 }

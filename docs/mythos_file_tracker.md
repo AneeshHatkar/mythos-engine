@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T07:28:00.987958+00:00
-Total tracked files: 483
+Generated at UTC: 2026-06-02T07:34:38.450347+00:00
+Total tracked files: 485
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -5482,6 +5482,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk6_architecture_built_environment_engine.py`
   - `backend/app/tests/test_chunk6_civilization_life_engine.py`
   - `backend/app/tests/test_chunk6_country_political_unit_system.py`
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
   - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
@@ -5551,8 +5552,26 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+
+### `backend/app/engines/deep_world/economy_resource_ecology_engine.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 551
+- Imports:
+  - `__future__`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
 
 ### `backend/app/engines/deep_world/fauna_generator.py`
 
@@ -5689,6 +5708,7 @@ This file records every current project file, what it does, and what it connects
 - Connected files:
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
   - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
 - Related tests:
@@ -5724,6 +5744,7 @@ This file records every current project file, what it does, and what it connects
 - Likely dependents:
   - `backend/app/tests/test_chunk6_architecture_built_environment_engine.py`
   - `backend/app/tests/test_chunk6_civilization_life_engine.py`
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
   - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
@@ -5936,6 +5957,27 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_ecology_engine.py`
+
+### `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 192
+- Imports:
+  - `backend.app.engines.deep_world.country_political_unit_system`
+  - `backend.app.engines.deep_world.ecology_engine`
+  - `backend.app.engines.deep_world.economy_resource_ecology_engine`
+  - `backend.app.engines.deep_world.roads_routes_travel_distance_engine`
+  - `backend.app.engines.deep_world.settlement_engine`
+- Connected files:
+  - `backend/app/engines/deep_world/country_political_unit_system.py`
+  - `backend/app/engines/deep_world/ecology_engine.py`
+  - `backend/app/engines/deep_world/economy_resource_ecology_engine.py`
+  - `backend/app/engines/deep_world/roads_routes_travel_distance_engine.py`
+  - `backend/app/engines/deep_world/settlement_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
 
 ### `backend/app/tests/test_chunk6_fauna_generator.py`
 
@@ -8185,14 +8227,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 11402
+- Line count: 11452
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 8267
+- Line count: 8305
 
 ### `requirements.txt`
 
