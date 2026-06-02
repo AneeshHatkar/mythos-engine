@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T06:52:21.558690+00:00",
+  "generated_at_utc": "2026-06-02T06:59:40.710143+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1596,12 +1596,35 @@
       ],
       "last_modified_utc": "2026-06-02T06:51:54.336400+00:00",
       "likely_dependents": [
-        "backend/app/tests/test_chunk6_settlement_engine.py"
+        "backend/app/tests/test_chunk6_settlement_engine.py",
+        "backend/app/tests/test_chunk6_settlement_soul_system.py"
       ],
       "line_count": 540,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_settlement_engine.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
+        "backend/app/schemas/deep_world.py"
+      ],
+      "file_path": "backend/app/engines/deep_world/settlement_soul_system.py",
+      "file_type": "engine",
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "last_modified_utc": "2026-06-02T06:59:12.378088+00:00",
+      "likely_dependents": [
+        "backend/app/tests/test_chunk6_settlement_soul_system.py"
+      ],
+      "line_count": 482,
+      "purpose": "Implements MythOS engine logic for a story/world subsystem.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_settlement_soul_system.py"
       ],
       "status": "active_project_file"
     },
@@ -8131,6 +8154,27 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/settlement_engine.py",
+        "backend/app/engines/deep_world/settlement_soul_system.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_settlement_soul_system.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.settlement_engine",
+        "backend.app.engines.deep_world.settlement_soul_system"
+      ],
+      "last_modified_utc": "2026-06-02T06:59:20.731273+00:00",
+      "likely_dependents": [],
+      "line_count": 130,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_settlement_soul_system.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/species_people_type_expansion_engine.py"
       ],
       "file_path": "backend/app/tests/test_chunk6_species_people_type_expansion_engine.py",
@@ -10767,9 +10811,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:47:19.795418+00:00",
+      "last_modified_utc": "2026-06-02T06:52:21.563289+00:00",
       "likely_dependents": [],
-      "line_count": 11166,
+      "line_count": 11213,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -10780,9 +10824,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T06:47:19.796226+00:00",
+      "last_modified_utc": "2026-06-02T06:52:21.564140+00:00",
       "likely_dependents": [],
-      "line_count": 8092,
+      "line_count": 8127,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11209,5 +11253,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 473
+  "total_tracked_files": 475
 }
