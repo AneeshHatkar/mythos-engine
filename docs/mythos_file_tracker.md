@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T07:53:11.313659+00:00
-Total tracked files: 489
+Generated at UTC: 2026-06-02T08:26:49.143645+00:00
+Total tracked files: 490
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -5584,7 +5584,7 @@ This file records every current project file, what it does, and what it connects
 - Type: `engine`
 - Status: `active_project_file`
 - Purpose: Implements MythOS engine logic for a story/world subsystem.
-- Line count: 551
+- Line count: 1101
 - Imports:
   - `__future__`
   - `typing`
@@ -5592,6 +5592,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
+  - `backend/app/tests/test_chunk6_economy_commerce_upgrade.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
   - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
 - Related tests:
@@ -6027,6 +6028,19 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_ecology_engine.py`
+
+### `backend/app/tests/test_chunk6_economy_commerce_upgrade.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 147
+- Imports:
+  - `backend.app.engines.deep_world.economy_resource_ecology_engine`
+- Connected files:
+  - `backend/app/engines/deep_world/economy_resource_ecology_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_economy_commerce_upgrade.py`
 
 ### `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
 
@@ -8324,14 +8338,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 11565
+- Line count: 11627
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 8394
+- Line count: 8444
 
 ### `requirements.txt`
 

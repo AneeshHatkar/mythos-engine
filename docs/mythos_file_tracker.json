@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-02T07:53:11.313659+00:00",
+  "generated_at_utc": "2026-06-02T08:26:49.143645+00:00",
   "project": "MythOS Engine",
   "records": [
     {
@@ -1509,13 +1509,14 @@
         "__future__",
         "typing"
       ],
-      "last_modified_utc": "2026-06-02T07:34:04.678144+00:00",
+      "last_modified_utc": "2026-06-02T08:26:27.194553+00:00",
       "likely_dependents": [
         "backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py",
+        "backend/app/tests/test_chunk6_economy_commerce_upgrade.py",
         "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py",
         "backend/app/tests/test_chunk6_migration_demographic_movement_engine.py"
       ],
-      "line_count": 551,
+      "line_count": 1101,
       "purpose": "Implements MythOS engine logic for a story/world subsystem.",
       "related_tests": [
         "backend/app/tests/test_chunk6_economy_resource_ecology_engine.py"
@@ -8246,6 +8247,25 @@
     {
       "chunk_owner": "chunk_6",
       "connected_files": [
+        "backend/app/engines/deep_world/economy_resource_ecology_engine.py"
+      ],
+      "file_path": "backend/app/tests/test_chunk6_economy_commerce_upgrade.py",
+      "file_type": "test",
+      "imports": [
+        "backend.app.engines.deep_world.economy_resource_ecology_engine"
+      ],
+      "last_modified_utc": "2026-06-02T08:24:58.357665+00:00",
+      "likely_dependents": [],
+      "line_count": 147,
+      "purpose": "Tests related MythOS functionality.",
+      "related_tests": [
+        "backend/app/tests/test_chunk6_economy_commerce_upgrade.py"
+      ],
+      "status": "active_project_file"
+    },
+    {
+      "chunk_owner": "chunk_6",
+      "connected_files": [
         "backend/app/engines/deep_world/country_political_unit_system.py",
         "backend/app/engines/deep_world/ecology_engine.py",
         "backend/app/engines/deep_world/economy_resource_ecology_engine.py",
@@ -11181,9 +11201,9 @@
       "file_path": "docs/mythos_file_tracker.json",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:48:48.120537+00:00",
+      "last_modified_utc": "2026-06-02T07:53:11.319747+00:00",
       "likely_dependents": [],
-      "line_count": 11565,
+      "line_count": 11627,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11194,9 +11214,9 @@
       "file_path": "docs/mythos_file_tracker.md",
       "file_type": "documentation",
       "imports": [],
-      "last_modified_utc": "2026-06-02T07:48:48.121555+00:00",
+      "last_modified_utc": "2026-06-02T07:53:11.320857+00:00",
       "likely_dependents": [],
-      "line_count": 8394,
+      "line_count": 8444,
       "purpose": "Documentation, roadmap, memory, or tracker file.",
       "related_tests": [],
       "status": "active_project_file"
@@ -11623,5 +11643,5 @@
       "status": "active_project_file"
     }
   ],
-  "total_tracked_files": 489
+  "total_tracked_files": 490
 }
