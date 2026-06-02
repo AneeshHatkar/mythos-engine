@@ -1,7 +1,7 @@
 # MythOS Engine File Tracker
 
-Generated at UTC: 2026-06-02T07:48:48.116064+00:00
-Total tracked files: 487
+Generated at UTC: 2026-06-02T07:53:11.313659+00:00
+Total tracked files: 489
 
 This file records every current project file, what it does, and what it connects to.
 
@@ -5485,6 +5485,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk6_country_political_unit_system.py`
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
   - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
@@ -5553,6 +5554,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
 
@@ -5572,6 +5574,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
   - `backend/app/tests/test_chunk6_ecology_engine.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_ecology_engine.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
@@ -5590,6 +5593,7 @@ This file records every current project file, what it does, and what it connects
 - Likely dependents:
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
 
@@ -5681,6 +5685,22 @@ This file records every current project file, what it does, and what it connects
 - Related tests:
   - `backend/app/tests/test_chunk6_geography_terrain_engine.py`
 
+### `backend/app/engines/deep_world/migration_demographic_movement_engine.py`
+
+- Type: `engine`
+- Status: `active_project_file`
+- Purpose: Implements MythOS engine logic for a story/world subsystem.
+- Line count: 568
+- Imports:
+  - `__future__`
+  - `typing`
+- Connected files:
+  - `backend/app/schemas/deep_world.py`
+- Likely dependents:
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
+
 ### `backend/app/engines/deep_world/population_diversity_engine.py`
 
 - Type: `engine`
@@ -5694,6 +5714,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Likely dependents:
   - `backend/app/tests/test_chunk6_civilization_life_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
   - `backend/app/tests/test_chunk6_population_diversity_engine.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
 - Related tests:
@@ -5730,6 +5751,7 @@ This file records every current project file, what it does, and what it connects
 - Likely dependents:
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
   - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
 - Related tests:
@@ -5767,6 +5789,7 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/tests/test_chunk6_civilization_life_engine.py`
   - `backend/app/tests/test_chunk6_disaster_environmental_pressure_engine.py`
   - `backend/app/tests/test_chunk6_economy_resource_ecology_engine.py`
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
   - `backend/app/tests/test_chunk6_roads_routes_travel_distance_engine.py`
   - `backend/app/tests/test_chunk6_secret_places_hidden_world_layer.py`
   - `backend/app/tests/test_chunk6_settlement_engine.py`
@@ -6100,6 +6123,33 @@ This file records every current project file, what it does, and what it connects
   - `backend/app/schemas/deep_world.py`
 - Related tests:
   - `backend/app/tests/test_chunk6_geography_terrain_engine.py`
+
+### `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
+
+- Type: `test`
+- Status: `active_project_file`
+- Purpose: Tests related MythOS functionality.
+- Line count: 210
+- Imports:
+  - `backend.app.engines.deep_world.country_political_unit_system`
+  - `backend.app.engines.deep_world.disaster_environmental_pressure_engine`
+  - `backend.app.engines.deep_world.ecology_engine`
+  - `backend.app.engines.deep_world.economy_resource_ecology_engine`
+  - `backend.app.engines.deep_world.migration_demographic_movement_engine`
+  - `backend.app.engines.deep_world.population_diversity_engine`
+  - `backend.app.engines.deep_world.roads_routes_travel_distance_engine`
+  - `backend.app.engines.deep_world.settlement_engine`
+- Connected files:
+  - `backend/app/engines/deep_world/country_political_unit_system.py`
+  - `backend/app/engines/deep_world/disaster_environmental_pressure_engine.py`
+  - `backend/app/engines/deep_world/ecology_engine.py`
+  - `backend/app/engines/deep_world/economy_resource_ecology_engine.py`
+  - `backend/app/engines/deep_world/migration_demographic_movement_engine.py`
+  - `backend/app/engines/deep_world/population_diversity_engine.py`
+  - `backend/app/engines/deep_world/roads_routes_travel_distance_engine.py`
+  - `backend/app/engines/deep_world/settlement_engine.py`
+- Related tests:
+  - `backend/app/tests/test_chunk6_migration_demographic_movement_engine.py`
 
 ### `backend/app/tests/test_chunk6_population_diversity_engine.py`
 
@@ -8274,14 +8324,14 @@ This file records every current project file, what it does, and what it connects
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 11506
+- Line count: 11565
 
 ### `docs/mythos_file_tracker.md`
 
 - Type: `documentation`
 - Status: `active_project_file`
 - Purpose: Documentation, roadmap, memory, or tracker file.
-- Line count: 8347
+- Line count: 8394
 
 ### `requirements.txt`
 
